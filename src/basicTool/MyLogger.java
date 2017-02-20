@@ -6,7 +6,7 @@ public class MyLogger {
 	 * @param message 信息。
 	 */
 	public static void log(String message){
-		System.out.println(message);
+		System.out.println("Logger Message: " + message);
 	}
 	
 	/**
@@ -14,6 +14,7 @@ public class MyLogger {
 	 * @param e 异常对象。
 	 */
 	public static void log(Exception e){
+		System.out.println("Logger Message: ");
 		e.printStackTrace();
 	}
 }
