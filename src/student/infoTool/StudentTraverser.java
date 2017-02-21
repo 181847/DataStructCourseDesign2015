@@ -1,14 +1,14 @@
-package unfinishedClass;
+package student.infoTool;
 
+import basicInterface.IInfo;
 import basicTool.MyLogger;
-import info.Info;
 import infoInterface.IInfoTraverser;
-import unfinishedClass.Student;
+import student.Student;
 
 public class StudentTraverser implements IInfoTraverser {
 
 	@Override
-	public int traverserInfo(Info info) {
+	public int traverserInfo(IInfo info) {
 		if (info == null){
 			MyLogger.log("错误：StudentTraverser准备读取info信息进行信息遍历，但是参数info为null。");
 			return 0;
@@ -26,7 +26,7 @@ public class StudentTraverser implements IInfoTraverser {
 		
 		Student tempContainer = (Student) container;
 		System.out.println("学生学号：" + tempContainer.getIndex() 
-				+ "\n学生姓名：" + tempContainer.getName());
+				+ "\t学生姓名：" + tempContainer.getName());
 		return 1;
 	}
 

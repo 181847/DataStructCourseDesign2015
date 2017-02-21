@@ -1,7 +1,6 @@
-package unfinishedClass;
+package basicTool;
 
-import basicTool.MyLogger;
-import info.Info;
+import basicInterface.IInfo;
 import infoInterface.IInfoFilter;
 
 /**
@@ -11,7 +10,7 @@ import infoInterface.IInfoFilter;
  */
 public class AllTrueFilter implements IInfoFilter {
 	@Override
-	public boolean check(Info info) {
+	public boolean check(IInfo info) {
 		if (info == null){
 			MyLogger.log("AllTrueFilter检查的Info对象是空指针，默认返回false。");
 			return false;
