@@ -1,22 +1,20 @@
 package testSpace;
 
-import info.Info;
-import unfinishedClass.AllTrueFilter;
-import unfinishedClass.InfoSet;
-import unfinishedClass.Student;
-import unfinishedClass.StudentTraverser;
+import basicTool.AllTrueFilter;
+import info.DoubleLinkedInfo;
+import student.Student;
+import student.infoTool.StudentTraverser;
+import unfinishedClass.DoubleLoopLinkedInfoSet;
 
-public class testInfoSet {
+public class TestInfoSet extends Test{
 	public static void main(String[] args){
-		Student[] stus = new Student[]{new Student("a", "1"), 
-				new Student("b", "2"), 
-				new Student("c", "3")};
+		prepare();
 		
-		InfoSet iset = new InfoSet();
+		DoubleLoopLinkedInfoSet iset = new DoubleLoopLinkedInfoSet();
 		for (Student s: stus){
-			iset.insertInfo(new Info(s));
+			iset.insertInfo(new DoubleLinkedInfo(s));
 		}
 		
-		iset.traverse(new StudentTraverser(), new AllTrueFilter());
+		iset.traverseInfo(new StudentTraverser(), new AllTrueFilter());
 	}
 }
