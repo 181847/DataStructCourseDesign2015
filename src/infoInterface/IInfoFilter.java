@@ -1,5 +1,5 @@
 package infoInterface;
-import info.Info;
+import basicInterface.IInfo;
 
 public interface IInfoFilter {
 	/**
@@ -8,5 +8,5 @@ public interface IInfoFilter {
 	 * @return 满足Filter中的要求返回真，
 	 * 不满足返回假。
 	 */
-	public boolean check(Info info);
+	public boolean check(IInfo info);
 }

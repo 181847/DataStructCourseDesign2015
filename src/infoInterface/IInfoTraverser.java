@@ -1,7 +1,7 @@
 package infoInterface;
 
-import info.Info;
+import basicInterface.IInfo;
 
 public interface IInfoTraverser {
-	public int traverserInfo(Info info);
+	public int traverserInfo(IInfo info);
 }
