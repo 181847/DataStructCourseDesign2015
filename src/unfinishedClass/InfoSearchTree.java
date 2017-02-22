@@ -7,6 +7,7 @@ import basicTool.MyLogger;
 import infoInterface.IInfoFilter;
 import infoInterface.IInfoGetter;
 import infoInterface.IInfoTraverser;
+import infoInterface.ILimitedTraverser;
 
 public class InfoSearchTree implements IInfoSet{
 	public InfoSearchTree lChild;
@@ -341,52 +342,146 @@ public class InfoSearchTree implements IInfoSet{
 		return -4;
 	}
 	
-	public IInfoSet getInfoSetFromCharArray(char[] charBuffer, int index){
+	/**
+	 * 查找指定字符串路径的树节点当中的存储DLLInfoSet对象，
+	 * 这个方法会先用参数找到指定的InfoSearchTree，如果这个Tree存在，就返回这个Tree的成员infoSet，
+	 * 如果这个Tree不存在就返回null。
+	 * @param charBuffer 
+	 * 		字符串路径。
+	 * @param index 
+	 * 		字符数组路径的起始检查点。
+	 * @return
+	 * 		规定的字符数组路径的树节点当中的成员变量DLLInfoSet，
+	 * 		这个对象是DoubleLoopLinkedInfoSet类型，但是它也有可能为null，
+	 * 		如果相关的字符路径的树节点并不存在的话也会返回null。
+	 */
+	public DoubleLoopLinkedInfoSet getSpecificInfoSet(char[] charBuffer, int index){
+		InfoSearchTree findTree = getTree(charBuffer, index);
+		if (findTree == null){
+			return null;
+		}
+		return findTree.getInfoSet();
+	}//getInfoSetFromCharArray
+	
+	/**
+	 * 根据字符数组的路径，获取这个路径的InfoSearchTree。
+	  * @param charBuffer 
+	 * 		字符串路径。
+	 * @param index 
+	 * 		字符数组路径的起始检查点，
+	 * 		这个方法会递归调用，
+	 * 		如果是递归调用的入口的话，
+	 * 		这个index应该设为0，
+	 * 		表示从字符串的第0个字符开始，
+	 * 		递归会持续到字符数组的结尾或者没有找到规定的字符数组路径。
+	 * @return
+	 * 		规定的字符数组路径的树节点，
+	 * 		如果这个树节点不存在就返回null。
+	 */
+	public InfoSearchTree getTree(char[] charBuffer, int index){
 		if (charBuffer == null){
-			MyLogger.logError("InfoSearchTree调用getInfoSetFromCharArray方法，"
+			MyLogger.logError("InfoSearchTree调用getTreeFromCharArray方法，"
 					+ "但是参数charBuffer为null，"
 					+ "不能根据空串插入Info对象。");
 			return null;
-		}//if
+		}
 		
 		if (index < 0){
-			MyLogger.logError("InfoSearchTree调用getInfoSetFromCharArray方法，"
+			MyLogger.logError("InfoSearchTree调用getTreeFromCharArray方法，"
 					+ "但是参数index小于等于0，"
 					+ "不能正常获取字符数组的字符。");
 			return null;
 			
 		} else if (index >= charBuffer.length){
-			MyLogger.logError("InfoSearchTree调用getInfoSetFromCharArray方法，"
+			MyLogger.logError("InfoSearchTree调用getTreeFromCharArray方法，"
 					+ "但是参数index大于等于字符数组的长度，"
 					+ "不能正常获取字符数组的字符。");
 			return null;
 			
 		} else {
+			
 			if (charBuffer[index] < curChar){//向左子树中查询
+				
 				if (lChild != null){
-					return lChild.getInfoSetFromCharArray(charBuffer, index);
+					return lChild.getTree(charBuffer, index);
 				}
 				//左子树为空，查找失败
 				return null;
 				
 			}else if (charBuffer[index] > curChar){//向右子树中查询
+				
 				if (rChild != null){
-					return rChild.getInfoSetFromCharArray(charBuffer, index);
+					return rChild.getTree(charBuffer, index);
 				}
 				//右子树为空，查找失败
 				return null;
 				
 			} else {//向当前树节点中查询
+				
 				if (index == charBuffer.length - 1){//检查序号已经到了字符数组的结尾，找到了这个节点
-					return infoSet;
+					return this;
 					
 				} else {//序号还没有到字符数组的结尾
+					
 					if (nextTree != null){
-						return nextTree.getInfoSetFromCharArray(charBuffer, index + 1);
+						return nextTree.getTree(charBuffer, index + 1);
 					}
 					return null;
+					
 				}//if
 			}//if
 		}//if
-	}//getInfoSetFromCharArray
+	}//getTree
+	
+	/**
+	 * 通过一个可限制的遍历者来遍历信息体，
+	 * 如果循环遍历的过程中发现遍历者被限制了，
+	 * 就立即返回0，结束遍历。
+	 * @param limitedTraverser 
+	 * 		可限制的遍历者。
+	 * @param filter 
+	 * 		过滤器，过滤掉不想要遍历的信息体。
+	 * @return
+	 * 		参数为null或者遍历者受到限制时都返回0，
+	 * 		其他情况返回1。
+	 */
+	public int limitedTraverseInfo(ILimitedTraverser limitedTraverser, IInfoFilter filter){
+		if (limitedTraverser == null || filter == null){
+			MyLogger.log("遍历InfoSearchTree的时候，参数存在null遍历并InfoSet失败。请检查："
+					+ "IInfoTraverser traverser == null: " + (limitedTraverser == null) 
+					+ "IInfoFilter filter == null: " + (filter == null));
+			return 0;
+		}
+		int[] resultNum = new int[]{1, 1, 1, 1};
+		
+		if (limitedTraverser.isLimited()){
+			return 0;
+		}
+		if (lChild != null){
+			resultNum[0] = lChild.limitedTraverseInfo(limitedTraverser, filter);
+		}
+		
+		if (limitedTraverser.isLimited()){
+			return 0;
+		}
+		if (rChild != null){
+			resultNum[1] = rChild.limitedTraverseInfo(limitedTraverser, filter);
+		}
+		
+		if (limitedTraverser.isLimited()){
+			return 0;
+		}
+		if (nextTree != null){
+			resultNum[2] = nextTree.limitedTraverseInfo(limitedTraverser, filter);
+		}
+		
+		if (limitedTraverser.isLimited()){
+			return 0;
+		}
+		if (infoSet != null){
+			resultNum[3] = infoSet.limitedTraverseInfo(limitedTraverser, filter);
+		}
+		
+		return resultNum[0]*resultNum[1]*resultNum[2]*resultNum[3];
+	}
 }
