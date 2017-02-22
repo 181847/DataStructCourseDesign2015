@@ -1,6 +1,7 @@
 package testSpace;
 
 import basicTool.AllTrueFilter;
+import basicTool.MyLogger;
 import info.InfoWithContainer;
 import student.Student;
 import student.infoTool.LimitedStudentTraverser;
@@ -18,8 +19,11 @@ public class TestLimitedTraverser extends Test {
 							new StudentNameGetter());
 		}
 		
-		ist.limitedTraverseInfo(new LimitedStudentTraverser(2), new AllTrueFilter());
-
+		ist.limitedTraverseInfo(new LimitedStudentTraverser(3), new AllTrueFilter());
+		
+		MyLogger.seperate();
+		ist.deleteSpecific("acd".toCharArray(), 0, "acd", new StudentNameGetter(), new AllTrueFilter());
+		ist.limitedTraverseInfo(new LimitedStudentTraverser(45), new AllTrueFilter());
 	}
 
 }
