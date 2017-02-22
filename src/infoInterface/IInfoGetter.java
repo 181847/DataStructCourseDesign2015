@@ -1,5 +1,4 @@
 package infoInterface;
-import basicInterface.IInfo;
 
 public interface IInfoGetter {
 	/**
@@ -7,5 +6,5 @@ public interface IInfoGetter {
 	 * @param info 信息体。
 	 * @return 信息体中的字符串信息。
 	 */
-	public String pickInfo(IInfo info);
+	public String pickMessage(IInfo info);
 }
