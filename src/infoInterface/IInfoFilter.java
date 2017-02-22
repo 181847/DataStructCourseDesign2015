@@ -1,5 +1,4 @@
 package infoInterface;
-import basicInterface.IInfo;
 
 public interface IInfoFilter {
 	/**

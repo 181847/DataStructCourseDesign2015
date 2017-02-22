@@ -1,5 +1,6 @@
 package basicInterface;
 
+import infoInterface.IInfo;
 import infoInterface.IInfoFilter;
 import infoInterface.IInfoGetter;
 import infoInterface.IInfoTraverser;

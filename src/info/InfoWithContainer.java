@@ -1,6 +1,6 @@
 package info;
 
-import basicInterface.IInfo;
+import infoInterface.IInfo;
 
 public class InfoWithContainer implements IInfo{
 	/**

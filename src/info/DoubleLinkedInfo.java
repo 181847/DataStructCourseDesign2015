@@ -1,6 +1,6 @@
 package info;
 
-import basicInterface.IInfo;
+import infoInterface.IInfo;
 
 public class DoubleLinkedInfo extends InfoWithContainer implements IInfo {
 	/**
