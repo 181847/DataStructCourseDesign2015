@@ -288,6 +288,7 @@ public class InfoSearchTree implements IInfoSet{
 						nextTree = new InfoSearchTree(charBuffer[index + 1]);
 					}
 					return nextTree.insertInfoAccordToCharArray(charBuffer, ++index, info);
+					
 				}//if
 			}//if
 		}//if
@@ -322,8 +323,8 @@ public class InfoSearchTree implements IInfoSet{
 					+ "不能正常获取特征字符串。");
 			return -1;
 		}
-		String key = getter.pickInfo(info);
 		
+		String key = getter.pickInfo(info);
 		if (key == null){
 			MyLogger.logError("InfoSearchTree调用insertInfo方法，"
 					+ "但是从info当中获取的特征字符串为null，"
@@ -483,5 +484,240 @@ public class InfoSearchTree implements IInfoSet{
 		}
 		
 		return resultNum[0]*resultNum[1]*resultNum[2]*resultNum[3];
-	}
+	}//limitedTraverseInfo
+	
+	/**
+	 * 递归调用，删除树内的所有的满足要求的信息体。
+	 * @param searchInfo 
+	 * 		主要用来检查的字符串信息，
+	 * 		只有与这个searchInfo相等才算找到，
+	 * 		如果这个字符串为空串的话表示所有信息体都符合，
+	 * 		如果这些信息体同时通过了filter的筛选的话，才会删除。
+	 * @param getter 
+	 * 		这个对象用来获取Info信息体中指定的信息，
+	 * 		比如某个InfoGetter用来获取Info中的名字信息，
+	 * 		有的InfoGetter用来获取Info中的学号信息。
+	 * @param filter 
+	 * 		过滤器，用于针对Info中的信息返回真假，
+	 * 		最终的InfoSet会过滤掉所有filter检查结果为false的Info，
+	 * 		比如某个filter规定如果StudentInfo的年级为大一，
+	 * 		那么这次删除只会删除大一的StudentInfo。
+	 * @return
+	 * 		如果参数中存在null，返回0；
+	 * 		如果当前节点的infoSet被删空了，而且nextTree为null，返回-1；
+	 * 		否则返回1。
+	 */
+	//TODO
+	public int delete(String searchInfo, IInfoGetter getter, IInfoFilter filter){
+		if (searchInfo == null || getter == null || filter == null){
+			MyLogger.log("调用InfoSearchTree的delete()的时候，参数存在null，删除Info失败。请检查："
+					+ "String searchInfo == null: " + (searchInfo == null) 
+					+ "IInfoGetter getter == null: " + (getter == null)
+					+ "IInfoFilter filter == null: " + (filter == null));
+			return 0;
+		}
+		
+		int result;
+		if (lChild != null){
+			result = lChild.delete(searchInfo, getter, filter);
+			if (result == -1){
+				lChild = deleteTree(lChild);
+			}
+		}//if
+		
+		if (rChild != null){
+			result = rChild.delete(searchInfo, getter, filter);
+			if (result == -1){
+				rChild = deleteTree(rChild);
+			}
+		}//if
+		
+		if (nextTree != null){
+			result = nextTree.delete(searchInfo, getter, filter);
+			if (result == -1){
+				nextTree = deleteTree(nextTree);
+			}
+		}//if
+		
+		if ( ! (infoSet == null || infoSet.isEmpty()) ){
+			infoSet.delete(searchInfo, getter, filter);
+		}
+		
+		//没有下个树节点，当前树节点中也没有存储任何信息体
+		//则这个树就没有用了，返回-1通知上层调用者将自己删除。
+		if (nextTree == null && 
+				(infoSet == null || infoSet.isEmpty()) ){
+			return -1;
+		}
+		return 1;
+	}//delete
+	
+	/**
+	 * 按照字符数组的路径删除指定的树节点中的信息体。
+	  * @param charBuffer 
+	 * 		一个与这个Info对象有关的字符数组，
+	 * 		一般来说可以是这个Info的某个特征字符串。
+	 * @param index 
+	 * 		如果是递归的入口的话，
+	 * 		这个index应该为0，
+	 * 		表示从字符数组的第0个字符开始在树中进行查找插入。
+	  * @param searchInfo 
+	 * 		主要用来检查的字符串信息，
+	 * 		只有与这个searchInfo相等才算找到，
+	 * 		如果这个字符串为空串的话表示所有信息体都符合，
+	 * 		如果这些信息体同时通过了filter的筛选的话，才会删除。
+	 * @param getter 
+	 * 		这个对象用来获取Info信息体中指定的信息，
+	 * 		比如某个InfoGetter用来获取Info中的名字信息，
+	 * 		有的InfoGetter用来获取Info中的学号信息。
+	 * @param filter 
+	 * 		过滤器，用于针对Info中的信息返回真假，
+	 * 		最终的InfoSet会过滤掉所有filter检查结果为false的Info，
+	 * 		比如某个filter规定如果StudentInfo的年级为大一，
+	 * 		那么这次删除只会删除大一的StudentInfo。
+	 * @return
+	 * 		如果参数中存在null或者index小于0或超出字符数组长度，返回0；
+	 * 		如果没有找到指定的路径，返回0；
+	 * 		如果要求上层调用者将自己删除的话，返回-1；
+	 * 		如果返回-2，表示已经在指定的路径尾部的树节点的infoSet执行了delete操作。
+	 */
+	//TODO
+	public int deleteSpecific(char[] charBuffer, int index, 
+			String searchInfo, IInfoGetter getter, IInfoFilter filter){
+		if (charBuffer == null){
+			MyLogger.logError("InfoSearchTree调用deleteSpecific()方法时，"
+					+ "但是参数charBuffer为null，"
+					+ "不能根据空串插入Info对象。");
+			return 0;
+		}
+		
+		if (searchInfo == null || getter == null || filter == null){
+			MyLogger.log("InfoSearchTree调用deleteSpecific()方法，参数存在null，删除Info失败。请检查："
+					+ "String searchInfo == null: " + (searchInfo == null) 
+					+ "IInfoGetter getter == null: " + (getter == null)
+					+ "IInfoFilter filter == null: " + (filter == null));
+			return 0;
+		}
+		
+		if (index < 0){
+			MyLogger.logError("InfoSearchTree调用insertInfo方法，"
+					+ "但是参数index小于等于0，"
+					+ "不能正常获取字符数组的字符。");
+			return 0;
+			
+		} else if (index >= charBuffer.length){
+			MyLogger.logError("InfoSearchTree调用insertInfo方法，"
+					+ "但是参数index大于等于字符数组的长度，"
+					+ "不能正常获取字符数组的字符。");
+			return 0;
+			
+		} else {
+			
+			if (charBuffer[index] < curChar){//向左子树删
+				if (lChild != null){
+					
+					switch(lChild.deleteSpecific(charBuffer, index, 
+							searchInfo, getter, filter)){
+					case -2:
+						return -2;
+					case -1:
+						lChild = deleteTree(lChild);
+						//告知上层，已经完成删除操作
+						return -2;
+					default:
+						return 0;
+					}//switch
+					
+				}
+				//左子树为空，无法继续查找，返回0表示查找失败
+				return 0;
+				
+			}else if (charBuffer[index] > curChar){//向右子树删
+				if (rChild != null){
+					
+					switch(rChild.deleteSpecific(charBuffer, index, 
+							searchInfo, getter, filter)){
+					case -1:
+						rChild = deleteTree(rChild);
+						//告知上层，已经完成删除操作
+					case -2:
+						return -2;
+					default:
+						return 0;
+					}//switch
+				}
+				return 0;
+				
+			} else {//找到指定的字符
+				
+				if (index == charBuffer.length - 1){//序号已经到了字符数组的结尾
+					if (infoSet != null){
+						infoSet.delete(searchInfo, getter, filter);
+					}
+					if ( (infoSet == null || infoSet.isEmpty()) &&
+							nextTree == null){
+						//这个节点已经空了，这个节点已经不能在作为路径的导航了，
+						//请求上层将自己删除，删除按照二叉排序树的删除方法。
+						return -1;
+					}//if
+					return -2;
+					
+				} else {//序号还没有到字符数组的结尾
+					if (nextTree != null){
+						switch(nextTree.deleteSpecific(charBuffer, index + 1, 
+								searchInfo, getter, filter)){
+						case -1:
+							nextTree = deleteTree(nextTree);
+							if ( (infoSet == null || infoSet.isEmpty()) &&
+									nextTree == null){
+								//这个节点已经空了，这个节点已经不能在作为路径的导航了，
+								//请求上层将自己删除，删除按照二叉排序树的删除方法。
+								return -1;
+							}//if
+						case -2:
+							return -2;
+						default:
+							return 0;
+						}//switch
+					}//if
+					return 0;
+					
+				}//if
+			}//if
+		}//if
+	}//deleteSpecific
+	
+	/**
+	 * 输入一个此树中的节点，
+	 * 删除这棵树，返回用来代替这棵树的树节点。
+	 * @return
+	 * 		用于代替这棵树的节点，
+	 * 		这个用来代替的树节点应该就是这棵树的左右子树中的某一棵。
+	 */
+	public InfoSearchTree deleteTree(InfoSearchTree treeToDelete){
+		if (treeToDelete.rChild == null){
+			return lChild;
+		}
+		if (treeToDelete.lChild == null){
+			return rChild;
+		}
+		
+		InfoSearchTree prec = treeToDelete;
+		InfoSearchTree next = treeToDelete.rChild;
+		
+		while(next.lChild != null){
+			prec = next;
+			next = next.lChild;
+		}
+		
+		if (prec == treeToDelete){
+			next.lChild = treeToDelete.lChild;
+			return next;
+		} else {
+			prec.lChild = next.rChild;
+			next.lChild = treeToDelete.lChild;
+			next.rChild = treeToDelete.rChild;
+			return next;
+		}//if
+	}//deleteTree
 }
