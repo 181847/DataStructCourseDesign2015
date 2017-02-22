@@ -1,4 +1,4 @@
-package basicInterface;
+package infoInterface;
 
 public interface IInfo {
 	/**

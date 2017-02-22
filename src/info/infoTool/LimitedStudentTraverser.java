@@ -1,9 +1,8 @@
-package student.infoTool;
+package info.infoTool;
 
-import basicInterface.IInfo;
 import basicTool.MyLogger;
-import student.Student;
-import unfinishedClass.TimesLimitedTraverser;
+import infoInterface.IInfo;
+import unfinishedClass.Student;
 
 public class LimitedStudentTraverser extends TimesLimitedTraverser {
 
@@ -16,13 +15,7 @@ public class LimitedStudentTraverser extends TimesLimitedTraverser {
 	}
 
 	@Override
-	public int dealWithInfo(IInfo info) {
-Object container = info.getContainer();
-		
-		if (container == null){
-			MyLogger.log("错误：StudentTraverser读取info的container为null，无法读取信息。");
-			return 0;
-		}
+	public int dealWithContainer(Object container) {
 		if (! (container instanceof Student)){
 			MyLogger.log("错误：StudentTraverser读取info的container的类型不是Student，无法读取信息。");
 			return 0;
@@ -30,7 +23,13 @@ Object container = info.getContainer();
 		
 		Student tempContainer = (Student) container;
 		System.out.println("学生学号：" + tempContainer.getIndex() 
-				+ "\t学生姓名：" + tempContainer.getName());
+				+ "\t学生姓名：" + tempContainer.getName()
+				+ "\n姓名拼音：" + tempContainer.getPinyin()
+				+ "\t姓名短拼音：" + tempContainer.getShortPinyin()
+				+ "\n性别：" + (tempContainer.getGender() == 1? "男" : "女")
+				+ "\t年级：" + tempContainer.getGrade()
+				+ "\n专业：" + tempContainer.getMainCourse());
+		MyLogger.seperate();
 		return 1;
 	}
 

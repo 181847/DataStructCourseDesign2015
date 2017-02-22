@@ -1,7 +1,7 @@
-package unfinishedClass;
+package info.infoTool;
 
-import basicInterface.IInfo;
 import basicTool.MyLogger;
+import infoInterface.IInfo;
 import infoInterface.ILimitedTraverser;
 
 /**
@@ -18,6 +18,8 @@ public abstract class TimesLimitedTraverser extends AbstractTraverser implements
 	public TimesLimitedTraverser(int maxTraverseTimes){
 		this.maxTraverseTimes = maxTraverseTimes;
 	}
+	
+	public abstract int dealWithContainer(Object container);
 	
 	@Override
 	public boolean isLimited() {
@@ -57,11 +59,18 @@ public abstract class TimesLimitedTraverser extends AbstractTraverser implements
 					+ "不可读取空指针，遍历当前信息体失败。");
 			return 0;
 		}
+		Object container = info.getContainer();
+		if (container == null){
+			MyLogger.logError("TimesLimitedTraverser准备遍历当前信息体，"
+					+ "但是读取出来的container为null，"
+					+ "从container获取信息失败。");
+			return -1;
+		}
 		if (isLimited()){
 			return 0;
 		}
 		
 		--maxTraverseTimes;
-		return dealWithInfo(info);
+		return dealWithContainer(container);
 	}
 }

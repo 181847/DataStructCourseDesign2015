@@ -1,6 +1,7 @@
-package basicTool;
+package info.infoTool;
 
-import basicInterface.IInfo;
+import basicTool.MyLogger;
+import infoInterface.IInfo;
 import infoInterface.IInfoFilter;
 
 /**

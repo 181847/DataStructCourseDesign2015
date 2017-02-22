@@ -1,9 +1,10 @@
-package unfinishedClass;
+package infoSet;
 
-import basicInterface.IInfo;
 import basicInterface.IInfoSet;
-import basicTool.AllTrueFilter;
 import basicTool.MyLogger;
+import info.infoTool.AllTrueFilter;
+import info.infoTool.CopyTraverser;
+import infoInterface.IInfo;
 import infoInterface.IInfoFilter;
 import infoInterface.IInfoGetter;
 import infoInterface.IInfoTraverser;
@@ -324,7 +325,7 @@ public class InfoSearchTree implements IInfoSet{
 			return -1;
 		}
 		
-		String key = getter.pickInfo(info);
+		String key = getter.pickMessage(info);
 		if (key == null){
 			MyLogger.logError("InfoSearchTree调用insertInfo方法，"
 					+ "但是从info当中获取的特征字符串为null，"
@@ -507,7 +508,6 @@ public class InfoSearchTree implements IInfoSet{
 	 * 		如果当前节点的infoSet被删空了，而且nextTree为null，返回-1；
 	 * 		否则返回1。
 	 */
-	//TODO
 	public int delete(String searchInfo, IInfoGetter getter, IInfoFilter filter){
 		if (searchInfo == null || getter == null || filter == null){
 			MyLogger.log("调用InfoSearchTree的delete()的时候，参数存在null，删除Info失败。请检查："
@@ -554,7 +554,7 @@ public class InfoSearchTree implements IInfoSet{
 	
 	/**
 	 * 按照字符数组的路径删除指定的树节点中的信息体。
-	  * @param charBuffer 
+	 * @param charBuffer 
 	 * 		一个与这个Info对象有关的字符数组，
 	 * 		一般来说可以是这个Info的某个特征字符串。
 	 * @param index 
@@ -581,7 +581,6 @@ public class InfoSearchTree implements IInfoSet{
 	 * 		如果要求上层调用者将自己删除的话，返回-1；
 	 * 		如果返回-2，表示已经在指定的路径尾部的树节点的infoSet执行了delete操作。
 	 */
-	//TODO
 	public int deleteSpecific(char[] charBuffer, int index, 
 			String searchInfo, IInfoGetter getter, IInfoFilter filter){
 		if (charBuffer == null){
@@ -694,7 +693,7 @@ public class InfoSearchTree implements IInfoSet{
 	 * 		用于代替这棵树的节点，
 	 * 		这个用来代替的树节点应该就是这棵树的左右子树中的某一棵。
 	 */
-	public InfoSearchTree deleteTree(InfoSearchTree treeToDelete){
+	private InfoSearchTree deleteTree(InfoSearchTree treeToDelete){
 		if (treeToDelete.rChild == null){
 			return lChild;
 		}
@@ -720,4 +719,73 @@ public class InfoSearchTree implements IInfoSet{
 			return next;
 		}//if
 	}//deleteTree
+	
+	/**
+	 * 单独遍历，这个方法只遍历当前树节点内部的infoSet和nextTree的所有，
+	 * 即调用infoSet.traverseInfo()和nextTree.traverseInfo()。
+	 * @param traverser 遍历的具体操作在这个IInfoTraverser的traverserInfo()方法中的的定义。
+	 * @param filter 过滤器，所有不满足过滤器的Info都不会被遍历。
+	 * @return 成功遍历返回1，参数存在null返回0。
+	 */
+	public int soloTraverseInfo(IInfoTraverser traverser, IInfoFilter filter) {
+		if (traverser == null || filter == null){
+			MyLogger.log("soloTraverseInfo()方法遍历InfoSearchTree的时候，"
+					+ "参数存在null遍历并InfoSet失败。请检查："
+					+ "IInfoTraverser traverser == null: " + (traverser == null) 
+					+ "IInfoFilter filter == null: " + (filter == null));
+			return 0;
+		}
+		int[] resultNum = new int[]{1, 1};
+		
+		if (infoSet != null){
+			resultNum[0] = infoSet.traverseInfo(traverser, filter);
+		}
+		
+		if (nextTree != null){
+			resultNum[1] = nextTree.traverseInfo(traverser, filter);
+		}
+		
+		
+		return resultNum[0]*resultNum[1];
+	}
+	
+	/**
+	 * 通过一个可限制的遍历者来遍历信息体，
+	 * 只遍历当前树节点和nextTree中的信息，
+	 * 不遍历当前这棵树的左右孩子。
+	 * 如果循环遍历的过程中发现遍历者被限制了，
+	 * 就立即返回0，结束遍历。
+	 * @param limitedTraverser 
+	 * 		可限制的遍历者。
+	 * @param filter 
+	 * 		过滤器，过滤掉不想要遍历的信息体。
+	 * @return
+	 * 		参数为null或者遍历者受到限制时都返回0，
+	 * 		其他情况返回1。
+	 */
+	public int soloLimitedTraverseInfo(ILimitedTraverser limitedTraverser, IInfoFilter filter){
+		if (limitedTraverser == null || filter == null){
+			MyLogger.log("遍历InfoSearchTree的时候，参数存在null遍历并InfoSet失败。请检查："
+					+ "IInfoTraverser traverser == null: " + (limitedTraverser == null) 
+					+ "IInfoFilter filter == null: " + (filter == null));
+			return 0;
+		}
+		int[] resultNum = new int[]{1, 1};
+		
+		if (limitedTraverser.isLimited()){
+			return 0;
+		}
+		if (infoSet != null){
+			resultNum[0] = infoSet.limitedTraverseInfo(limitedTraverser, filter);
+		}
+		
+		if (limitedTraverser.isLimited()){
+			return 0;
+		}
+		if (nextTree != null){
+			resultNum[1] = nextTree.limitedTraverseInfo(limitedTraverser, filter);
+		}
+		
+		return resultNum[0]*resultNum[1];
+	}//limitedTraverseInfo
 }

@@ -1,8 +1,9 @@
-package unfinishedClass;
+package info.infoTool;
 
-import basicInterface.IInfo;
 import basicTool.MyLogger;
+import infoInterface.IInfo;
 import infoInterface.IInfoTraverser;
+import infoSet.DoubleLoopLinkedInfoSet;
 
 /**
  * 这个遍历装置能够将遍历到的Info加入内部存储的DoubleLoopLinkedInfoSet中。

@@ -1,10 +1,11 @@
-package unfinishedClass;
+package infoSet;
 
-import basicInterface.IInfo;
 import basicInterface.IInfoSet;
-import basicTool.AllTrueFilter;
 import basicTool.MyLogger;
 import info.DoubleLinkedInfo;
+import info.infoTool.AllTrueFilter;
+import info.infoTool.CopyTraverser;
+import infoInterface.IInfo;
 import infoInterface.IInfoFilter;
 import infoInterface.IInfoGetter;
 import infoInterface.IInfoTraverser;
@@ -59,10 +60,12 @@ public class DoubleLoopLinkedInfoSet implements IInfoSet{
 	 */
 	public int insertInfo(IInfo newInfo){
 		if (newInfo == null){
-			MyLogger.log("InfoSet插入的元素为null，插入失败。");
+			MyLogger.log("DLLInfoSet插入的元素为null，"
+					+ "插入失败。");
 			return 0;
 		} else if (newInfo.getContainer() == null){
-			MyLogger.log("InfoSet插入的元素中没有信息，插入失败。");
+			MyLogger.log("DLLInfoSet插入的元素中的container为null，"
+					+ "插入失败。");
 			return -1;
 		}
 		DoubleLinkedInfo newDLInfo = new DoubleLinkedInfo(newInfo.getContainer());
@@ -122,7 +125,7 @@ public class DoubleLoopLinkedInfoSet implements IInfoSet{
 		
 		while(checkPointer != head){
 			if (( searchInfo.isEmpty() || 
-					getter.pickInfo(checkPointer).hashCode() == searchInfo.hashCode()
+					getter.pickMessage(checkPointer).hashCode() == searchInfo.hashCode()
 					) && filter.check(checkPointer)){
 				
 				resultSet.insertInfo(new DoubleLinkedInfo(checkPointer.getContainer()));
@@ -165,7 +168,7 @@ public class DoubleLoopLinkedInfoSet implements IInfoSet{
 		DoubleLinkedInfo checkPointer = head.next;
 		while(checkPointer != head){
 			if (( searchInfo.isEmpty() || 
-					getter.pickInfo(checkPointer).hashCode() == searchInfo.hashCode()
+					getter.pickMessage(checkPointer).hashCode() == searchInfo.hashCode()
 					) && filter.check(checkPointer)){
 				
 				deleteInfo(checkPointer);
