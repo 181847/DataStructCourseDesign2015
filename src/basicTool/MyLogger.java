@@ -25,4 +25,8 @@ public class MyLogger {
 		System.out.println("Logger Message: ");
 		e.printStackTrace();
 	}
+	
+	public static void seperate(){
+		System.out.println("************seperateLine*********************");
+	}
 }
