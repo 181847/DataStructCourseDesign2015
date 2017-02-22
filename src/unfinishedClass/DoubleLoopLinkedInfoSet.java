@@ -93,16 +93,20 @@ public class DoubleLoopLinkedInfoSet implements IInfoSet{
 	
 	/**
 	 * 获取这个InfoSet当中指定的信息体，用另一个InfoSet返回
-	 * @param searchInfo 主要用来检查的对象，
-	 * 只有与这个searchInfo相等才算找到。
-	 * @param getter 这个对象用来获取Info信息体中指定的信息，
-	 * 比如某个InfoGetter用来获取Info中的名字信息，
-	 * 有的InfoGetter用来获取Info中的学号信息。
-	 * @param filter 过滤器，用于针对Info中的信息返回真假，
-	 * 最终的InfoSet会过滤掉所有filter检查结果为false的Info，
-	 * 比如某个filter规定如果StudentInfo的年级为大一，
-	 * 那么这次搜寻结果就只会有大一的StudentInfo。
-	 * @return 查找结果。
+	 * @param searchInfo 
+	 * 		主要用来检查的对象，
+	 * 		只有与这个searchInfo相等才算找到。
+	 * @param getter 
+	 * 		这个对象用来获取Info信息体中指定的信息，
+	 * 		比如某个InfoGetter用来获取Info中的名字信息，
+	 * 		有的InfoGetter用来获取Info中的学号信息。
+	 * @param filter 
+	 * 		过滤器，用于针对Info中的信息返回真假，
+	 * 		最终的InfoSet会过滤掉所有filter检查结果为false的Info，
+	 * 		比如某个filter规定如果StudentInfo的年级为大一，
+	 * 		那么这次搜寻结果就只会有大一的StudentInfo。
+	 * @return 
+	 * 		查找结果。
 	 */
 	public IInfoSet search(String searchInfo, IInfoGetter getter, IInfoFilter filter){
 		DoubleLoopLinkedInfoSet resultSet = new DoubleLoopLinkedInfoSet();
@@ -117,9 +121,9 @@ public class DoubleLoopLinkedInfoSet implements IInfoSet{
 		DoubleLinkedInfo checkPointer = head.next;
 		
 		while(checkPointer != head){
-			if (searchInfo.isEmpty() || 
-					(getter.pickInfo(checkPointer).hashCode() == searchInfo.hashCode()
-					&& filter.check(checkPointer) )){
+			if (( searchInfo.isEmpty() || 
+					getter.pickInfo(checkPointer).hashCode() == searchInfo.hashCode()
+					) && filter.check(checkPointer)){
 				
 				resultSet.insertInfo(new DoubleLinkedInfo(checkPointer.getContainer()));
 			}
@@ -131,16 +135,22 @@ public class DoubleLoopLinkedInfoSet implements IInfoSet{
 
 	/**
 	 * 删除这个InfoSet当中指定的信息体，用另一个InfoSet返回删除的所有Info对象。
-	 * @param searchInfo 主要用来检查的对象，
-	 * 只有与这个searchInfo相等才算找到。
-	 * @param getter 这个对象用来获取Info信息体中指定的信息，
-	 * 比如某个InfoGetter用来获取Info中的名字信息，
-	 * 有的InfoGetter用来获取Info中的学号信息。
-	 * @param filter 过滤器，用于针对Info中的信息返回真假，
-	 * 最终的InfoSet会过滤掉所有filter检查结果为false的Info，
-	 * 比如某个filter规定如果StudentInfo的年级为大一，
-	 * 那么这次搜寻结果就只会有大一的StudentInfo。
-	 * @return 删除的所有Info组成的InfoSet。
+	 * @param searchInfo 
+	 * 		主要用来检查的字符串信息，
+	 * 		只有与这个searchInfo相等才算找到，
+	 * 		如果这个字符串为空串的话表示所有信息体都符合，
+	 * 		如果这些信息体同时通过了filter的筛选的话，才会删除。
+	 * @param getter 
+	 * 		这个对象用来获取Info信息体中指定的信息，
+	 * 		比如某个InfoGetter用来获取Info中的名字信息，
+	 * 		有的InfoGetter用来获取Info中的学号信息。
+	 * @param filter 
+	 * 		过滤器，用于针对Info中的信息返回真假，
+	 * 		最终的InfoSet会过滤掉所有filter检查结果为false的Info，
+	 * 		比如某个filter规定如果StudentInfo的年级为大一，
+	 * 		那么这次删除只会删除大一的StudentInfo。
+	 * @return 
+	 * 		删除的所有Info组成的InfoSet。
 	 */
 	public DoubleLoopLinkedInfoSet delete(String searchInfo, IInfoGetter getter, IInfoFilter filter) {
 		DoubleLoopLinkedInfoSet resultSet = new DoubleLoopLinkedInfoSet();
@@ -154,8 +164,9 @@ public class DoubleLoopLinkedInfoSet implements IInfoSet{
 		
 		DoubleLinkedInfo checkPointer = head.next;
 		while(checkPointer != head){
-			if (getter.pickInfo(checkPointer).hashCode() == searchInfo.hashCode()
-					&& filter.check(checkPointer)){
+			if (( searchInfo.isEmpty() || 
+					getter.pickInfo(checkPointer).hashCode() == searchInfo.hashCode()
+					) && filter.check(checkPointer)){
 				
 				deleteInfo(checkPointer);
 				resultSet.insertInfo(checkPointer);
