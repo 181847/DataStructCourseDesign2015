@@ -8,6 +8,7 @@ import info.DoubleLinkedInfo;
 import infoInterface.IInfoFilter;
 import infoInterface.IInfoGetter;
 import infoInterface.IInfoTraverser;
+import infoInterface.ILimitedTraverser;
 
 public class DoubleLoopLinkedInfoSet implements IInfoSet{
 	/**
@@ -209,7 +210,42 @@ public class DoubleLoopLinkedInfoSet implements IInfoSet{
 		DoubleLinkedInfo checkPointer = head.next;
 		while(checkPointer != head){
 			if (filter.check(checkPointer)){
-				traverser.traverserInfo(checkPointer);
+				traverser.traverse(checkPointer);
+			}
+			checkPointer = checkPointer.next;
+		}
+		return 1;
+	}
+	
+	/**
+	 * 通过一个可限制的遍历者来遍历信息体，
+	 * 如果循环遍历的过程中发现遍历者被限制了，
+	 * 就立即返回0，结束遍历。
+	 * @param limitedTraverser 
+	 * 		可限制的遍历者。
+	 * @param filter 
+	 * 		过滤器，过滤掉不想要遍历的信息体。
+	 * @return
+	 * 		参数为null或者遍历者受到限制时都返回0，
+	 * 		其他情况返回1。
+	 */
+	public int limitedTraverseInfo(ILimitedTraverser limitedTraverser, IInfoFilter filter){
+		if (limitedTraverser == null || filter == null){
+			MyLogger.log("遍历DLLInfoSet的时候，参数存在null遍历并InfoSet失败。请检查："
+					+ "ILimitedTraverser limitedTraverser == null: " + (limitedTraverser == null) 
+					+ "IInfoFilter filter == null: " + (filter == null));
+			return 0;
+		}
+		
+		DoubleLinkedInfo checkPointer = head.next;
+		while(checkPointer != head){
+			if (filter.check(checkPointer)){
+				if (limitedTraverser.isNotLimited()){
+					limitedTraverser.traverse(checkPointer);
+				} else {
+					//遍历者已经被限制，直接返回结束方法。
+					return 0;
+				}
 			}
 			checkPointer = checkPointer.next;
 		}
