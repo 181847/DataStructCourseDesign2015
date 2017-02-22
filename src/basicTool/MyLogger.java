@@ -29,4 +29,11 @@ public class MyLogger {
 	public static void seperate(){
 		System.out.println("************seperateLine*********************");
 	}
+	
+	public static void seperate(String message){
+		System.out.println("**************" 
+					+ message 
+					+ "**************");
+	}
+
 }
