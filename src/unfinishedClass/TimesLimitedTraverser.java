@@ -33,7 +33,7 @@ public abstract class TimesLimitedTraverser extends AbstractTraverser implements
 	 * 获取这个遍历者的剩余的最大遍历次数。
 	 * @return 剩余的最大遍历次数。
 	 */
-	public int getMaxTraverseTimes() {
+	public int getMaxTimes() {
 		return maxTraverseTimes;
 	}
 
@@ -41,7 +41,7 @@ public abstract class TimesLimitedTraverser extends AbstractTraverser implements
 	 * 设置这个遍历者的剩余的最大遍历次数。
 	 * @param maxTraverseTimes
 	 */
-	public void setMaxTraverseTimes(int maxTraverseTimes) {
+	public void setMaxTimes(int maxTraverseTimes) {
 		this.maxTraverseTimes = maxTraverseTimes;
 	}
 
