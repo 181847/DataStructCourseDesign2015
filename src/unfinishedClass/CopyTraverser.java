@@ -25,7 +25,7 @@ public class CopyTraverser implements IInfoTraverser {
 	}
 	
 	@Override
-	public int traverserInfo(IInfo info) {
+	public int traverse(IInfo info) {
 		if (info == null){
 			MyLogger.logError("CopyTraverser准备复制一个info对象，"
 					+ "但是参数info为null，无法复制。");
