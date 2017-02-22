@@ -8,7 +8,7 @@ public class Test {
 	public static void prepare(){
 		stus = new Student[]{
 				new Student("abc", "1"), 
-				new Student("acd", "2"), 
-				new Student("abe", "3")};
+				new Student("abe", "3"), 
+				new Student("acd", "2")};
 	}
 }
