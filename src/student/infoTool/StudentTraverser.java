@@ -2,17 +2,13 @@ package student.infoTool;
 
 import basicInterface.IInfo;
 import basicTool.MyLogger;
-import infoInterface.IInfoTraverser;
 import student.Student;
+import unfinishedClass.AbstractTraverser;
 
-public class StudentTraverser implements IInfoTraverser {
+public class StudentTraverser extends AbstractTraverser {
 
 	@Override
-	public int traverserInfo(IInfo info) {
-		if (info == null){
-			MyLogger.log("错误：StudentTraverser准备读取info信息进行信息遍历，但是参数info为null。");
-			return 0;
-		}
+	public int dealWithInfo(IInfo info) {
 		Object container = info.getContainer();
 		
 		if (container == null){
