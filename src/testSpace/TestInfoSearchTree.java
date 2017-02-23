@@ -18,9 +18,9 @@ public class TestInfoSearchTree extends Test{
 		}
 		
 		ist.traverseInfo(new StudentTraverser(), new AllTrueFilter());
-		ist.getSpecificInfoSet("2002005".toCharArray(), 0).traverseInfo(new StudentTraverser(), new AllTrueFilter());
+		ist.getSoloInfoSet("2002005".toCharArray(), 0).traverseInfo(new StudentTraverser(), new AllTrueFilter());
 		
 		MyLogger.seperate("SEARCH_TREE");
-		ist.getTree("2002001".toCharArray(), 0).soloTraverseInfo(new StudentTraverser(), new AllTrueFilter());
+		ist.getTree("2002001".toCharArray(), 0).specialTraverseInfo(new StudentTraverser(), new AllTrueFilter());
 	}
 }
