@@ -357,7 +357,7 @@ public class InfoSearchTree implements IInfoSet{
 	 * 		这个对象是DoubleLoopLinkedInfoSet类型，但是它也有可能为null，
 	 * 		如果相关的字符路径的树节点并不存在的话也会返回null。
 	 */
-	public DoubleLoopLinkedInfoSet getSpecificInfoSet(char[] charBuffer, int index){
+	public DoubleLoopLinkedInfoSet getSoloInfoSet(char[] charBuffer, int index){
 		InfoSearchTree findTree = getTree(charBuffer, index);
 		if (findTree == null){
 			return null;
@@ -488,7 +488,9 @@ public class InfoSearchTree implements IInfoSet{
 	}//limitedTraverseInfo
 	
 	/**
-	 * 递归调用，删除树内的所有的满足要求的信息体。
+	 * 传统的全局删除，
+	 * 递归调用，对树内的所有信息体进行删除操作，
+	 * （是否真的从树中删掉要看是否满足相关参数的要求）。
 	 * @param searchInfo 
 	 * 		主要用来检查的字符串信息，
 	 * 		只有与这个searchInfo相等才算找到，
@@ -553,7 +555,11 @@ public class InfoSearchTree implements IInfoSet{
 	}//delete
 	
 	/**
-	 * 按照字符数组的路径删除指定的树节点中的信息体。
+	 * 按照字符数组的路径删除指定的树节点中的信息体，
+	 * 此操作只针对指定路径的单独的树节点内部的infoSet对象，
+	 * 不对其他的左右子树和nextTree所删除操作，
+	 * 当然，如果这个被指定的树节点被删空而且没有指向下一棵树的时候，
+	 * 这棵树节点本身会被删除，同时保证树的结构不变。
 	 * @param charBuffer 
 	 * 		一个与这个Info对象有关的字符数组，
 	 * 		一般来说可以是这个Info的某个特征字符串。
@@ -581,17 +587,17 @@ public class InfoSearchTree implements IInfoSet{
 	 * 		如果要求上层调用者将自己删除的话，返回-1；
 	 * 		如果返回-2，表示已经在指定的路径尾部的树节点的infoSet执行了delete操作。
 	 */
-	public int deleteSpecific(char[] charBuffer, int index, 
+	public int soloDelete(char[] charBuffer, int index, 
 			String searchInfo, IInfoGetter getter, IInfoFilter filter){
 		if (charBuffer == null){
-			MyLogger.logError("InfoSearchTree调用deleteSpecific()方法时，"
+			MyLogger.logError("InfoSearchTree调用soloDelete()方法时，"
 					+ "但是参数charBuffer为null，"
 					+ "不能根据空串插入Info对象。");
 			return 0;
 		}
 		
 		if (searchInfo == null || getter == null || filter == null){
-			MyLogger.log("InfoSearchTree调用deleteSpecific()方法，参数存在null，删除Info失败。请检查："
+			MyLogger.log("InfoSearchTree调用soloDelete()方法，参数存在null，删除Info失败。请检查："
 					+ "String searchInfo == null: " + (searchInfo == null) 
 					+ "IInfoGetter getter == null: " + (getter == null)
 					+ "IInfoFilter filter == null: " + (filter == null));
@@ -599,13 +605,13 @@ public class InfoSearchTree implements IInfoSet{
 		}
 		
 		if (index < 0){
-			MyLogger.logError("InfoSearchTree调用insertInfo方法，"
+			MyLogger.logError("InfoSearchTree调用soloDelete()方法，"
 					+ "但是参数index小于等于0，"
 					+ "不能正常获取字符数组的字符。");
 			return 0;
 			
 		} else if (index >= charBuffer.length){
-			MyLogger.logError("InfoSearchTree调用insertInfo方法，"
+			MyLogger.logError("InfoSearchTree调用soloDelete()方法，"
 					+ "但是参数index大于等于字符数组的长度，"
 					+ "不能正常获取字符数组的字符。");
 			return 0;
@@ -615,7 +621,7 @@ public class InfoSearchTree implements IInfoSet{
 			if (charBuffer[index] < curChar){//向左子树删
 				if (lChild != null){
 					
-					switch(lChild.deleteSpecific(charBuffer, index, 
+					switch(lChild.soloDelete(charBuffer, index, 
 							searchInfo, getter, filter)){
 					case -2:
 						return -2;
@@ -634,7 +640,7 @@ public class InfoSearchTree implements IInfoSet{
 			}else if (charBuffer[index] > curChar){//向右子树删
 				if (rChild != null){
 					
-					switch(rChild.deleteSpecific(charBuffer, index, 
+					switch(rChild.soloDelete(charBuffer, index, 
 							searchInfo, getter, filter)){
 					case -1:
 						rChild = deleteTree(rChild);
@@ -656,14 +662,14 @@ public class InfoSearchTree implements IInfoSet{
 					if ( (infoSet == null || infoSet.isEmpty()) &&
 							nextTree == null){
 						//这个节点已经空了，这个节点已经不能在作为路径的导航了，
-						//请求上层将自己删除，删除按照二叉排序树的删除方法。
+						//返回-1，请求上层将自己删除。
 						return -1;
 					}//if
 					return -2;
 					
 				} else {//序号还没有到字符数组的结尾
 					if (nextTree != null){
-						switch(nextTree.deleteSpecific(charBuffer, index + 1, 
+						switch(nextTree.soloDelete(charBuffer, index + 1, 
 								searchInfo, getter, filter)){
 						case -1:
 							nextTree = deleteTree(nextTree);
@@ -684,7 +690,125 @@ public class InfoSearchTree implements IInfoSet{
 				}//if
 			}//if
 		}//if
-	}//deleteSpecific
+	}//soloDelete
+	
+	/**
+	 * 到达指定的字符路径的树节点，
+	 * 只对树节点本身的infoSet和nextTree进行传统删除，
+	 * 如果本节点被删空，会通知上层将自己删除，
+	 * 并保持树的基本结构不变。
+	 * @param charBuffer
+	 * @param index
+	 * @param searchInfo
+	 */
+	public int specialDelete(char[] charBuffer, int index, 
+			String searchInfo, IInfoGetter getter, IInfoFilter filter){
+		if (charBuffer == null){
+			MyLogger.logError("InfoSearchTree调用specialDelete()方法时，"
+					+ "但是参数charBuffer为null，"
+					+ "不能根据空串插入Info对象。");
+			return 0;
+		}
+		
+		if (searchInfo == null || getter == null || filter == null){
+			MyLogger.log("InfoSearchTree调用specialDelete()方法，参数存在null，删除Info失败。请检查："
+					+ "String searchInfo == null: " + (searchInfo == null) 
+					+ "IInfoGetter getter == null: " + (getter == null)
+					+ "IInfoFilter filter == null: " + (filter == null));
+			return 0;
+		}
+		
+		if (index < 0){
+			MyLogger.logError("InfoSearchTree调用specialDelete()方法，"
+					+ "但是参数index小于等于0，"
+					+ "不能正常获取字符数组的字符。");
+			return 0;
+			
+		} else if (index >= charBuffer.length){
+			MyLogger.logError("InfoSearchTree调用specialDelete()方法，"
+					+ "但是参数index大于等于字符数组的长度，"
+					+ "不能正常获取字符数组的字符。");
+			return 0;
+			
+		} else {
+			
+			if (charBuffer[index] < curChar){//向左子树删
+				if (lChild != null){
+					
+					switch(lChild.specialDelete(charBuffer, index, 
+							searchInfo, getter, filter)){
+					case -2:
+						return -2;
+					case -1:
+						lChild = deleteTree(lChild);
+						//告知上层，已经完成删除操作
+						return -2;
+					default:
+						return 0;
+					}//switch
+					
+				}
+				//左子树为空，无法继续查找，返回0表示查找失败
+				return 0;
+				
+			}else if (charBuffer[index] > curChar){//向右子树删
+				if (rChild != null){
+					
+					switch(rChild.specialDelete(charBuffer, index, 
+							searchInfo, getter, filter)){
+					case -1:
+						rChild = deleteTree(rChild);
+						//告知上层，已经完成删除操作
+					case -2:
+						return -2;
+					default:
+						return 0;
+					}//switch
+				}
+				return 0;
+				
+			} else {//找到指定的字符
+				
+				if (index == charBuffer.length - 1){//序号已经到了字符数组的结尾
+					if (infoSet != null){
+						infoSet.delete(searchInfo, getter, filter);
+					}
+					if ( (infoSet == null || infoSet.isEmpty()) &&
+							nextTree == null){
+						//这个节点已经空了，这个节点已经不能在作为路径的导航了，
+						//返回-1，请求上层将自己删除。
+						return -1;
+					}
+					return -2;
+					
+				} else {//序号还没有到字符数组的结尾
+					if (nextTree != null){
+						switch(nextTree.specialDelete(charBuffer, index + 1, 
+								searchInfo, getter, filter)){
+						
+						case -1:
+							nextTree = deleteTree(nextTree);
+							if ( (infoSet == null || infoSet.isEmpty()) &&
+									nextTree == null){
+								//这个节点已经空了，这个节点已经不能在作为路径的导航了，
+								//请求上层将自己删除，删除按照二叉排序树的删除方法。
+								return -1;
+							}//if
+							
+						case -2:
+							return -2;
+							
+						default:
+							return 0;
+						}//switch
+						
+					}//if
+					
+					return 0;
+				}//if
+			}//if
+		}//if
+	}//specialDelete
 	
 	/**
 	 * 输入一个此树中的节点，
@@ -695,10 +819,10 @@ public class InfoSearchTree implements IInfoSet{
 	 */
 	private InfoSearchTree deleteTree(InfoSearchTree treeToDelete){
 		if (treeToDelete.rChild == null){
-			return lChild;
+			return treeToDelete.lChild;
 		}
 		if (treeToDelete.lChild == null){
-			return rChild;
+			return treeToDelete.rChild;
 		}
 		
 		InfoSearchTree prec = treeToDelete;
@@ -727,7 +851,7 @@ public class InfoSearchTree implements IInfoSet{
 	 * @param filter 过滤器，所有不满足过滤器的Info都不会被遍历。
 	 * @return 成功遍历返回1，参数存在null返回0。
 	 */
-	public int soloTraverseInfo(IInfoTraverser traverser, IInfoFilter filter) {
+	public int specialTraverseInfo(IInfoTraverser traverser, IInfoFilter filter) {
 		if (traverser == null || filter == null){
 			MyLogger.log("soloTraverseInfo()方法遍历InfoSearchTree的时候，"
 					+ "参数存在null遍历并InfoSet失败。请检查："
@@ -763,7 +887,7 @@ public class InfoSearchTree implements IInfoSet{
 	 * 		参数为null或者遍历者受到限制时都返回0，
 	 * 		其他情况返回1。
 	 */
-	public int soloLimitedTraverseInfo(ILimitedTraverser limitedTraverser, IInfoFilter filter){
+	public int specialLimitedTraverseInfo(ILimitedTraverser limitedTraverser, IInfoFilter filter){
 		if (limitedTraverser == null || filter == null){
 			MyLogger.log("遍历InfoSearchTree的时候，参数存在null遍历并InfoSet失败。请检查："
 					+ "IInfoTraverser traverser == null: " + (limitedTraverser == null) 
