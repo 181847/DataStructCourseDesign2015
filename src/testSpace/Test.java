@@ -32,6 +32,7 @@ public class Test {
 				new Student("2002009", "许强", 1, "大三", "机械理论"), 
 				new Student("20020010", "杨小鹃", 2, "大一", "文化与法制"), 
 				new Student("20020011", "岳不群", 1, "大一", "体育")};
+		
 		prepareVariables();
 	}
 
