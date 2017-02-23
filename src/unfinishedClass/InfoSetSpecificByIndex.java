@@ -130,7 +130,7 @@ public class InfoSetSpecificByIndex extends DoubleLoopLinkedInfoSet{
 	/**
 	 * 传入一个指定的序号，
 	 * 将指定序号的信息体从对象内删除，
-	 * 将这个对象通过一个DLLInfoSet返回
+	 * 将这个对象通过一个DLLInfoSet返回，精确删除。
 	 * @param index
 	 * @return
 	 */
