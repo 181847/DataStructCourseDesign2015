@@ -23,7 +23,7 @@ public class TestLimitedTraverser extends Test {
 		ist.limitedTraverseInfo(new LimitedStudentTraverser(3), new AllTrueFilter());
 		
 		MyLogger.seperate();
-		ist.deleteSpecific("20020011".toCharArray(), 0, "岳不群", new NameGetter(), new AllTrueFilter());
+		ist.specialDelete("20020011".toCharArray(), 0, "岳不群", new NameGetter(), new AllTrueFilter());
 		ist.limitedTraverseInfo(new LimitedStudentTraverser(45), new AllTrueFilter());
 	}
 
