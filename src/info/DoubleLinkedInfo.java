@@ -33,7 +33,7 @@ public class DoubleLinkedInfo extends InfoWithContainer implements IInfo {
 	 * 获取前一个Info信息体。
 	 * @return 前一个Info信息体。
 	 */
-	public InfoWithContainer getPrec() {
+	public DoubleLinkedInfo getPrec() {
 		return prec;
 	}
 	
@@ -49,7 +49,7 @@ public class DoubleLinkedInfo extends InfoWithContainer implements IInfo {
 	 * 获取下一个信息体。
 	 * @return 下一个信息体。
 	 */
-	public IInfo getNext() {
+	public DoubleLinkedInfo getNext() {
 		return next;
 	}
 	
