@@ -12,6 +12,7 @@ import info.infoTool.NameGetter;
 import infoInterface.IInfo;
 import infoInterface.IInfoFilter;
 import infoInterface.IInfoGetter;
+import unfinishedClass.InnerCopyTraverserForIInfo;
 
 /**
  * 本类并不能依靠Index参数获取相关信息体，
@@ -161,6 +162,9 @@ public class InfoSetSpecificByIndex extends DoubleLoopLinkedInfoSet{
 		if (searchResult == null){
 			return new DoubleLoopLinkedInfoSet();
 		}
-		return searchResult;
+		InnerCopyTraverserForIInfo innerCopier = new InnerCopyTraverserForIInfo();
+		
+		searchResult.traverseInfo(innerCopier, new AllTrueFilter());
+		return innerCopier.getcontainerSet();
 	}
 }
