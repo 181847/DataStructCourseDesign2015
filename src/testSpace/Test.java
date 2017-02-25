@@ -10,10 +10,15 @@ import info.infoTool.StudentTraverser;
 import unfinishedClass.Club;
 import unfinishedClass.ClubTraverser;
 import unfinishedClass.Student;
+import unfinishedClass.College;
+import unfinishedClass.MyClubTraverser;
+import unfinishedClass.MyMemberTraverser;
 
 public class Test {
 	public static Student[] stus;
 	public static Club[] clubs;
+	
+	public static College college;
 	
 	public static StudentTraverser studentTraverser;
 	public static ClubTraverser clubTraverser;
@@ -24,6 +29,8 @@ public class Test {
 	public static GradeGetterForStudent gradeGetter;
 	public static MainCourseGetterForStudent mainCourseGetter;
 	public static AllTrueFilter allTrueFilter;
+	public static MyMemberTraverser myMemberTraverser;
+	public static MyClubTraverser myClubTraverser;
 	
 	public static void prepare(){
 		stus = new Student[]{
@@ -51,6 +58,17 @@ public class Test {
 				new Club("20120021", "篮球社", "2012-12-21"),
 				new Club("2012220", "3D工厂", "2016-4-16"),
 							};
+		
+		college = new College();
+		
+		for (Club club: clubs){
+			college.addClub(club);
+		}
+		
+		for (Student stud: stus){
+			college.addStudent(stud);
+		}
+		
 		prepareVariables();
 	}
 
@@ -64,5 +82,7 @@ public class Test {
 		gradeGetter = new GradeGetterForStudent();
 		mainCourseGetter = new MainCourseGetterForStudent();
 		allTrueFilter = new AllTrueFilter();
+		myMemberTraverser = new MyMemberTraverser();
+		myClubTraverser = new MyClubTraverser();
 	}
 }
