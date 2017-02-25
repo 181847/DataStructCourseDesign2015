@@ -1,13 +1,13 @@
 package testSpace;
 
-import unfinishedClass.SearchResult;
 import basicTool.MyLogger;
 import info.InfoWithContainer;
 import info.infoTool.GenderGetterForStudent;
 import info.infoTool.PinyinGetter;
 import info.infoTool.ShortPinyinGetter;
 import infoInterface.IInfoGetter;
-import unfinishedClass.SearchableInfoSet;
+import infoSet.SearchResult;
+import infoSet.SearchableInfoSet;
 import unfinishedClass.Student;
 
 public class TestSearchableInfoSet extends Test {
@@ -25,10 +25,10 @@ public class TestSearchableInfoSet extends Test {
 		}
 		
 		SearchResult sr = sis.search("wx");
-		sr.getAllResult().traverseInfo(studentTraverser, allTrueFilter);
+		sr.getAllResult(allTrueFilter).traverseInfo(studentTraverser, allTrueFilter);
 		
 		MyLogger.seperate("Search Male");
 		sr = sis.search("M");
-		sr.getAllResult().traverseInfo(studentTraverser, allTrueFilter);
+		sr.getAllResult(allTrueFilter).traverseInfo(studentTraverser, allTrueFilter);
 	}
 }

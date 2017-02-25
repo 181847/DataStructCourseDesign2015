@@ -5,7 +5,7 @@ import basicTool.MyLogger;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
 import info.infoTool.NameGetter;
-import unfinishedClass.InfoSetSpecificByIndex;
+import infoSet.InfoSetSpecificByIndex;
 import unfinishedClass.Student;
 
 public class TestInfoSetSpecificByIndex_DeleteIndex extends Test{
@@ -24,9 +24,13 @@ public class TestInfoSetSpecificByIndex_DeleteIndex extends Test{
 		issbi.traverseInfo(studentTraverser, allTrueFilter);
 
 		issbi.delete("2002015", new NameGetter(), new AllTrueFilter());
+
+		System.out.println("MemberNum: " + issbi.getNum());
 		IInfoSet deleteSet = issbi.deleteIndex("2002002");
 		
 		MyLogger.seperate("AfterDelete");
+
+		System.out.println("MemberNum: " + issbi.getNum());
 		issbi.traverseInfo(studentTraverser, allTrueFilter);
 		
 		MyLogger.seperate("The Info had Been Deleted");

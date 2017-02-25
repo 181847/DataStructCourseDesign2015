@@ -3,7 +3,7 @@ package testSpace;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
 import info.infoTool.StudentTraverser;
-import unfinishedClass.InfoSetSpecificByIndex;
+import infoSet.InfoSetSpecificByIndex;
 
 public class TestInfoSetSpecificByIndex_Insert extends Test {
 	public static void main(String[] args){

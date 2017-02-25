@@ -6,7 +6,7 @@ import info.infoTool.AllTrueFilter;
 import info.infoTool.IndexGetter;
 import info.infoTool.NameGetter;
 import info.infoTool.StudentTraverser;
-import unfinishedClass.InfoSetSpecificByIndex;
+import infoSet.InfoSetSpecificByIndex;
 import unfinishedClass.Student;
 
 public class TestInfoSetSpecificByIndex_Delete extends Test {

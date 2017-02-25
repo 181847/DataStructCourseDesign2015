@@ -3,7 +3,7 @@ package testSpace;
 import basicTool.MyLogger;
 import info.InfoWithContainer;
 import infoSet.InfoSearchTree;
-import unfinishedClass.SearchLog;
+import infoSet.SearchLog;
 import unfinishedClass.Student;
 
 public class TestSearchLog extends Test {
