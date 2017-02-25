@@ -79,7 +79,7 @@ public class College {
 					+ "获得了多个相同编号的社团，"
 					+ "现在只返回第一个社团。");
 		}
-		return (Club) infoArray[1].getContainer();
+		return (Club) ( infoArray[0].getContainer() );
 	}
 	
 	/**
@@ -102,7 +102,7 @@ public class College {
 					+ "现在只返回第一个社团。请检查这些相同序号的学生对象");
 			searchResult.traverseInfo(new StudentTraverser(), new AllTrueFilter());
 		}
-		return (Student) infoArray[1].getContainer();
+		return (Student) ( infoArray[0].getContainer() );
 	}
 	
 	/**
