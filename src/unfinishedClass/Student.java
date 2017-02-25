@@ -61,7 +61,12 @@ public class Student extends RegistObjectWithPinyin {
 		this.mainCourse = mainCourse;
 	}
 	
-	public IInfoSet getMyClubs(){
+	/**
+	 * 获取参加社团的集合。
+	 * @return
+	 * 		当前学生参加的社团的集合。
+	 */
+	public InfoSetSpecificByIndex getMyClubs(){
 		return myClubsInfoSet;
 	}
 }
