@@ -5,6 +5,7 @@ import basicTool.MyLogger;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
 import info.infoTool.GenderGetterForStudent;
+import info.infoTool.GradeGetterForStudent;
 import info.infoTool.IndexGetter;
 import info.infoTool.MainCourseGetterForStudent;
 import info.infoTool.NameGetter;
@@ -13,7 +14,6 @@ import info.infoTool.ShortPinyinGetter;
 import info.infoTool.StudentTraverser;
 import infoInterface.IInfo;
 import infoInterface.IInfoGetter;
-import infoSet.DoubleLoopLinkedInfoSet;
 import infoSet.SearchableInfoSet;
 
 public class College {
@@ -28,17 +28,21 @@ public class College {
 	public SearchableInfoSet clubInfoSet;
 
 	public College(){
-		studentInfoSet = new SearchableInfoSet(new IInfoGetter[]{new IndexGetter(),
-																	new NameGetter(),
-																	new PinyinGetter(),
-																	new ShortPinyinGetter(),
-																	new GenderGetterForStudent(),
-																	new MainCourseGetterForStudent(),});
+		studentInfoSet = new SearchableInfoSet(new IInfoGetter[]{
+				new IndexGetter(),
+				new NameGetter(),
+				new PinyinGetter(),
+				new ShortPinyinGetter(),
+				new GenderGetterForStudent(),
+				new GradeGetterForStudent(),
+				new MainCourseGetterForStudent(),});
 		
-		clubInfoSet = new SearchableInfoSet(new IInfoGetter[]{new IndexGetter(),
-																new NameGetter(),
-																new PinyinGetter(),
-																new ShortPinyinGetter()});
+		clubInfoSet = new SearchableInfoSet(new IInfoGetter[]{
+				new IndexGetter(),
+				new NameGetter(),
+				new PinyinGetter(),
+				new ShortPinyinGetter(),
+				new DateGetter()});
 	}
 
 	/**
