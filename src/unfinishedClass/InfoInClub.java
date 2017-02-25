@@ -1,8 +1,8 @@
 package unfinishedClass;
 
-import basicInterface.IPositionInClub;
+import basicInterface.IPositionHolder;
 
-public class InfoInClub implements IPositionInClub {
+public class InfoInClub implements IPositionHolder {
 	public String position;
 	
 	public InfoInClub(String position){
