@@ -3,9 +3,9 @@ package unfinishedClass;
 import basicInterface.IIndexHolder;
 import basicInterface.INameHolder;
 import basicInterface.IPinyinHolder;
-import basicInterface.IPositionInClub;
+import basicInterface.IPositionHolder;
 
-public class MyClub implements IIndexHolder, INameHolder, IPinyinHolder, IPositionInClub{
+public class MyClub implements IIndexHolder, INameHolder, IPinyinHolder, IPositionHolder{
 	/**
 	 * 在社团中的职位。
 	 */
