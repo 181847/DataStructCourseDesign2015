@@ -1,4 +1,4 @@
-package unfinishedClass;
+package infoSet;
 
 import basicTool.MyLogger;
 import info.infoTool.AllTrueFilter;
@@ -24,7 +24,7 @@ public class SearchLogForIndex extends SearchLog {
 	}
 	
 	/**
-	 * 将在指定路径结尾的信息体全部删除。
+	 * 将在指定路径结尾中和参数的Index相同的信息体删除。
 	 * @param searchInfo
 	 * 		字符串路径。
 	 * @return

@@ -1,16 +1,17 @@
-package unfinishedClass;
+package infoSet;
 
 import basicTool.MyLogger;
 import info.DoubleLinkedInfo;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
+import info.infoTool.DeleteTraverserForDLInfo;
 import info.infoTool.IndexGetter;
+import info.infoTool.InnerFilterForInfo;
+import info.infoTool.InnerGetterForInfo;
 import info.infoTool.NameGetter;
 import infoInterface.IInfo;
 import infoInterface.IInfoFilter;
 import infoInterface.IInfoGetter;
-import infoSet.DoubleLoopLinkedInfoSet;
-import infoSet.InfoSearchTree;
 
 /**
  * 本类并不能依靠Index参数获取相关信息体，
@@ -142,7 +143,24 @@ public class InfoSetSpecificByIndex extends DoubleLoopLinkedInfoSet{
 		if ( ! (infoSet == null || infoSet.isEmpty()) ){
 			infoSet.traverseInfo(deleteTraverser, new AllTrueFilter());
 			registArea.soloDelete(indexArray, 0, "", new InnerGetterForInfo(new NameGetter()), new AllTrueFilter());
+			infoSet = deleteTraverser.getDLLInfoSet();
+			num -= infoSet.getNum();
 		}
 		return deleteTraverser.getDLLInfoSet();
+	}
+	
+	/**
+	 * 获取指定序号的对象。
+	 * @param index
+	 * 		要获取的对象的序号。
+	 * @return
+	 * 		包含指定序号的信息体的集合。
+	 */
+	public DoubleLoopLinkedInfoSet getIndex(String index){
+		DoubleLoopLinkedInfoSet searchResult = registArea.getSoloInfoSet(index.toCharArray(), 0);
+		if (searchResult == null){
+			return new DoubleLoopLinkedInfoSet();
+		}
+		return searchResult;
 	}
 }

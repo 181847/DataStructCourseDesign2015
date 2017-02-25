@@ -1,7 +1,6 @@
-package unfinishedClass;
+package info.infoTool;
 
 import info.InfoWithContainer;
-import info.infoTool.TimesLimitedTraverser;
 import infoSet.DoubleLoopLinkedInfoSet;
 
 public class LimitedCopyTraverser extends TimesLimitedTraverser {

@@ -1,12 +1,13 @@
-package unfinishedClass;
+package infoSet;
 
 import basicInterface.IInfoSet;
 import basicTool.MyLogger;
 import info.infoTool.AllTrueFilter;
 import info.infoTool.CopyTraverser;
+import info.infoTool.LimitedCopyTraverser;
+import infoInterface.IInfoFilter;
 import infoInterface.IInfoTraverser;
 import infoInterface.ILimitedTraverser;
-import infoSet.InfoSearchTree;
 
 public class SearchResult {
 	InfoSearchTree[] searchTree;
@@ -38,13 +39,13 @@ public class SearchResult {
 	 * 		返回最多包含num个信息体的IInfoSet，
 	 * 		最终也可能一个信息体都没有，但是返回值一定不为null。
 	 */
-	public IInfoSet getLimitedResult(int num){
+	public IInfoSet getLimitedResult(int num, IInfoFilter filter){
 		InfoSetSpecificByIndex resultSet = new InfoSetSpecificByIndex();
 		if (num >= 0){
 			ILimitedTraverser traverser = new LimitedCopyTraverser(num, resultSet);
 			for(InfoSearchTree tree: searchTree){
 				if (tree != null){
-					tree.specialLimitedTraverseInfo(traverser, new AllTrueFilter());
+					tree.specialLimitedTraverseInfo(traverser, filter);
 				}
 				if (traverser.isLimited()){
 					break;
@@ -59,12 +60,12 @@ public class SearchResult {
 	 * @return
 	 * 		包含搜索得到的所有信息体的IInfoSet。
 	 */
-	public IInfoSet getAllResult(){
+	public IInfoSet getAllResult(IInfoFilter filter){
 		InfoSetSpecificByIndex resultSet = new InfoSetSpecificByIndex();
 		IInfoTraverser traverser = new CopyTraverser(resultSet);
 		for(InfoSearchTree tree: searchTree){
 			if (tree != null){
-				tree.specialTraverseInfo(traverser, new AllTrueFilter());
+				tree.specialTraverseInfo(traverser, filter);
 			}
 		}
 		return resultSet;

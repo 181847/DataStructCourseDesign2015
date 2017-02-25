@@ -1,8 +1,7 @@
-package unfinishedClass;
+package info.infoTool;
 
 import basicTool.MyLogger;
 import info.DoubleLinkedInfo;
-import info.infoTool.AbstractGetter;
 import infoInterface.IInfo;
 import infoInterface.IInfoGetter;
 

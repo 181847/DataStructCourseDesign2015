@@ -1,12 +1,10 @@
-package unfinishedClass;
+package infoSet;
 
 import basicTool.MyLogger;
 import info.infoTool.AllTrueFilter;
 import info.infoTool.NameGetter;
 import infoInterface.IInfo;
 import infoInterface.IInfoGetter;
-import infoSet.DoubleLoopLinkedInfoSet;
-import infoSet.InfoSearchTree;
 
 
 public class SearchLog extends InfoSearchTree {
@@ -48,7 +46,8 @@ public class SearchLog extends InfoSearchTree {
 	 * 		要搜索的字符串路径。
 	 * @return
 	 * 		指定字符串路径的树节点，
-	 * 		如果没找到，或者参数为null或者空，就返回null。
+	 * 		如果没找到，或者参数为null，就返回null；
+	 * 		如果参数为空串，就返回当前这棵树。
 	 */
 	public InfoSearchTree searchInfo(String searchInfo){
 		if (searchInfo == null){
@@ -56,8 +55,7 @@ public class SearchLog extends InfoSearchTree {
 			return null;
 		}
 		if (searchInfo.isEmpty()){
-			MyLogger.logError("SearchLog搜索失败，字符串参数为空串。");
-			return null;
+			return this;
 		}
 		return getTree(searchInfo.toCharArray(), 0);
 	}

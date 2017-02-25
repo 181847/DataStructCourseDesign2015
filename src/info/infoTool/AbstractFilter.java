@@ -1,4 +1,4 @@
-package unfinishedClass;
+package info.infoTool;
 
 import basicTool.MyLogger;
 import infoInterface.IInfo;

@@ -1,12 +1,10 @@
-package unfinishedClass;
+package infoSet;
 
 import basicTool.MyLogger;
 import info.infoTool.IndexGetter;
 import infoInterface.IInfo;
 import infoInterface.IInfoFilter;
 import infoInterface.IInfoGetter;
-import infoSet.DoubleLoopLinkedInfoSet;
-import infoSet.InfoSearchTree;
 
 public class SearchableInfoSet extends InfoSetSpecificByIndex {
 	public SearchLogForIndex[] searchLogs;
@@ -72,6 +70,40 @@ public class SearchableInfoSet extends InfoSetSpecificByIndex {
 		return new SearchResult(resultTreeArray);
 	}
 	
+	/**
+	 * 由参数来决定对那些搜索目录进行搜索。
+	 * @param searchInfo
+	 * 		搜索的主要依据。
+	 * @param selectedTree
+	 * 		boolean数组，用来表明那些搜索目录能够被搜索。
+	 * @return
+	 * 		如果selectedTree和搜索目录的数量不一致，
+	 * 		返回一个空的SearchResult。
+	 */
+	public SearchResult search(String searchInfo, boolean[] selectedTree){
+		if (selectedTree.length != searchLogs.length){
+			MyLogger.logError("在SearchableInfoSet中进行搜索目录的选择性搜索时出错，"
+					+ "参数boolean[] selectedTree数组的长度和搜索目录的数量不一致。");
+			return new SearchResult(new InfoSearchTree[0]);
+		}
+		
+		int treeNum = searchLogs.length;
+		InfoSearchTree[] resultTreeArray = new InfoSearchTree[treeNum];
+		for (--treeNum; treeNum >= 0; --treeNum){
+			if (selectedTree[treeNum]){
+				resultTreeArray[treeNum] = searchLogs[treeNum].searchInfo(searchInfo);
+			}
+		}
+		return new SearchResult(resultTreeArray);
+	}
+	
+	/**
+	 * 插入信息体，同时为每个信息体都要建立相应的搜索目录信息。
+	 * @return
+	 * 		参数为null返回0；
+	 * 		插入失败返回-1；
+	 * 		插入成功返回1。
+	 */
 	@Override
 	public int insertInfo(IInfo info){
 		if (info == null){
@@ -99,15 +131,35 @@ public class SearchableInfoSet extends InfoSetSpecificByIndex {
 		return 0;
 	}
 	
+	/**
+	 * 删除指定序号的信息体，
+	 * 并且在所有搜索目录中将这个信息体的去掉。
+	 * @param index
+	 * 		要删除的信息体的序号。
+	 * @return
+	 * 		包含删除的信息体的信息集合。
+	 */
 	@Override
 	public DoubleLoopLinkedInfoSet deleteIndex(String index){
-		//TODO
-		return null;
+		DoubleLoopLinkedInfoSet deleteSet = super.deleteIndex(index);
+		IInfo[] deleteInfos = deleteSet.toInfoArray();
+		if (deleteInfos.length == 1){
+			for (SearchLogForIndex sl: searchLogs){
+				sl.deleteInfo(deleteInfos[0]);
+			}
+		}
+		return deleteSet;
 	}
 	
 	@Override
 	public DoubleLoopLinkedInfoSet delete(String searchInfo, IInfoGetter getter, IInfoFilter filter){
-		//TODO
-		return null;
+		DoubleLoopLinkedInfoSet deleteSet = super.delete(searchInfo, getter, filter);
+		IInfo[] deleteInfos = deleteSet.toInfoArray();
+		for (IInfo info: deleteInfos){
+			for (SearchLogForIndex sl: searchLogs){
+				sl.deleteInfo(info);
+			}
+		}
+		return deleteSet;
 	}
 }
