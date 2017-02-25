@@ -8,10 +8,15 @@ import basicInterface.IPositionHolder;
 public class MyMember implements IIndexHolder, INameHolder, IPinyinHolder, IPositionHolder {
 	public InfoInClub infoInClub;
 	public Student student;
+	
+	public MyMember(InfoInClub infoInClub, Student student){
+		this.infoInClub = infoInClub;
+		this.student = student;
+	}
 
 	@Override
 	public void setPosition(String position) {
-		infoInClub = new InfoInClub(position);
+		infoInClub.setPosition(position);;
 	}
 
 	@Override
@@ -70,6 +75,22 @@ public class MyMember implements IIndexHolder, INameHolder, IPinyinHolder, IPosi
 	@Override
 	public void setIndex(String index) {
 		//Empty Body
+	}
+
+	public InfoInClub getInfoInClub() {
+		return infoInClub;
+	}
+
+	public void setInfoInClub(InfoInClub infoInClub) {
+		this.infoInClub = infoInClub;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 }

@@ -16,8 +16,8 @@ public class MyClub implements IIndexHolder, INameHolder, IPinyinHolder, IPositi
 	 */
 	public Club club;
 	
-	public MyClub(String position, Club club){
-		infoInClub = new InfoInClub(position);
+	public MyClub(InfoInClub infoInClub, Club club){
+		this.infoInClub = infoInClub;
 		this.club = club;
 	}
 	
