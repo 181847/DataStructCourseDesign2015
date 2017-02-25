@@ -3,6 +3,7 @@ package infoSet;
 import basicInterface.IInfoSet;
 import basicTool.MyLogger;
 import info.DoubleLinkedInfo;
+import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
 import info.infoTool.CopyTraverser;
 import infoInterface.IInfo;
@@ -267,12 +268,23 @@ public class DoubleLoopLinkedInfoSet implements IInfoSet{
 	}
 
 	/**
-	 * 未完成方法，不可使用，返回值总为null。
+	 * 将信息集合中的信息体用数组返回出来，
+	 * @return 
+	 * 		返回的类型是InfoWithContainer类型的数组，
+	 * 		如果这个集合中没有信息体即num== 0，
+	 * 		返回的数组长度为0，可以通过数组的length成员判断。
 	 */
 	@Override
-	public IInfo[] getInfos() {
-		//TODO
-		return null;
+	public IInfo[] toInfoArray() {
+		if (num == 0){
+			return new InfoWithContainer[0];
+		}
+		InfoWithContainer[] infoArray = new InfoWithContainer[num];
+		DoubleLinkedInfo checkPointer = head.next;
+		for(int i = 0; checkPointer != head; ++i, checkPointer = checkPointer.next){
+			infoArray[i] = new InfoWithContainer(checkPointer.getContainer());
+		}
+		return infoArray;
 	}
 	
 	/**

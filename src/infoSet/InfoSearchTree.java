@@ -176,11 +176,11 @@ public class InfoSearchTree implements IInfoSet{
 	 * @return 包含所有信息体的数组。
 	 */
 	@Override
-	public IInfo[] getInfos() {
+	public IInfo[] toInfoArray() {
 		DoubleLoopLinkedInfoSet resultSet = new DoubleLoopLinkedInfoSet();
 		CopyTraverser copyTraverser = new CopyTraverser(resultSet);
 		traverseInfo(copyTraverser, new AllTrueFilter());
-		return resultSet.getInfos();
+		return resultSet.toInfoArray();
 	}
 	
 	/**
