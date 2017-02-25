@@ -128,7 +128,7 @@ public class SearchableInfoSet extends InfoSetSpecificByIndex {
 				MyLogger.logError("SearchableInfoSet为新Info创建搜索目录之一失败。");
 			}
 		}
-		return 0;
+		return 1;
 	}
 	
 	/**
