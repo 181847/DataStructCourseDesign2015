@@ -17,6 +17,7 @@ public class Test {
 	
 	public static StudentTraverser studentTraverser;
 	public static ClubTraverser clubTraverser;
+	
 	public static NameGetter nameGetter;
 	public static IndexGetter indexGetter;
 	public static GenderGetterForStudent genderGetter;
@@ -40,15 +41,15 @@ public class Test {
 		
 		
 		clubs = new Club[]{
-				new Club("1002002", "吉他俱乐部", "2011-5-7"),
-				new Club("1002003", "初心社", "2014-12-4"),
-				new Club("1002004", "诗歌协会", "2008-7-24"),
-				new Club("1002005", "动漫社", "2009-8-7"),
-				new Club("1002008", "机器人俱乐部", "2015-4-5"),
-				new Club("1002015", "足球会社", "2007-4-19"),
-				new Club("100200111", "瑜伽馆", "2008-10-30"),
-				new Club("10020021", "篮球社", "2012-12-21"),
-				new Club("1002220", "3D工厂", "2016-4-16"),
+				new Club("2012002", "吉他俱乐部", "2011-5-7"),
+				new Club("2012003", "初心社", "2014-12-4"),
+				new Club("2012004", "诗歌协会", "2008-7-24"),
+				new Club("2012005", "动漫社", "2009-8-7"),
+				new Club("2012008", "机器人俱乐部", "2015-4-5"),
+				new Club("2012015", "足球会社", "2007-4-19"),
+				new Club("201200111", "瑜伽馆", "2008-10-30"),
+				new Club("20120021", "篮球社", "2012-12-21"),
+				new Club("2012220", "3D工厂", "2016-4-16"),
 							};
 		prepareVariables();
 	}
