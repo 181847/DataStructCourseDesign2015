@@ -13,6 +13,10 @@ import infoSet.DoubleLoopLinkedInfoSet;
 public class CopyTraverser implements IInfoTraverser {
 	DoubleLoopLinkedInfoSet containerSet;
 
+	public CopyTraverser(){
+		containerSet = new DoubleLoopLinkedInfoSet();
+	}
+	
 	public CopyTraverser(DoubleLoopLinkedInfoSet containerSet){
 		this.containerSet = containerSet;
 	}
