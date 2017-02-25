@@ -9,12 +9,13 @@ public class PinyinGetter extends AbstractGetter {
 	public String dealWithContainer(Object container) {
 		if (container instanceof IPinyinHolder){
 			return ((IPinyinHolder) container).getPinyin();
-		} else {
-			MyLogger.logError("PinyinGetter准备读取Info对象内存储的信息，"
-					+ "但是读取的container不是IPinyinHolder的子类，"
-					+ "无法获取信息。");
-			return "";
 		}
+		
+		MyLogger.logError("PinyinGetter准备读取Info对象内存储的信息，"
+				+ "但是读取的container不是IPinyinHolder的子类，"
+				+ "无法获取信息。");
+		return "";
+		
 	}
 
 }
