@@ -4,11 +4,18 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import basicInterface.IDateHolder;
 import basicTool.MyLogger;
 import basicTool.RegistObjectWithPinyin;
+import info.infoTool.GenderGetterForStudent;
+import info.infoTool.GradeGetterForStudent;
+import info.infoTool.IndexGetter;
+import info.infoTool.MainCourseGetterForStudent;
+import info.infoTool.NameGetter;
+import infoInterface.IInfoGetter;
 import infoSet.SearchableInfoSet;
 
-public class Club extends RegistObjectWithPinyin {
+public class Club extends RegistObjectWithPinyin implements IDateHolder{
 	public Date date;
 	public SearchableInfoSet myMembersInfoSet;
 	public SimpleDateFormat dateFormate;
@@ -26,6 +33,14 @@ public class Club extends RegistObjectWithPinyin {
 		super(clubIndex, clubName);
 		dateFormate = new SimpleDateFormat("yyyy-mm-dd");
 		setDate(dateString);
+		myMembersInfoSet = new SearchableInfoSet(new IInfoGetter[]{
+										new IndexGetter(),
+										new NameGetter(),
+										new GenderGetterForStudent(),
+										new GradeGetterForStudent(),
+										new MainCourseGetterForStudent(),
+										new PositionGetter()
+												});
 	}
 	
 	/**
@@ -56,5 +71,14 @@ public class Club extends RegistObjectWithPinyin {
 			MyLogger.logException(e);
 			date = null;
 		}
+	}
+	
+	/**
+	 * 返回社团成员集合。
+	 * @return
+	 * 		社团成员集合。
+	 */
+	public SearchableInfoSet getMyMembers(){
+		return myMembersInfoSet;
 	}
 }
