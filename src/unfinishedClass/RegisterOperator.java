@@ -16,10 +16,14 @@ public class RegisterOperator extends CollegeOperator {
 
 	/**
 	 * @return
+	 * 		如果学号，社团编号，职位不符合要求，
+	 * 	返回0；
+	 * 		如果不存在对应的学生或者社团，
+	 * 	返回-1；
 	 * 		如果已经有相同学号的社员参加了这个社团，
 	 * 		或者这个学生已经参加的相同编号的这个社团，
-	 * 		返回-1；
-	 * 		如果插入操作发生错误返回0；
+	 * 	返回-2；
+	 * 		如果插入操作发生错误返回-3；
 	 * 		如果成功，返回1。
 	 */
 	@Override
@@ -29,33 +33,43 @@ public class RegisterOperator extends CollegeOperator {
 			
 			Student student = college.getStudent(studentIndex);
 			Club club = college.getClub(clubIndex);
-			InfoSetSpecificByIndex myClubs = student.getMyClubs();
-			SearchableInfoSet myMembers = club.getMyMembers();
-			
-			if ( myMembers
-					.haveIndex(studentIndex.toCharArray()) ){
-				MyLogger.logError("向社团注册社员的时候，"
-						+ "发现学号重复的社员，"
-						+ "注册失败，请检查："
-						+ "\nstudentIndex: " + studentIndex
-						+ "\nclubIndex: " + clubIndex
-						+ "\nposition:" + position);
+			if (student == null){
+				MyLogger.logError("RegisterOperator向社团注册社员的时候，"
+						+ "未能发现指定学号的学生，"
+						+ "注册失败，请检查：");
+				showLogger();
 				operateResult = -1;
-			}//if
-			
-			if (myClubs
-					.haveIndex(clubIndex.toCharArray()) ){
-				MyLogger.logError("向学生添加社团的时候，"
-						+ "发现编号重复的社团，"
-						+ "注册失败，请检查："
-						+ "\nstudentIndex: " + studentIndex
-						+ "\nclubIndex: " + clubIndex
-						+ "\nposition:" + position);
+			}
+			if (club == null){
+				MyLogger.logError("RegisterOperator向社团注册社员的时候，"
+						+ "未能发现指定编号的社团，"
+						+ "注册失败，请检查：");
+				showLogger();
 				operateResult = -1;
-			}//if
-			
+			}
 			if (operateResult != 1){
 				return -1;
+			}
+			
+			InfoSetSpecificByIndex myClubs = student.getMyClubs();
+			SearchableInfoSet myMembers = club.getMyMembers();
+			if ( myMembers
+					.haveIndex(studentIndex.toCharArray()) ){
+				MyLogger.logError("RegisterOperator向社团注册社员的时候，"
+						+ "发现学号重复的社员，");
+				showLogger();
+				operateResult = -1;
+			}//if
+			if (myClubs
+					.haveIndex(clubIndex.toCharArray()) ){
+				MyLogger.logError("RegisterOperator向学生添加社团的时候，"
+						+ "发现编号重复的社团，"
+						+ "注册失败，请检查：");
+				showLogger();
+				operateResult = -1;
+			}//if
+			if (operateResult != 1){
+				return -2;
 			}
 			
 			InfoInClub infoInClub = new InfoInClub(position);
@@ -63,25 +77,22 @@ public class RegisterOperator extends CollegeOperator {
 					myMembers.insertInfo( 
 							new InfoWithContainer(
 									new MyMember(infoInClub, student)))){
-				MyLogger.logError("向社团插入成员信息是发生错误，请检查："
-						+ "\nstudentIndex: " + studentIndex
-						+ "\nclubIndex: " + clubIndex
-						+ "\nposition:" + position);
-				return 0;
+				MyLogger.logError("RegisterOperator向社团插入成员信息是发生错误，请检查：");
+				showLogger();
+				return -3;
 			}//if
-			
 			if (1 != 
 					myClubs.insertInfo( 
 							new InfoWithContainer(
 									new MyClub(infoInClub, club)))){
-				MyLogger.logError("向学生插入社团信息时发生错误，请检查："
-						+ "\nstudentIndex: " + studentIndex
-						+ "\nclubIndex: " + clubIndex
-						+ "\nposition:" + position);
-				return 0;
+				MyLogger.logError("RegisterOperator向学生插入社团信息时发生错误，请检查：");
+				showLogger();
+				return -3;
 			}//if
+			return 1;
+			
 		}//if check
-		return 1;
+		return 0;
 	}//operate()
 	
 	/**
@@ -90,7 +101,7 @@ public class RegisterOperator extends CollegeOperator {
 	 * 		如果可以为社团注册学生，就返回true；
 	 * 		如果有null或者空串，就返回false。
 	 */
-	public boolean check(){
+	protected boolean check(){
 		boolean checkResult = true;
 		
 		if (studentIndex == null){
@@ -144,4 +155,9 @@ public class RegisterOperator extends CollegeOperator {
 		this.position = position;
 	}
 
+	public void showLogger(){
+		MyLogger.log("\nstudentIndex: " + studentIndex
+				+ "\nclubIndex: " + clubIndex
+				+ "\nposition:" + position);
+	}
 }
