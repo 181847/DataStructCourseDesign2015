@@ -3,15 +3,17 @@ package collegeComponent.tool;
 import basicTool.MyLogger;
 import collegeComponent.College;
 import collegeComponent.MyClub;
-import info.infoTool.AbstractTraverser;
-import operator.DeregisterOperator;
+import unfinishedClass.DeregistTraverser;
 
-public class DeregistTraverserForMyClub extends AbstractTraverser {
-	DeregisterOperator dro;
+public class DeregistTraverserForMyClub extends DeregistTraverser {
 	
 	public DeregistTraverserForMyClub(College college, String studentIndex){
-		dro = new DeregisterOperator(college);
-		dro.setStudentIndex(studentIndex);
+		super(college);
+		setStudentIndex(studentIndex);
+	}
+	
+	public DeregistTraverserForMyClub(College college){
+		super(college);
 	}
 	@Override
 	public int dealWithContainer(Object container) {
@@ -25,9 +27,5 @@ public class DeregistTraverserForMyClub extends AbstractTraverser {
 			return 0;
 		}
 		return 1;
-	}
-
-	public void setStudentIndex(String studentIndex){
-		dro.setStudentIndex(studentIndex);
 	}
 }
