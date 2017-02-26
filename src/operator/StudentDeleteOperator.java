@@ -12,6 +12,11 @@ public class StudentDeleteOperator extends DeleteOperator {
 	public StudentDeleteOperator(College college) {
 		super(college);
 	}
+	
+	public StudentDeleteOperator(College college, String studentIndex){
+		this(college);
+		this.targetIndex = studentIndex;
+	}
 
 	/**
 	 * @return
