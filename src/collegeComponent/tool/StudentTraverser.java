@@ -3,6 +3,7 @@ package collegeComponent.tool;
 import basicTool.MyLogger;
 import collegeComponent.Student;
 import info.infoTool.AbstractTraverser;
+import info.infoTool.AllTrueFilter;
 
 public class StudentTraverser extends AbstractTraverser {
 
@@ -14,6 +15,8 @@ public class StudentTraverser extends AbstractTraverser {
 		}
 		
 		Student tempContainer = (Student) container;
+		
+		MyLogger.seperate("********* S T U D E N T **************");
 		System.out.println("学生学号：" + tempContainer.getIndex() 
 				+ "\t学生姓名：" + tempContainer.getName()
 				+ "\n姓名拼音：" + tempContainer.getPinyin()
@@ -21,7 +24,10 @@ public class StudentTraverser extends AbstractTraverser {
 				+ "\n性别：" + (tempContainer.getGender() == 1? "男" : "女")
 				+ "\t\t\t年级：" + tempContainer.getGrade()
 				+ "\n专业：" + tempContainer.getMainCourse());
-		MyLogger.seperate();
+		MyLogger.seperate("MyClubs");
+		tempContainer.getMyClubs().traverseInfo(new MyClubTraverser(), new AllTrueFilter());
+		MyLogger.seperate("MyClubs");
+		MyLogger.seperate("********* S T U D E N T **************");
 		return 1;
 	}
 
