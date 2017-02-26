@@ -35,5 +35,9 @@ public class MyLogger {
 					+ message 
 					+ "**************");
 	}
+	
+	public static void newLine(){
+		System.out.println();
+	}
 
 }
