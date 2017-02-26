@@ -1,8 +1,8 @@
 package testSpace;
 
 import basicTool.MyLogger;
-import unfinishedClass.ClubPositionOperator;
-import unfinishedClass.RegisterOperator;
+import operator.ClubPositionOperator;
+import operator.RegisterOperator;
 
 public class TestClubPostitionOperator extends Test {
 

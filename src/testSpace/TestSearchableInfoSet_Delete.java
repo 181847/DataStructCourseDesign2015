@@ -1,13 +1,13 @@
 package testSpace;
 
 import basicTool.MyLogger;
+import collegeComponent.Student;
+import collegeComponent.tool.GenderGetterForStudent;
+import collegeComponent.tool.PinyinGetter;
+import collegeComponent.tool.ShortPinyinGetter;
 import info.InfoWithContainer;
-import info.infoTool.GenderGetterForStudent;
-import info.infoTool.PinyinGetter;
-import info.infoTool.ShortPinyinGetter;
 import infoInterface.IInfoGetter;
 import infoSet.SearchableInfoSet;
-import unfinishedClass.Student;
 
 public class TestSearchableInfoSet_Delete extends Test {
 

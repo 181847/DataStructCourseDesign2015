@@ -1,13 +1,13 @@
 package testSpace;
 
 import basicTool.MyLogger;
+import collegeComponent.Student;
+import collegeComponent.tool.NameGetter;
+import collegeComponent.tool.StudentTraverser;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
 import info.infoTool.IndexGetter;
-import info.infoTool.NameGetter;
-import info.infoTool.StudentTraverser;
 import infoSet.InfoSetSpecificByIndex;
-import unfinishedClass.Student;
 
 public class TestInfoSetSpecificByIndex_Delete extends Test {
 

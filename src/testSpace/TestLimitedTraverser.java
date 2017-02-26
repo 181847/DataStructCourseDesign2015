@@ -1,13 +1,13 @@
 package testSpace;
 
 import basicTool.MyLogger;
+import collegeComponent.Student;
+import collegeComponent.tool.LimitedStudentTraverser;
+import collegeComponent.tool.NameGetter;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
 import info.infoTool.IndexGetter;
-import info.infoTool.LimitedStudentTraverser;
-import info.infoTool.NameGetter;
 import infoSet.InfoSearchTree;
-import unfinishedClass.Student;
 
 public class TestLimitedTraverser extends Test {
 

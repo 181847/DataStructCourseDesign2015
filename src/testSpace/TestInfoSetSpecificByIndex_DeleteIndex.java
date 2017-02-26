@@ -2,11 +2,11 @@ package testSpace;
 
 import basicInterface.IInfoSet;
 import basicTool.MyLogger;
+import collegeComponent.Student;
+import collegeComponent.tool.NameGetter;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
-import info.infoTool.NameGetter;
 import infoSet.InfoSetSpecificByIndex;
-import unfinishedClass.Student;
 
 public class TestInfoSetSpecificByIndex_DeleteIndex extends Test{
 

@@ -1,18 +1,18 @@
 package testSpace;
 
+import collegeComponent.Club;
+import collegeComponent.College;
+import collegeComponent.Student;
+import collegeComponent.tool.ClubTraverser;
+import collegeComponent.tool.GenderGetterForStudent;
+import collegeComponent.tool.GradeGetterForStudent;
+import collegeComponent.tool.MainCourseGetterForStudent;
+import collegeComponent.tool.MyClubTraverser;
+import collegeComponent.tool.MyMemberTraverser;
+import collegeComponent.tool.NameGetter;
+import collegeComponent.tool.StudentTraverser;
 import info.infoTool.AllTrueFilter;
-import info.infoTool.GenderGetterForStudent;
-import info.infoTool.GradeGetterForStudent;
 import info.infoTool.IndexGetter;
-import info.infoTool.MainCourseGetterForStudent;
-import info.infoTool.NameGetter;
-import info.infoTool.StudentTraverser;
-import unfinishedClass.Club;
-import unfinishedClass.ClubTraverser;
-import unfinishedClass.Student;
-import unfinishedClass.College;
-import unfinishedClass.MyClubTraverser;
-import unfinishedClass.MyMemberTraverser;
 
 public class Test {
 	public static Student[] stus;

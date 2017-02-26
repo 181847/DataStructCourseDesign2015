@@ -1,8 +1,8 @@
 package testSpace;
 
+import collegeComponent.tool.StudentTraverser;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
-import info.infoTool.StudentTraverser;
 import infoSet.InfoSetSpecificByIndex;
 
 public class TestInfoSetSpecificByIndex_Insert extends Test {

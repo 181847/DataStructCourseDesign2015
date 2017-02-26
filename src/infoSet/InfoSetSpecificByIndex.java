@@ -1,18 +1,18 @@
 package infoSet;
 
 import basicTool.MyLogger;
+import collegeComponent.tool.NameGetter;
 import info.DoubleLinkedInfo;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
 import info.infoTool.DeleteTraverserForDLInfo;
 import info.infoTool.IndexGetter;
+import info.infoTool.InnerCopyTraverserForIInfo;
 import info.infoTool.InnerFilterForInfo;
 import info.infoTool.InnerGetterForInfo;
-import info.infoTool.NameGetter;
 import infoInterface.IInfo;
 import infoInterface.IInfoFilter;
 import infoInterface.IInfoGetter;
-import unfinishedClass.InnerCopyTraverserForIInfo;
 
 /**
  * 本类并不能依靠Index参数获取相关信息体，

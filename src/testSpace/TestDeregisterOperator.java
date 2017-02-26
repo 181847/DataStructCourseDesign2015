@@ -1,8 +1,8 @@
 package testSpace;
 
 import basicTool.MyLogger;
-import unfinishedClass.DeregisterOperator;
-import unfinishedClass.RegisterOperator;
+import operator.DeregisterOperator;
+import operator.RegisterOperator;
 
 public class TestDeregisterOperator extends Test {
 

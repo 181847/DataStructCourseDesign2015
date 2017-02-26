@@ -1,10 +1,10 @@
 package testSpace;
 
-import unfinishedClass.Club;
-import unfinishedClass.College;
-import unfinishedClass.SearchOperator;
-import unfinishedClass.SearchOperatorForClubs;
-import unfinishedClass.Student;
+import collegeComponent.Club;
+import collegeComponent.College;
+import collegeComponent.Student;
+import operator.SearchOperator;
+import operator.SearchOperatorForClubs;
 
 public class TestSearchOperatorForClubs extends Test {
 	public static void main(String[] args){

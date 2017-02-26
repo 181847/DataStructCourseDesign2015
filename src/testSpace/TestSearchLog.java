@@ -1,10 +1,10 @@
 package testSpace;
 
 import basicTool.MyLogger;
+import collegeComponent.Student;
 import info.InfoWithContainer;
 import infoSet.InfoSearchTree;
 import infoSet.SearchLog;
-import unfinishedClass.Student;
 
 public class TestSearchLog extends Test {
 	public static void main(String[] args){

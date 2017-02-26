@@ -1,9 +1,9 @@
 package testSpace;
 
 import basicTool.MyLogger;
-import unfinishedClass.Club;
-import unfinishedClass.College;
-import unfinishedClass.Student;
+import collegeComponent.Club;
+import collegeComponent.College;
+import collegeComponent.Student;
 
 public class TestCollege extends Test {
 

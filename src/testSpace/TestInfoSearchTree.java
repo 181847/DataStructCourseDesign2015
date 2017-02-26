@@ -1,12 +1,12 @@
 package testSpace;
 
 import basicTool.MyLogger;
+import collegeComponent.Student;
+import collegeComponent.tool.StudentTraverser;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
 import info.infoTool.IndexGetter;
-import info.infoTool.StudentTraverser;
 import infoSet.InfoSearchTree;
-import unfinishedClass.Student;
 
 public class TestInfoSearchTree extends Test{
 	public static void main(String[] args){
