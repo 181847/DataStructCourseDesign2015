@@ -23,7 +23,7 @@ public class TestSearchOperatorForStudents extends Test {
 		
 		so.setSearchInfo("F");
 		so.selectSearchLog(-1);
-		so.deselectSearchLog(4);
+		so.deselectSearchLog(3);
 		so.operate();
 		so.getResult().getAllResult(allTrueFilter).traverseInfo(studentTraverser, allTrueFilter);
 	}
