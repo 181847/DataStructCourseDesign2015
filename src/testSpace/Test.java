@@ -13,6 +13,7 @@ import collegeComponent.tool.NameGetter;
 import collegeComponent.tool.StudentTraverser;
 import info.infoTool.AllTrueFilter;
 import info.infoTool.IndexGetter;
+import operator.RegisterOperator;
 
 public class Test {
 	public static Student[] stus;
@@ -68,6 +69,33 @@ public class Test {
 		for (Student stud: stus){
 			college.addStudent(stud);
 		}
+		
+		RegisterOperator ro = new RegisterOperator(college);
+		ro.setPosition("会员");
+		ro.setStudentIndex("2002015");
+		ro.setClubIndex("2012003");
+		ro.operate();
+		
+
+		ro.setPosition("会员");
+		ro.setStudentIndex("2002009");
+		ro.setClubIndex("2012003");
+		ro.operate();
+
+		ro.setPosition("会长");
+		ro.setStudentIndex("2002005");
+		ro.setClubIndex("2012003");
+		ro.operate();
+
+		ro.setPosition("会长");
+		ro.setStudentIndex("20020011");
+		ro.setClubIndex("2012005");
+		ro.operate();
+		
+		ro.setPosition("会员");
+		ro.setStudentIndex("2002009");
+		ro.setClubIndex("2012005");
+		ro.operate();
 		
 		prepareVariables();
 	}
