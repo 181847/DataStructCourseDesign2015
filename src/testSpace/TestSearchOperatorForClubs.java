@@ -21,9 +21,9 @@ public class TestSearchOperatorForClubs extends Test {
 		
 		SearchOperator so = new SearchOperatorForClubs(college);
 		
-		so.setSearchInfo("201");
+		so.setSearchInfo("");
 		so.selectSearchLog(-1);
-		so.deselectSearchLog(0);
+		//so.deselectSearchLog(0);
 		so.operate();
 		so.getResult().getAllResult(allTrueFilter).traverseInfo(clubTraverser, allTrueFilter);
 	}
