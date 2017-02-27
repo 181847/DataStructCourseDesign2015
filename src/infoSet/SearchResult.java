@@ -8,7 +8,7 @@ import infoInterface.IInfoFilter;
 import infoInterface.IInfoTraverser;
 import infoInterface.ILimitedTraverser;
 
-public class SearchResult {
+public class SearchResult{
 	InfoSearchTree[] searchTree;
 	
 	/**
@@ -43,8 +43,10 @@ public class SearchResult {
 		if (num >= 0){
 			ILimitedTraverser traverser = new LimitedCopyTraverser(num, resultSet);
 			for(InfoSearchTree tree: searchTree){
-				if (tree != null){
-					tree.specialLimitedTraverseInfo(traverser, filter);
+				if (tree.getCurChar() == '\0'){
+					tree.traverseInfo(traverser, filter);
+				} else {
+					tree.specialTraverseInfo(traverser, filter);
 				}
 				if (traverser.isLimited()){
 					break;
@@ -59,12 +61,16 @@ public class SearchResult {
 	 * @return
 	 * 		包含搜索得到的所有信息体的IInfoSet。
 	 */
-	public IInfoSet getAllResult(IInfoFilter filter){
+	public InfoSetSpecificByIndex getAllResult(IInfoFilter filter){
 		InfoSetSpecificByIndex resultSet = new InfoSetSpecificByIndex();
 		IInfoTraverser traverser = new CopyTraverser(resultSet);
 		for(InfoSearchTree tree: searchTree){
 			if (tree != null){
-				tree.specialTraverseInfo(traverser, filter);
+				if (tree.getCurChar() == '\0'){
+					tree.traverseInfo(traverser, filter);
+				} else {
+					tree.specialTraverseInfo(traverser, filter);
+				}
 			}
 		}
 		return resultSet;
