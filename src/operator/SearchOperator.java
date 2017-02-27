@@ -67,7 +67,7 @@ public abstract class SearchOperator extends CollegeOperator {
 	 */
 	public int deselectSearchLog(int deselect){
 		if (deselect == -1){
-			for (int i = selectedLog.length; i >= 0; --i){
+			for (int i = selectedLog.length - 1; i >= 0; --i){
 				selectedLog[i] = false;
 			}
 		} else if (deselect >= 0 && deselect < selectedLog.length){
