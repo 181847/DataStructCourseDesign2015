@@ -3,7 +3,7 @@ package testSpace;
 import basicInterface.IInfoSet;
 import basicTool.MyLogger;
 import collegeComponent.Student;
-import collegeComponent.tool.NameGetter;
+import collegeComponent.tool.getter.NameGetter;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
 import infoSet.InfoSetSpecificByIndex;

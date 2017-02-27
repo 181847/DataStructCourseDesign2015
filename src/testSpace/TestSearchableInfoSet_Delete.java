@@ -2,9 +2,9 @@ package testSpace;
 
 import basicTool.MyLogger;
 import collegeComponent.Student;
-import collegeComponent.tool.GenderGetterForStudent;
-import collegeComponent.tool.PinyinGetter;
-import collegeComponent.tool.ShortPinyinGetter;
+import collegeComponent.tool.getter.GenderGetterForStudent;
+import collegeComponent.tool.getter.PinyinGetter;
+import collegeComponent.tool.getter.ShortPinyinGetter;
 import info.InfoWithContainer;
 import infoInterface.IInfoGetter;
 import infoSet.SearchableInfoSet;

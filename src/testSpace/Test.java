@@ -1,16 +1,17 @@
 package testSpace;
 
+import basicTool.MyLogger;
 import collegeComponent.Club;
 import collegeComponent.College;
 import collegeComponent.Student;
-import collegeComponent.tool.ClubTraverser;
-import collegeComponent.tool.GenderGetterForStudent;
-import collegeComponent.tool.GradeGetterForStudent;
-import collegeComponent.tool.MainCourseGetterForStudent;
-import collegeComponent.tool.MyClubTraverser;
-import collegeComponent.tool.MyMemberTraverser;
-import collegeComponent.tool.NameGetter;
-import collegeComponent.tool.StudentTraverser;
+import collegeComponent.tool.getter.GenderGetterForStudent;
+import collegeComponent.tool.getter.GradeGetterForStudent;
+import collegeComponent.tool.getter.MainCourseGetterForStudent;
+import collegeComponent.tool.getter.NameGetter;
+import collegeComponent.tool.traverser.ClubTraverser;
+import collegeComponent.tool.traverser.MyClubTraverser;
+import collegeComponent.tool.traverser.MyMemberTraverser;
+import collegeComponent.tool.traverser.StudentTraverser;
 import info.infoTool.AllTrueFilter;
 import info.infoTool.IndexGetter;
 import operator.RegisterOperator;
@@ -112,5 +113,13 @@ public class Test {
 		allTrueFilter = new AllTrueFilter();
 		myMemberTraverser = new MyMemberTraverser();
 		myClubTraverser = new MyClubTraverser();
+	}
+	
+	public static void showCollege(){
+		college.getClubInfoSet().traverseInfo(clubTraverser, allTrueFilter);
+		MyLogger.newLine();
+		MyLogger.newLine();
+		MyLogger.newLine();
+		college.getStudentInfoSet().traverseInfo(studentTraverser, allTrueFilter);
 	}
 }

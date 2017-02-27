@@ -1,14 +1,11 @@
-package unfinishedClass;
+package operator;
 
 import basicTool.MyLogger;
 import collegeComponent.Club;
 import collegeComponent.College;
-import collegeComponent.Student;
-import collegeComponent.tool.DeregistTraverserForMyClub;
+import collegeComponent.tool.traverser.DeregistTraverserForMyMember;
 import info.infoTool.AllTrueFilter;
-import infoSet.InfoSetSpecificByIndex;
 import infoSet.SearchableInfoSet;
-import operator.DeleteOperator;
 
 public class ClubDeleteOperator extends DeleteOperator {
 

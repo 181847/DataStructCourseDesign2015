@@ -1,4 +1,4 @@
-package collegeComponent.tool;
+package collegeComponent.tool.getter;
 
 import basicTool.MyLogger;
 import collegeComponent.MyMember;

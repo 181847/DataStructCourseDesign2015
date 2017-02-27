@@ -3,7 +3,7 @@ package operator;
 import basicTool.MyLogger;
 import collegeComponent.College;
 import collegeComponent.Student;
-import collegeComponent.tool.DeregistTraverserForMyClub;
+import collegeComponent.tool.traverser.DeregistTraverserForMyClub;
 import info.infoTool.AllTrueFilter;
 import infoSet.InfoSetSpecificByIndex;
 

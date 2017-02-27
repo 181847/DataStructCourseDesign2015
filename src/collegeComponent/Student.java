@@ -1,6 +1,5 @@
 package collegeComponent;
 
-import basicInterface.IInfoSet;
 import basicTool.RegistObjectWithPinyin;
 import infoSet.InfoSetSpecificByIndex;
 

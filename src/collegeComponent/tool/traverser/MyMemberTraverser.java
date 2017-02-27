@@ -1,4 +1,4 @@
-package collegeComponent.tool;
+package collegeComponent.tool.traverser;
 
 import basicTool.MyLogger;
 import collegeComponent.MyMember;
@@ -19,7 +19,7 @@ public class MyMemberTraverser extends AbstractTraverser {
 				+ "\n社员名字拼音：" + tempContainer.getPinyin()
 				+ "\t社员名字短拼音：" + tempContainer.getShortPinyin()
 				+ "\n社员在社团中的职位：" + tempContainer.getPosition());
-		MyLogger.seperate();
+		MyLogger.seperate("****");
 		return 1;
 	}
 

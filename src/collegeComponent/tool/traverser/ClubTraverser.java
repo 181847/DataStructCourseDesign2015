@@ -1,4 +1,4 @@
-package collegeComponent.tool;
+package collegeComponent.tool.traverser;
 
 import basicTool.MyLogger;
 import collegeComponent.Club;

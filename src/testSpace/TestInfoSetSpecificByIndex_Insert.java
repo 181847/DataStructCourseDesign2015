@@ -1,6 +1,6 @@
 package testSpace;
 
-import collegeComponent.tool.StudentTraverser;
+import collegeComponent.tool.traverser.StudentTraverser;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
 import infoSet.InfoSetSpecificByIndex;

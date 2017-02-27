@@ -1,9 +1,8 @@
-package collegeComponent.tool;
+package collegeComponent.tool.traverser;
 
 import basicTool.MyLogger;
 import collegeComponent.College;
 import collegeComponent.MyClub;
-import unfinishedClass.DeregistTraverser;
 
 public class DeregistTraverserForMyClub extends DeregistTraverser {
 	

@@ -2,7 +2,6 @@ package infoSet;
 
 import basicInterface.IInfoSet;
 import basicTool.MyLogger;
-import info.infoTool.AllTrueFilter;
 import info.infoTool.CopyTraverser;
 import info.infoTool.LimitedCopyTraverser;
 import infoInterface.IInfoFilter;

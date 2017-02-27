@@ -1,4 +1,4 @@
-package collegeComponent.tool;
+package collegeComponent;
 
 import basicInterface.IPositionHolder;
 

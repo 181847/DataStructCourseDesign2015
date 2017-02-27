@@ -1,7 +1,7 @@
 package testSpace;
 
 import basicTool.MyLogger;
-import unfinishedClass.ClubDeleteOperator;
+import operator.ClubDeleteOperator;
 
 public class TestClubDeleteOperator extends Test {
 

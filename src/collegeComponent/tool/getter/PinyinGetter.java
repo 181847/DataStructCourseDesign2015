@@ -1,4 +1,4 @@
-package collegeComponent.tool;
+package collegeComponent.tool.getter;
 
 import basicInterface.IPinyinHolder;
 import basicTool.MyLogger;

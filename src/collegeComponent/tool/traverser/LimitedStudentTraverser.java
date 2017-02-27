@@ -1,9 +1,8 @@
-package collegeComponent.tool;
+package collegeComponent.tool.traverser;
 
 import basicTool.MyLogger;
 import collegeComponent.Student;
 import info.infoTool.TimesLimitedTraverser;
-import infoInterface.IInfo;
 
 public class LimitedStudentTraverser extends TimesLimitedTraverser {
 

@@ -1,7 +1,7 @@
 package infoSet;
 
 import basicTool.MyLogger;
-import collegeComponent.tool.NameGetter;
+import collegeComponent.tool.getter.NameGetter;
 import info.DoubleLinkedInfo;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;

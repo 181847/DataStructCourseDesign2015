@@ -1,4 +1,4 @@
-package collegeComponent.tool;
+package collegeComponent.tool.getter;
 
 import basicInterface.INameHolder;
 import basicTool.MyLogger;

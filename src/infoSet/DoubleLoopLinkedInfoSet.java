@@ -4,7 +4,6 @@ import basicInterface.IInfoSet;
 import basicTool.MyLogger;
 import info.DoubleLinkedInfo;
 import info.InfoWithContainer;
-import info.infoTool.AllTrueFilter;
 import info.infoTool.CopyTraverser;
 import infoInterface.IInfo;
 import infoInterface.IInfoFilter;

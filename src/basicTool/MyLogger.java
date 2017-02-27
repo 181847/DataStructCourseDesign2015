@@ -39,5 +39,11 @@ public class MyLogger {
 	public static void newLine(){
 		System.out.println();
 	}
+	
+	public static void newLine(int lines){
+		for (; lines >= 0; --lines){
+			System.out.println();
+		}
+	}
 
 }

@@ -1,9 +1,7 @@
 package collegeComponent.tool.traverser;
 
 import basicTool.MyLogger;
-import collegeComponent.Club;
 import collegeComponent.MyClub;
-import collegeComponent.Student;
 import info.infoTool.AbstractTraverser;
 import infoInterface.IInfo;
 import infoSet.SearchableInfoSet;

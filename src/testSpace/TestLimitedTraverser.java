@@ -2,8 +2,8 @@ package testSpace;
 
 import basicTool.MyLogger;
 import collegeComponent.Student;
-import collegeComponent.tool.LimitedStudentTraverser;
-import collegeComponent.tool.NameGetter;
+import collegeComponent.tool.getter.NameGetter;
+import collegeComponent.tool.traverser.LimitedStudentTraverser;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
 import info.infoTool.IndexGetter;

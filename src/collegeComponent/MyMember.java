@@ -4,7 +4,6 @@ import basicInterface.IIndexHolder;
 import basicInterface.INameHolder;
 import basicInterface.IPinyinHolder;
 import basicInterface.IPositionHolder;
-import collegeComponent.tool.InfoInClub;
 
 public class MyMember implements IIndexHolder, INameHolder, IPinyinHolder, IPositionHolder {
 	public InfoInClub infoInClub;
