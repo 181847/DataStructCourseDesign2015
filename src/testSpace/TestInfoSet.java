@@ -1,7 +1,7 @@
 package testSpace;
 
 import collegeComponent.Student;
-import collegeComponent.tool.StudentTraverser;
+import collegeComponent.tool.traverser.StudentTraverser;
 import info.DoubleLinkedInfo;
 import info.infoTool.AllTrueFilter;
 import infoSet.DoubleLoopLinkedInfoSet;
