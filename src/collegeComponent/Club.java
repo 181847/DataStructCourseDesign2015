@@ -11,7 +11,9 @@ import collegeComponent.tool.getter.GenderGetterForStudent;
 import collegeComponent.tool.getter.GradeGetterForStudent;
 import collegeComponent.tool.getter.MainCourseGetterForStudent;
 import collegeComponent.tool.getter.NameGetter;
+import collegeComponent.tool.getter.PinyinGetter;
 import collegeComponent.tool.getter.PositionGetter;
+import collegeComponent.tool.getter.ShortPinyinGetter;
 import info.infoTool.IndexGetter;
 import infoInterface.IInfoGetter;
 import infoSet.SearchableInfoSet;
@@ -20,6 +22,14 @@ public class Club extends RegistObjectWithPinyin implements IDateHolder{
 	public Date date;
 	public SearchableInfoSet myMembersInfoSet;
 	public SimpleDateFormat dateFormate;
+
+	public SimpleDateFormat getDateFormate() {
+		return dateFormate;
+	}
+
+	public void setDateFormate(SimpleDateFormat dateFormate) {
+		this.dateFormate = dateFormate;
+	}
 
 	/**
 	 * @param clubIndex
@@ -37,6 +47,8 @@ public class Club extends RegistObjectWithPinyin implements IDateHolder{
 		myMembersInfoSet = new SearchableInfoSet(new IInfoGetter[]{
 										new IndexGetter(),
 										new NameGetter(),
+										new PinyinGetter(),
+										new ShortPinyinGetter(),
 										new GenderGetterForStudent(),
 										new GradeGetterForStudent(),
 										new MainCourseGetterForStudent(),
