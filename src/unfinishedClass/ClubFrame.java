@@ -218,7 +218,7 @@ public class ClubFrame extends FrameWithCollege {
 					name = nameField.getText();
 					year = yearField.getText();
 					month = monthField.getText();
-					day = monthField.getText();
+					day = dayField.getText();
 					club.setIndex(index);
 					club.setName(name);
 					club.setDate(year + "-" + month + "-" + day);
