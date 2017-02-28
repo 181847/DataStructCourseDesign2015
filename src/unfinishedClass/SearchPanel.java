@@ -89,15 +89,14 @@ public class SearchPanel extends JPanel {
 		//showSearchResult();
 	}
 
-	private void showSearchResult() {
+	public void showSearchResult() {
 		String searchInfo = searchTextField.getText();
 		MyLogger.log("SearchInfo: " + (searchInfo == null));
 		traverser.setModel(new DefaultTableModel(column, 0));
 		so.setSearchInfo(searchInfo);
 		so.selectSearchLog(-1);
 		so.operate();
-		so
-			.getResult()
+		so.getResult()
 			.getAllResult(new AllTrueFilter())
 			.traverseInfo(traverser, new AllTrueFilter());
 		
