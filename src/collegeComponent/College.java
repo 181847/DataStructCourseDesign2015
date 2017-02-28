@@ -154,7 +154,7 @@ public class College {
 	 * 		失败返回0。
 	 */
 	public int deleteStudent(String sutdentIndex){
-		//TODO
+		studentInfoSet.deleteIndex(sutdentIndex);
 		return 0;
 	}
 	
