@@ -8,6 +8,7 @@ import collegeComponent.College;
 import info.infoTool.AllTrueFilter;
 import operator.ClubUpdateOperator;
 import operator.SearchOperatorForClubs;
+import operator.SearchOperatorForStudents;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -16,6 +17,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -26,14 +28,17 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.CardLayout;
 
 public class ClubFrame extends FrameWithCollege {
 	protected Club club;
 	protected final String[] myMemberColumn = {"社员学号", "姓名", "职位"};
+	public final String[] studentColumn = {"学号", "姓名", "性别", "年级", "专业"};
 	protected SearchPanel myMemberSearchPanel;
+	protected SearchPanel studentSearchPanel;
 	protected ClubUpdateOperator clubUpdateOperator;
 	
-	
+	protected CardLayout cl_memberPanel;
 	
 
 	/**
@@ -59,22 +64,28 @@ public class ClubFrame extends FrameWithCollege {
 	
 	public ClubFrame(College college, String clubIndex){
 		super(college);
+		
 		this.setSize(530, 600);
 		setResizable(false);
 		club = college.getClub(clubIndex);
 		if (club == null){
 			MyLogger.logError("ClubFrame没有获得Club对象，"
 					+ "请检查社团编号是否正确：" + clubIndex);
+			this.setVisible(false);
+			return ;
 		} else {
-			myMemberSearchPanel = new SearchPanel(new SearchOperatorForMyMembers(college, club), myMemberColumn, new MyMemberModelTraverser());
+			myMemberSearchPanel = 
+					new SearchPanel(
+							new SearchOperatorForMyMembers(college, club),
+							myMemberColumn, 
+							new MyMemberModelTraverser());
+			studentSearchPanel = 
+					new SearchPanel(
+							new SearchOperatorForStudents(college), 
+							studentColumn, 
+							new StudentModelTraverser());
 			clubUpdateOperator = new ClubUpdateOperator(college, club);
 		}
-		
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		
-		panel_1.add(myMemberSearchPanel);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -188,32 +199,71 @@ public class ClubFrame extends FrameWithCollege {
 					.addContainerGap())
 		);
 		panel.setLayout(gl_panel);
+		
+		JPanel panel_1 = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(10)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 500, Short.MAX_VALUE)
-						.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE))
+						.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+						.addComponent(panel, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 500, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(6)
-					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 353, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
+		
+		JPanel memberPanel = new JPanel();
+		panel_1.add(memberPanel);
+		memberPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+
+		cl_memberPanel = new CardLayout(5, 5);
+		memberPanel.setLayout(cl_memberPanel);
+		
+		memberPanel.add(myMemberSearchPanel);
+		memberPanel.add(studentSearchPanel);
+		
+		JButton button = new JButton("搜索本社成员");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cl_memberPanel.first(memberPanel);
+			}
+		});
+		panel_1.add(button, BorderLayout.NORTH);
+		
+		JButton button_1 = new JButton("添加社员");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cl_memberPanel.last(memberPanel);
+			}
+		});
+		panel_1.add(button_1, BorderLayout.SOUTH);
 		getContentPane().setLayout(groupLayout);
 		
-		updateDataToTextField();
+		updateData();
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (check()){
+					int n = JOptionPane.showConfirmDialog(null,
+							"确认更新社团信息？",
+							"确认窗口",
+							JOptionPane.YES_NO_CANCEL_OPTION);
+					
+					if (n != JOptionPane.YES_OPTION){
+						//check();
+						return;
+					}
 					index = indexField.getText();
 					name = nameField.getText();
 					year = yearField.getText();
@@ -223,14 +273,18 @@ public class ClubFrame extends FrameWithCollege {
 					club.setName(name);
 					club.setDate(year + "-" + month + "-" + day);
 					clubUpdateOperator.operate();
-					updateDataToTextField();
+					updateData();
+					clearErrorLabel();
 				}
 			}
 		});
 		
+		myMemberSearchPanel.showSearchResult();
+		studentSearchPanel.showSearchResult();
+		clearErrorLabel();
 	}
 	
-	private void updateDataToTextField() {
+	private void updateData() {
 		index = club.getIndex();
 		name = club.getName();
 		date = club.getDate();
@@ -279,7 +333,7 @@ public class ClubFrame extends FrameWithCollege {
 		if (changedName.compareTo(name) == 0 ){
 			nameErrorLabel.setText("名字不变。");
 		} else {
-			if (changedIndex.isEmpty()){
+			if (changedName.isEmpty()){
 				nameErrorLabel.setText("错误！名字为空。");
 				checkResult *= 0;
 			} else {
@@ -308,5 +362,11 @@ public class ClubFrame extends FrameWithCollege {
 		}
 		
 		return checkResult == 1;
+	}
+	
+	private void clearErrorLabel() {
+		indexErrorLabel.setText("");
+		nameErrorLabel.setText("");
+		dateErrorLabel.setText("");
 	}
 }
