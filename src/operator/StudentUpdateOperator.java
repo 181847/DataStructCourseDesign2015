@@ -2,12 +2,20 @@ package operator;
 
 import basicTool.MyLogger;
 import collegeComponent.College;
+import collegeComponent.InfoInClub;
 import collegeComponent.Student;
 import collegeComponent.tool.traverser.UpdateTraverserForMyClubs;
 import info.infoTool.AllTrueFilter;
+import unfinishedClass.AddMemberInMyClubTraverser;
+import unfinishedClass.DeleteMemberInMyClubTraverser;
 
 public class StudentUpdateOperator extends UpdateOperator {
 	public Student student;
+	public String newIndex = null;
+	public String newName = null;
+	public int newGender;
+	public String newGrade = null;
+	public String newMainCourse = null;
 
 	public StudentUpdateOperator(College college, Student student) {
 		super(college);
@@ -33,14 +41,27 @@ public class StudentUpdateOperator extends UpdateOperator {
 			return 0;
 		}
 		college.deleteStudent(originalIndex);
+		
+		DeleteMemberInMyClubTraverser deleteTraverser = 
+				new DeleteMemberInMyClubTraverser(originalIndex,
+									student.getMyClubs().getNum());
+		
+		student
+			.getMyClubs()
+			.traverseInfo(deleteTraverser, new AllTrueFilter());
+		
+		updateStudentInfo();
+		
 		college.addStudent(student);
 		student
 			.getMyClubs()
 			.traverseInfo(
-					new UpdateTraverserForMyClubs(originalIndex), 
+					new AddMemberInMyClubTraverser(student, deleteTraverser.getInfosInClub()),  
 					new AllTrueFilter());
 		return 0;
 	}
+
+	
 
 	public Student getStudent() {
 		return student;
@@ -58,6 +79,43 @@ public class StudentUpdateOperator extends UpdateOperator {
 		}
 		this.originalIndex = student.getIndex();
 		this.student = student;
+		newGender = student.getGender();
 	}
-
+	
+	public void setNewIndex(String index){
+		newIndex = index;
+	}
+	
+	public void setNewName(String name){
+		newName = name;
+	}
+	
+	public void setNewGender(int gender){
+		newGender = gender;
+	}
+	
+	public void setNewGrade(String grade){
+		newGrade = grade;
+	}
+	
+	public void setNewMainCourse(String mainCourse){
+		newMainCourse = mainCourse;
+	}
+	
+	private void updateStudentInfo() {
+		if (newIndex != null){
+			student.setIndex(newIndex);
+		}
+		if (newName != null){
+			student.setName(newName);
+		}
+		student.setGender(newGender);
+		
+		if (newGrade != null){
+			student.setGrade(newGrade);
+		}
+		if (newMainCourse != null){
+			student.setMainCourse(newMainCourse);
+		}
+	}
 }
