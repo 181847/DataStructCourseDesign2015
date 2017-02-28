@@ -6,10 +6,16 @@ import collegeComponent.College;
 import operator.SearchOperatorForClubs;
 import operator.SearchOperatorForStudents;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+
+import basicTool.MyLogger;
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 public class CollegeFrame extends FrameWithCollege {
@@ -52,6 +58,38 @@ public class CollegeFrame extends FrameWithCollege {
 			}
 		});
 		
+		JTable studentTable = studentSearchPanel.getResultTable();
+		studentTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int row = studentTable.rowAtPoint(arg0.getPoint());
+				int column = studentTable.columnAtPoint(arg0.getPoint());
+				
+				if (column == 0){;
+					new StudentFrame(college, 
+							(String) studentTable.getValueAt(row, column))
+					.setVisible(true);
+				}
+			}
+		});
+		
+		JTable clubTable = clubSearchPanel.getResultTable();
+		clubTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int row = studentTable.rowAtPoint(arg0.getPoint());
+				int column = studentTable.columnAtPoint(arg0.getPoint());
+				
+				if (column == 0){;
+					new ClubFrame(college, 
+							(String) clubTable.getValueAt(row, column))
+					.setVisible(true);
+				}
+			}
+		});
+		
+		studentSearchPanel.showSearchResult();
+		clubSearchPanel.showSearchResult();
 		
 	}
 
