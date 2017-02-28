@@ -10,12 +10,26 @@ public class GenderGetterForStudent extends AbstractGetter {
 	@Override
 	public String dealWithContainer(Object container) {
 		if (container instanceof Student){
-			return ((Student) container).getGender() == 1 ? "M" : "F";
+			switch( ((Student) container).getGender() ){
+				case 0:
+					return "M";
+				case 1:
+					return "F";
+				default:
+					return "?";
+			}
 		} else if (container instanceof MyMember){
-			return ((MyMember) container).getStudent().getGender() == 1 ? "M" : "F"; 
+			switch( ((MyMember) container).getStudent().getGender() ){
+			case 0:
+				return "M";
+			case 1:
+				return "F";
+			default:
+				return "?";
+			}
 		} else {
 			MyLogger.logError("GenderGetterForStudent准备读取Info对象内存储的信息，"
-					+ "但是读取的container不是Student的子类，"
+					+ "但是读取的container不是Student或MyMember的子类，"
 					+ "无法获取信息。");
 			return "";
 		}
