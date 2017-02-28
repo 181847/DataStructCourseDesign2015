@@ -2,6 +2,8 @@ package unfinishedClass;
 
 import collegeComponent.College;
 import collegeComponent.Student;
+import collegeComponent.tool.traverser.ClubModelTraverser;
+import collegeComponent.tool.traverser.MyClubModelTraverser;
 import info.infoTool.AllTrueFilter;
 import operator.ClubUpdateOperator;
 import operator.SearchOperatorForClubs;
@@ -20,6 +22,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import aboutVisual.FrameWithCollege;
+import aboutVisual.SearchPanel;
 import basicTool.MyLogger;
 
 import java.awt.Color;
@@ -324,6 +328,23 @@ public class StudentFrame extends FrameWithCollege {
 							(String) myClubsTable.getValueAt(row, 0), 
 							student.getIndex(), 
 							(String) myClubsTable.getValueAt(row, 2) )
+						.setVisible(true);;
+				}
+			}
+		});
+		
+		JTable clubSearchResultTable = clubSearchPanel.getResultTable();
+		clubSearchResultTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int row = clubSearchResultTable.rowAtPoint(arg0.getPoint());
+				int column = clubSearchResultTable.columnAtPoint(arg0.getPoint());
+				
+				if (column == 0){;
+					new RegistMemberFrame(
+							college, 
+							(String) clubSearchResultTable.getValueAt(row, 0), 
+							student.getIndex() )
 						.setVisible(true);;
 				}
 			}
