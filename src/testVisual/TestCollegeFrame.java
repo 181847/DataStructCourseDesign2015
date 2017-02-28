@@ -4,7 +4,6 @@ import javax.swing.JFrame;
 
 import testSpace.Test;
 import unfinishedClass.CollegeFrame;
-import unfinishedClass.CollegeFrameDemo;
 
 public class TestCollegeFrame extends Test {
 

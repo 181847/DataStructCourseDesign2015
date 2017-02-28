@@ -5,8 +5,9 @@ import javax.swing.JFrame;
 import testSpace.Test;
 import unfinishedClass.ClubFrame;
 import unfinishedClass.CollegeFrame;
+import unfinishedClass.StudentFrame;
 
-public class TestClubFrame extends Test{
+public class TestStudentFrame extends Test {
 	public static void main(String[] args){
 		prepare();
 		
@@ -15,5 +16,8 @@ public class TestClubFrame extends Test{
 		
 		JFrame frame1 = new CollegeFrame(college);
 		frame1.setVisible(true);
+		
+		JFrame frame2 = new StudentFrame(college, "2002009");
+		frame2.setVisible(true);
 	}
 }
