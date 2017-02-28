@@ -4,6 +4,7 @@ import javax.swing.table.DefaultTableModel;
 
 import basicTool.MyLogger;
 import collegeComponent.Club;
+import collegeComponent.MyClub;
 import collegeComponent.MyMember;
 
 public class MyMemberModelTraverser extends ModelTraverser {
@@ -30,7 +31,7 @@ public class MyMemberModelTraverser extends ModelTraverser {
 			model.addRow(new Object[]{index, name, position});
 			return 1;
 		} else {
-			MyLogger.logError("ClubModelTraverser遍历的container不是Club类型"
+			MyLogger.logError("ClubModelTraverser遍历的container不是MyMember类型"
 					+ "无法获取社团信息。");
 			return 0;
 		}
