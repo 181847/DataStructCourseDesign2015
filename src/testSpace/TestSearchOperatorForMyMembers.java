@@ -3,8 +3,8 @@ package testSpace;
 import basicTool.MyLogger;
 import operator.ClubPositionOperator;
 import operator.DeregisterOperator;
+import operator.SearchOperatorForMyMembers;
 import operator.StudentUpdateOperator;
-import unfinishedClass.SearchOperatorForMyMembers;
 
 public class TestSearchOperatorForMyMembers extends Test {
 	public static void main(String[] args){

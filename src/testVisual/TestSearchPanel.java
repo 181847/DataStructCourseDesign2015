@@ -4,10 +4,11 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
+import aboutVisual.SearchPanel;
+import collegeComponent.tool.traverser.ClubModelTraverser;
 import operator.SearchOperatorForClubs;
 import testSpace.Test;
-import unfinishedClass.ClubModelTraverser;
-import unfinishedClass.SearchPanel;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

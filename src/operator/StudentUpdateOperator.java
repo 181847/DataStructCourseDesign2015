@@ -4,10 +4,10 @@ import basicTool.MyLogger;
 import collegeComponent.College;
 import collegeComponent.InfoInClub;
 import collegeComponent.Student;
+import collegeComponent.tool.traverser.AddMemberInMyClubTraverser;
+import collegeComponent.tool.traverser.DeleteMemberInMyClubTraverser;
 import collegeComponent.tool.traverser.UpdateTraverserForMyClubs;
 import info.infoTool.AllTrueFilter;
-import unfinishedClass.AddMemberInMyClubTraverser;
-import unfinishedClass.DeleteMemberInMyClubTraverser;
 
 public class StudentUpdateOperator extends UpdateOperator {
 	public Student student;

@@ -3,11 +3,15 @@ package unfinishedClass;
 import javax.swing.JFrame;
 
 import collegeComponent.College;
+import collegeComponent.tool.traverser.ClubModelTraverser;
+import collegeComponent.tool.traverser.StudentModelTraverser;
 import operator.SearchOperatorForClubs;
 import operator.SearchOperatorForStudents;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
+import aboutVisual.FrameWithCollege;
+import aboutVisual.SearchPanel;
 import basicTool.MyLogger;
 
 import java.awt.BorderLayout;

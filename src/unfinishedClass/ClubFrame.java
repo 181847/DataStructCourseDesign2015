@@ -5,9 +5,12 @@ import javax.swing.JFrame;
 import basicTool.MyLogger;
 import collegeComponent.Club;
 import collegeComponent.College;
+import collegeComponent.tool.traverser.MyMemberModelTraverser;
+import collegeComponent.tool.traverser.StudentModelTraverser;
 import info.infoTool.AllTrueFilter;
 import operator.ClubUpdateOperator;
 import operator.SearchOperatorForClubs;
+import operator.SearchOperatorForMyMembers;
 import operator.SearchOperatorForStudents;
 
 import javax.swing.JPanel;
@@ -31,6 +34,10 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import aboutVisual.FrameWithCollege;
+import aboutVisual.SearchPanel;
+
 import java.awt.Color;
 import java.awt.CardLayout;
 
