@@ -89,6 +89,16 @@ public class ClubMemberControlFrame extends FrameWithCollege {
 		JButton button_1 = new JButton("退社");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int n = JOptionPane.showConfirmDialog(null,
+						"确认退出“" + club.getName() + "”社团？",
+						"确认窗口",
+						JOptionPane.YES_NO_CANCEL_OPTION);
+				
+				if (n != JOptionPane.YES_OPTION){
+					//check();
+					return;
+				}
+				
 				if (1 == deregisterOperator.operate()){
 					dispose();
 				} else {
