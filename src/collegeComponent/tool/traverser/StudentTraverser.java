@@ -16,12 +16,25 @@ public class StudentTraverser extends AbstractTraverser {
 		
 		Student tempContainer = (Student) container;
 		
+		String gender;
+		switch( tempContainer.getGender() ){
+		case 0:
+			gender = "男";
+			break;
+		case 1:
+			gender = "女";
+			break;
+		default:
+			gender = "?";
+			break;
+		}
+		
 		MyLogger.seperate("********* S T U D E N T **************");
 		System.out.println("学生学号：" + tempContainer.getIndex() 
 				+ "\t学生姓名：" + tempContainer.getName()
 				+ "\n姓名拼音：" + tempContainer.getPinyin()
 				+ "\t姓名短拼音：" + tempContainer.getShortPinyin()
-				+ "\n性别：" + (tempContainer.getGender() == 1? "男" : "女")
+				+ "\n性别：" + gender
 				+ "\t\t\t年级：" + tempContainer.getGrade()
 				+ "\n专业：" + tempContainer.getMainCourse());
 		MyLogger.seperate("MyClubs");
