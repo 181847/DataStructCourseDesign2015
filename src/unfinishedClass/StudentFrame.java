@@ -150,12 +150,7 @@ public class StudentFrame extends FrameWithCollege {
 				return false;
 			}
 		};
-		myClubsTable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				
-			}
-		});
+		
 		scrollPane.setViewportView(myClubsTable);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
