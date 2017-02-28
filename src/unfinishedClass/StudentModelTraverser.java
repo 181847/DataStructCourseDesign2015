@@ -22,10 +22,24 @@ public class StudentModelTraverser extends ModelTraverser {
 	public int dealWithContainer(Object arg0) {
 		if (arg0 instanceof Student){
 			Student student = (Student) arg0;
+			
+			String gender;
+			switch( student.getGender() ){
+			case 0:
+				gender = "男";
+				break;
+			case 1:
+				gender = "女";
+				break;
+			default:
+				gender = "?";
+				break;
+			}
+			
 			model.addRow(new Object[]{
 					student.getIndex(), 
 					student.getName(),
-					student.getGender() == 1? "男": "女",
+					gender,
 					student.getGrade(),
 					student.getMainCourse()});
 			return 1;
