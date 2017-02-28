@@ -1,4 +1,4 @@
-package unfinishedClass;
+package collegeComponent.tool.traverser;
 
 import javax.swing.table.DefaultTableModel;
 

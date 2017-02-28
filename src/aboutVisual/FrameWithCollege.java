@@ -1,4 +1,4 @@
-package unfinishedClass;
+package aboutVisual;
 
 import javax.swing.JFrame;
 

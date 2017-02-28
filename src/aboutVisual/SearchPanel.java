@@ -1,4 +1,4 @@
-package unfinishedClass;
+package aboutVisual;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -9,6 +9,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 import basicTool.MyLogger;
+import collegeComponent.tool.traverser.ModelTraverser;
 import info.infoTool.AllTrueFilter;
 import operator.SearchOperator;
 

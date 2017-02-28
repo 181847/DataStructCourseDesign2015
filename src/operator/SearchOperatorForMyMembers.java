@@ -1,8 +1,7 @@
-package unfinishedClass;
+package operator;
 
 import collegeComponent.Club;
 import collegeComponent.College;
-import operator.SearchOperator;
 
 public class SearchOperatorForMyMembers extends SearchOperator {
 	public Club club;
