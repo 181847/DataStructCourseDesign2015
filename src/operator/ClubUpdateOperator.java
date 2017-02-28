@@ -6,6 +6,9 @@ import collegeComponent.College;
 
 public class ClubUpdateOperator extends UpdateOperator {
 	public Club club;
+	public String newIndex = null;
+	public String newName = null;
+	public String newDate = null;
 
 	public ClubUpdateOperator(College college, Club club) {
 		super(college);
@@ -33,6 +36,7 @@ public class ClubUpdateOperator extends UpdateOperator {
 			return 0;
 		}
 		college.deleteClub(originalIndex);
+		updateClubInfo();
 		college.addClub(club);
 		return 0;
 	}
@@ -44,9 +48,34 @@ public class ClubUpdateOperator extends UpdateOperator {
 		}
 		this.originalIndex = club.getIndex();
 		this.club = club;
+		newIndex = null;
+		newName = null;
+		newDate = club.getDate();
 	}
 	
 	public Club getClub(){
 		return club;
+	}
+	
+	public void setNewIndex(String index){
+		newIndex = index;
+	}
+	
+	public void setNewName(String name){
+		newName = name;
+	}
+	
+	public void setNewDate(String date){
+		newDate = date;
+	}
+	
+	private void updateClubInfo(){
+		if (newIndex != null){
+			club.setIndex(newIndex);
+		}
+		if (newName != null){
+			club.setName(newName);
+		}
+		club.setDate(newDate);
 	}
 }
