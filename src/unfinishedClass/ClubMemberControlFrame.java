@@ -8,6 +8,7 @@ import info.infoTool.AllTrueFilter;
 import operator.ClubPositionOperator;
 import operator.DeregisterOperator;
 import operator.SearchOperator;
+import operator.SearchOperatorForMyMembers;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -20,6 +21,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
+import aboutVisual.FrameWithCollege;
+
 import java.awt.Color;
 
 public class ClubMemberControlFrame extends FrameWithCollege {
@@ -51,7 +55,7 @@ public class ClubMemberControlFrame extends FrameWithCollege {
 		Student student = college.getStudent(studentIndex);
 		
 		if (club == null || student == null){
-			MyLogger.logError("社团编号或学生编号有误，ClubMemberControlFrame创建失败。");
+			MyLogger.logError("ClubMemberControlFrame创建时，社团编号或学生编号有误，ClubMemberControlFrame创建失败。");
 			return;
 		}
 		
