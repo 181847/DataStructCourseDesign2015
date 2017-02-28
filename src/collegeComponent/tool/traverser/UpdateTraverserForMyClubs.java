@@ -6,6 +6,13 @@ import info.infoTool.AbstractTraverser;
 import infoInterface.IInfo;
 import infoSet.SearchableInfoSet;
 
+/**
+ * 暂时废除这个类，这个类原本只用于StudentUpdateOperator中，
+ * 现在StudentUpdateOperator中由DeleteMemberInMyClubTraverser和
+ * AddMemberInMyClubTraverser配合使用来达到原来的效果。
+ * @author 75309
+ *
+ */
 public class UpdateTraverserForMyClubs extends AbstractTraverser {
 	public String originalIndex;
 	
@@ -35,7 +42,10 @@ public class UpdateTraverserForMyClubs extends AbstractTraverser {
 					for (IInfo memberInfo: deleteResult){
 						memberInfoSet.insertInfo(memberInfo);
 					}
-				} else {
+				}
+				return 1;
+				/**
+				 * else {
 					if (1 != memberInfoSet.insertInfo(deleteResult[0])){
 						MyLogger.logError("UpdateTraverserForMyClubs更新社员信息时，"
 								+ "插入信息失败，"
@@ -44,6 +54,7 @@ public class UpdateTraverserForMyClubs extends AbstractTraverser {
 					}
 					return 1;
 				}
+				*/
 				
 				
 				
