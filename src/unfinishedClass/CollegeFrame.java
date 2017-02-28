@@ -21,6 +21,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import javax.swing.border.BevelBorder;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class CollegeFrame extends FrameWithCollege {
 	public SearchPanel clubSearchPanel;
@@ -36,10 +39,25 @@ public class CollegeFrame extends FrameWithCollege {
 		getContentPane().add(panel, BorderLayout.NORTH);
 		
 		JButton btnSwitch = new JButton("Switch");
-		
-		panel.add(btnSwitch);
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnSwitch, GroupLayout.PREFERRED_SIZE, 454, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(5)
+					.addComponent(btnSwitch)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panel.setLayout(gl_panel);
 		
 		JPanel studentsAndClubPanel = new JPanel();
+		studentsAndClubPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		getContentPane().add(studentsAndClubPanel, BorderLayout.CENTER);
 		studentsAndClubPanel.setLayout(new CardLayout(0, 0));
 		clubSearchPanel = 
