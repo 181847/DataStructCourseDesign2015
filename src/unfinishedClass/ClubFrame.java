@@ -247,6 +247,7 @@ public class ClubFrame extends FrameWithCollege {
 		JButton button = new JButton("搜索本社成员");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				myMemberSearchPanel.showSearchResult();
 				cl_memberPanel.first(memberPanel);
 			}
 		});
@@ -255,6 +256,7 @@ public class ClubFrame extends FrameWithCollege {
 		JButton button_1 = new JButton("添加社员");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				studentSearchPanel.showSearchResult();
 				cl_memberPanel.last(memberPanel);
 			}
 		});
@@ -307,6 +309,23 @@ public class ClubFrame extends FrameWithCollege {
 							(String) myMemberSearchResultTable.getValueAt(row, 0), 
 							(String) myMemberSearchResultTable.getValueAt(row, 2) )
 						.setVisible(true);
+				}
+			}
+		});
+		
+		JTable studentSearchResultTable = studentSearchPanel.getResultTable();
+		studentSearchResultTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int row = studentSearchResultTable.rowAtPoint(arg0.getPoint());
+				int column = studentSearchResultTable.columnAtPoint(arg0.getPoint());
+				
+				if (column == 0){;
+					new RegistMemberFrame(
+							college, 
+							club.getIndex(),
+							(String) studentSearchResultTable.getValueAt(row, 0))
+						.setVisible(true);;
 				}
 			}
 		});
