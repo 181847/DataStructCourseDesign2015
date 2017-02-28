@@ -120,7 +120,7 @@ public class RegistMemberFrame extends FrameWithCollege {
 		
 		JLabel label_2 = new JLabel("学生名字：" + student.getIndex());
 		
-		JLabel label_3 = new JLabel("学生学号" + student.getName());
+		JLabel label_3 = new JLabel("学生学号：" + student.getName());
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
