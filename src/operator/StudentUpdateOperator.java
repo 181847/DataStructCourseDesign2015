@@ -80,6 +80,10 @@ public class StudentUpdateOperator extends UpdateOperator {
 		this.originalIndex = student.getIndex();
 		this.student = student;
 		newGender = student.getGender();
+		newIndex = null;
+		newName = null;
+		newGrade = null;
+		newMainCourse = null;
 	}
 	
 	public void setNewIndex(String index){
