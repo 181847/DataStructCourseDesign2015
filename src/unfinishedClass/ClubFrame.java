@@ -11,6 +11,8 @@ import operator.SearchOperatorForClubs;
 import operator.SearchOperatorForStudents;
 
 import javax.swing.JPanel;
+import javax.swing.JTable;
+
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout;
@@ -21,6 +23,8 @@ import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
@@ -269,15 +273,38 @@ public class ClubFrame extends FrameWithCollege {
 					year = yearField.getText();
 					month = monthField.getText();
 					day = dayField.getText();
-					club.setIndex(index);
-					club.setName(name);
-					club.setDate(year + "-" + month + "-" + day);
+					
+					clubUpdateOperator.setClub(club);
+					clubUpdateOperator.setNewIndex(index);
+					clubUpdateOperator.setNewName(name);
+					clubUpdateOperator.setNewDate(year + "-" + month + "-" + day);
+					
 					clubUpdateOperator.operate();
 					updateData();
 					clearErrorLabel();
 				}
 			}
 		});
+		
+		JTable myMemberSearchResultTable = myMemberSearchPanel.getResultTable();
+		myMemberSearchResultTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int row = myMemberSearchResultTable.rowAtPoint(arg0.getPoint());
+				int column = myMemberSearchResultTable.columnAtPoint(arg0.getPoint());
+				
+				if (column == 0){
+					new ClubMemberControlFrame(
+							college, 
+							club.getIndex(), 
+							(String) myMemberSearchResultTable.getValueAt(row, 0), 
+							(String) myMemberSearchResultTable.getValueAt(row, 2) )
+						.setVisible(true);
+				}
+			}
+		});
+		
+		
 		
 		myMemberSearchPanel.showSearchResult();
 		studentSearchPanel.showSearchResult();
@@ -298,8 +325,6 @@ public class ClubFrame extends FrameWithCollege {
 		yearField.setText(year);
 		monthField.setText(month);
 		dayField.setText(day);
-		
-		clubUpdateOperator.setClub(club);
 	}
 
 	protected boolean check(){
