@@ -55,8 +55,8 @@ public class ClubPositionOperator extends RegisterOperator {
 			
 			Object theMember = members[0].getContainer();
 			if (theMember instanceof MyMember){
-				((MyMember) theMember).setPosition(position);
 				myMembers.deleteIndex(studentIndex);
+				((MyMember) theMember).setPosition(position);
 				myMembers.insertInfo(new InfoWithContainer(theMember));
 			} else {
 				MyLogger.logError("ClubPositionOperator从社团中获取指定学号的社团成员的时候，"
