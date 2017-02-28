@@ -120,12 +120,12 @@ public class StudentFrame extends FrameWithCollege {
 		);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		button_1 = new JButton("参加社团");
+		button_1 = new JButton("参加新的社团");
 		
-		panel_1.add(button_1, BorderLayout.NORTH);
+		panel_1.add(button_1, BorderLayout.SOUTH);
 		
-		JButton button = new JButton("刷新社团");
-		panel_1.add(button, BorderLayout.SOUTH);
+		JButton button = new JButton("已参加社团");
+		panel_1.add(button, BorderLayout.NORTH);
 		
 		clubPane = new JPanel();
 		panel_1.add(clubPane, BorderLayout.CENTER);
