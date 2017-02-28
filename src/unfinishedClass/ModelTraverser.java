@@ -15,6 +15,10 @@ public abstract class ModelTraverser extends AbstractTraverser {
 	public ModelTraverser(DefaultTableModel model){
 		this.model = model;
 	}
+	
+	public ModelTraverser(){
+		this.model = new DefaultTableModel();
+	}
 
 	@Override
 	public abstract int dealWithContainer(Object arg0);
