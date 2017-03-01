@@ -62,6 +62,14 @@ public class College {
 		return clubInfoSet;
 	}
 	
+	public void setStudentInfoSet(SearchableInfoSet studentInfoSet) {
+		this.studentInfoSet = studentInfoSet;
+	}
+
+	public void setClubInfoSet(SearchableInfoSet clubInfoSet) {
+		this.clubInfoSet = clubInfoSet;
+	}
+
 	/**
 	 * 获取指定编号的社团对象。
 	 * @param clubIndex
