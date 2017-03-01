@@ -132,4 +132,12 @@ public class MyClub implements IIndexHolder, INameHolder, IPinyinHolder, IPositi
 	public void setIndex(String index) {
 		//Empty Body
 	}
+
+	public InfoInClub getInfoInClub() {
+		return infoInClub;
+	}
+
+	public void setInfoInClub(InfoInClub infoInClub) {
+		this.infoInClub = infoInClub;
+	}
 }
