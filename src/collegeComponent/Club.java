@@ -42,7 +42,7 @@ public class Club extends RegistObjectWithPinyin implements IDateHolder{
 	 */
 	public Club(String clubIndex, String clubName, String dateString) {
 		super(clubIndex, clubName);
-		dateFormate = new SimpleDateFormat("yyyy-mm-dd");
+		dateFormate = new SimpleDateFormat("yyyy-MM-dd");
 		setDate(dateString);
 		myMembersInfoSet = new SearchableInfoSet(new IInfoGetter[]{
 										new IndexGetter(),
