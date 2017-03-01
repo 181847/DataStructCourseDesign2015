@@ -7,16 +7,19 @@ import collegeComponent.MyMember;
 import info.infoTool.AbstractTraverser;
 import infoInterface.IInfo;
 import infoSet.SearchableInfoSet;
+import unfinishedClass.DeleteTraverserForUpdateOperator;
 
-public class DeleteMemberInMyClubTraverser extends AbstractTraverser {
-	public String originalIndex;
-	public InfoInClub[] infosInClub;
-	public int clubCount;
+/**
+ * 此类专门用于更新Student的信息的时候，
+ * 从新对这个Student所参加的社团中的社员信息，
+ * 删除操作，并且用InfoInClub数组存储所有参加的社团中的职位信息。
+ * @author 75309
+ *
+ */
+public class DeleteMemberInMyClubTraverser extends DeleteTraverserForUpdateOperator {
 	
-	public DeleteMemberInMyClubTraverser(String originalIndex, int infosInClubNum){
-		this.originalIndex = originalIndex;
-		infosInClub = new InfoInClub[infosInClubNum];
-		clubCount = 0;
+	public DeleteMemberInMyClubTraverser(String memberIndex, int infoInClubNum){
+		super(memberIndex, infoInClubNum);
 	}
 	
 	
@@ -29,28 +32,29 @@ public class DeleteMemberInMyClubTraverser extends AbstractTraverser {
 														.getClub()
 														.getMyMembers();
 				IInfo[] deleteResult = memberInfoSet
-											.deleteIndex(originalIndex)
+											.deleteIndex(deleteTargetIndex)
 											.toInfoArray();
 				if (deleteResult.length == 0){
-					MyLogger.logError("UpdateTraverserForMyClubs更新社员信息时，"
+					MyLogger.logError("DeleteMemberInMyClubTraverser暂时删除社员信息时，"
 							+ "没有发现指定学号的学生，"
-							+ "信息更新失败。");
+							+ "信息删除失败。");
 					return 0;
 				} else if (deleteResult.length > 1){
-					MyLogger.logError("UpdateTraverserForMyClubs更新社员信息时，"
+					MyLogger.logError("UpdateTraverserForMyClubs暂时删除社员信息时，"
 							+ "发现重复学号的学生，"
-							+ "信息更新失败。");
+							+ "信息删除失败。");
 					for (IInfo memberInfo: deleteResult){
 						memberInfoSet.insertInfo(memberInfo);
 					}
 				} else {
 					Object myMember = deleteResult[0].getContainer();
 					if (myMember instanceof MyMember){
-						infosInClub[clubCount] = ((MyMember)myMember).getInfoInClub();
-						clubCount ++;
+						infosInClub[traversCount] = ((MyMember)myMember).getInfoInClub();
+						traversCount ++;
 						return 1;
 					} else {
-						MyLogger.logError("DeleteMemberInMyClubTraverser无法读取MyClub的MyMember中的InfoInClub。");
+						MyLogger.logError("DeleteMemberInMyClubTraverser无法读取MyClub的MyMember"
+								+ "中的InfoInClub，container不是MyMember类型。");
 						return 0;
 					}
 				}
@@ -59,31 +63,5 @@ public class DeleteMemberInMyClubTraverser extends AbstractTraverser {
 		return 0;
 	}
 
-	protected boolean check(){
-		boolean checkResult = true;
-		if (originalIndex == null){
-			MyLogger.logError("UpdateTraverserForMyClubs中的originalIndex为null，无法执行社员信息更新。");
-			checkResult = false; 
-		} else if (originalIndex.isEmpty()){
-			MyLogger.logError("UpdateTraverserForMyClubs中的originalIndex为空串，无法执行社员信息更新。");
-			checkResult = false; 
-		}
-		return checkResult;
-	}
 	
-	public InfoInClub[] getInfosInClub() {
-		return infosInClub;
-	}
-
-	public void setInfosInClub(InfoInClub[] infosInClub) {
-		this.infosInClub = infosInClub;
-	}
-
-	public int getClubCount() {
-		return clubCount;
-	}
-
-	public void setClubCount(int clubCount) {
-		this.clubCount = clubCount;
-	}
 }
