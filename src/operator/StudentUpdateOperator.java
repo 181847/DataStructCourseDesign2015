@@ -39,15 +39,14 @@ public class StudentUpdateOperator extends UpdateOperator {
 			return 0;
 		}
 		college.deleteStudent(originalIndex);
-		
 		DeleteMemberInMyClubTraverser deleteTraverser = 
 				new DeleteMemberInMyClubTraverser(originalIndex,
 									student.getMyClubs().getNum());
-		
 		student
 			.getMyClubs()
 			.traverseInfo(deleteTraverser, new AllTrueFilter());
 		
+		//更新信息
 		updateStudentInfo();
 		
 		college.addStudent(student);
