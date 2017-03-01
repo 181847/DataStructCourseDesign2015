@@ -6,6 +6,7 @@ import collegeComponent.tool.traverser.ClubModelTraverser;
 import collegeComponent.tool.traverser.MyClubModelTraverser;
 import info.infoTool.AllTrueFilter;
 import operator.SearchOperatorForClubs;
+import operator.StudentDeleteOperator;
 import operator.StudentUpdateOperator;
 
 import javax.swing.GroupLayout;
@@ -34,6 +35,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class StudentFrame extends FrameWithCollege {
 
@@ -65,6 +67,7 @@ public class StudentFrame extends FrameWithCollege {
 	private MyClubModelTraverser traverser;
 	private Student student;
 	private StudentUpdateOperator studentUpdateOperator;
+	private StudentDeleteOperator studentDeleteOperator;
 	public SearchPanel clubSearchPanel;
 	private final String[] column = new String[]{"编号", "社团名字", "职位"};
 	public final String[] clubColumn = { "社团编号", "社团名字", "创建日期"};
@@ -89,6 +92,7 @@ public class StudentFrame extends FrameWithCollege {
 							new SearchOperatorForClubs(college), 
 							clubColumn, 
 							new ClubModelTraverser());
+			studentDeleteOperator = new StudentDeleteOperator(college);
 		}
 		
 		
@@ -230,6 +234,29 @@ public class StudentFrame extends FrameWithCollege {
 		
 		indexErrorLabel = new JLabel("");
 		
+		JButton button_2 = new JButton("注销当前学生");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int n = JOptionPane.showConfirmDialog(null,
+						"确认注销社团？",
+						"确认窗口",
+						JOptionPane.YES_NO_CANCEL_OPTION);
+				
+				if (n != JOptionPane.YES_OPTION){
+					//check();
+					return;
+				}
+				
+				studentDeleteOperator.setTargetIndex(student.getIndex());
+				
+				if (1 == studentDeleteOperator.operate()){
+					dispose();
+				} else {
+					MyLogger.logError("删除社团时发生错误！请勿保存文件。");
+				}
+			}
+		});
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -241,11 +268,11 @@ public class StudentFrame extends FrameWithCollege {
 								.addGroup(gl_panel.createSequentialGroup()
 									.addComponent(label)
 									.addGap(18)
-									.addComponent(indexField, GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE))
+									.addComponent(indexField, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addComponent(label_1)
 									.addGap(18)
-									.addComponent(nameField))
+									.addComponent(nameField, 234, 234, 234))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addComponent(label_2)
 									.addGap(18)
@@ -253,11 +280,11 @@ public class StudentFrame extends FrameWithCollege {
 								.addGroup(gl_panel.createSequentialGroup()
 									.addComponent(label_3)
 									.addGap(18)
-									.addComponent(gradeBox, 0, 152, Short.MAX_VALUE))
+									.addComponent(gradeBox, 0, 234, Short.MAX_VALUE))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addComponent(label_4)
 									.addGap(18)
-									.addComponent(mainCourseField)))
+									.addComponent(mainCourseField, 234, 234, 234)))
 							.addGap(18)
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
@@ -270,7 +297,9 @@ public class StudentFrame extends FrameWithCollege {
 								.addComponent(indexErrorLabel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(192)
-							.addComponent(btnNewButton)))
+							.addComponent(btnNewButton)
+							.addPreferredGap(ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+							.addComponent(button_2)))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
@@ -306,8 +335,10 @@ public class StudentFrame extends FrameWithCollege {
 						.addComponent(mainCourseField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(mainCourseErrorLabel))
 					.addGap(18)
-					.addComponent(btnNewButton)
-					.addContainerGap(22, Short.MAX_VALUE))
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnNewButton)
+						.addComponent(button_2))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 		getContentPane().setLayout(groupLayout);
