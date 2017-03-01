@@ -1,7 +1,6 @@
 package testSpace;
 
 import basicTool.MyLogger;
-import operator.ClubPositionOperator;
 import operator.DeregisterOperator;
 import operator.SearchOperatorForMyMembers;
 import operator.StudentUpdateOperator;

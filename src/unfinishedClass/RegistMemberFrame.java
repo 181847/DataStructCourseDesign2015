@@ -25,6 +25,10 @@ import java.awt.event.ActionEvent;
 
 public class RegistMemberFrame extends FrameWithCollege {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6980831906560948523L;
 	protected String clubIndex;
 	protected String studentIndex;
 	

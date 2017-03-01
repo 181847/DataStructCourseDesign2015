@@ -9,9 +9,6 @@ import collegeComponent.tool.traverser.ClubModelTraverser;
 import operator.SearchOperatorForClubs;
 import testSpace.Test;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 public class TestSearchPanel extends JFrame {
 	public SearchPanel searchPanel;
 	public TestSearchPanel() {

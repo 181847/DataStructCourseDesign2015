@@ -3,8 +3,6 @@ package collegeComponent.tool.traverser;
 import javax.swing.table.DefaultTableModel;
 
 import basicTool.MyLogger;
-import collegeComponent.Club;
-import collegeComponent.MyClub;
 import collegeComponent.MyMember;
 
 public class MyMemberModelTraverser extends ModelTraverser {

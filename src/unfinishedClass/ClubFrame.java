@@ -1,7 +1,5 @@
 package unfinishedClass;
 
-import javax.swing.JFrame;
-
 import basicTool.MyLogger;
 import collegeComponent.Club;
 import collegeComponent.College;
@@ -23,7 +21,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -31,8 +28,6 @@ import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import aboutVisual.FrameWithCollege;

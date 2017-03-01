@@ -7,7 +7,6 @@ import collegeComponent.MyMember;
 import collegeComponent.Student;
 import info.InfoWithContainer;
 import info.infoTool.AbstractTraverser;
-import infoInterface.IInfo;
 import infoSet.SearchableInfoSet;
 
 public class AddMemberInMyClubTraverser extends AbstractTraverser {

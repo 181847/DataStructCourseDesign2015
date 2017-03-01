@@ -5,7 +5,6 @@ import collegeComponent.Student;
 import collegeComponent.tool.traverser.ClubModelTraverser;
 import collegeComponent.tool.traverser.MyClubModelTraverser;
 import info.infoTool.AllTrueFilter;
-import operator.ClubUpdateOperator;
 import operator.SearchOperatorForClubs;
 import operator.StudentUpdateOperator;
 
@@ -34,7 +33,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.CardLayout;
 
 public class StudentFrame extends FrameWithCollege {

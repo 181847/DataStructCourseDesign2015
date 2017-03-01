@@ -4,7 +4,6 @@ import basicTool.MyLogger;
 import collegeComponent.InfoInClub;
 import collegeComponent.MyClub;
 import collegeComponent.MyMember;
-import info.infoTool.AbstractGetter;
 import info.infoTool.AbstractTraverser;
 import infoInterface.IInfo;
 import infoSet.SearchableInfoSet;
