@@ -92,6 +92,15 @@ public class CollegeFrame extends FrameWithCollege {
 		});
 		
 		JTable clubTable = clubSearchPanel.getResultTable();
+		
+		JPanel panel_1 = new JPanel();
+		getContentPane().add(panel_1, BorderLayout.SOUTH);
+		
+		JButton btnNewButton_1 = new JButton("读取");
+		panel_1.add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("保存");
+		panel_1.add(btnNewButton);
 		clubTable.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
