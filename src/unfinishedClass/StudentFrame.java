@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
@@ -78,7 +79,7 @@ public class StudentFrame extends FrameWithCollege {
 	public StudentFrame(College college, String studentIndex) {
 		super(college);
 		traverser = new MyClubModelTraverser();
-		this.setSize(530, 600);
+		this.setSize(530, 789);
 		student = college.getStudent(studentIndex);
 		if (student == null){
 			MyLogger.logError("StudentFrame没有获得Student对象，"
@@ -106,9 +107,9 @@ public class StudentFrame extends FrameWithCollege {
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -116,8 +117,8 @@ public class StudentFrame extends FrameWithCollege {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE)
-					.addGap(41)
-					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		panel_1.setLayout(new BorderLayout(0, 0));
@@ -193,7 +194,7 @@ public class StudentFrame extends FrameWithCollege {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (check()){
-					int n = JOptionPane.showConfirmDialog(null,
+					int n = JOptionPane.showConfirmDialog(btnNewButton,
 							"确认更新学生信息？",
 							"确认窗口",
 							JOptionPane.YES_NO_CANCEL_OPTION);
@@ -237,7 +238,7 @@ public class StudentFrame extends FrameWithCollege {
 		JButton button_2 = new JButton("注销当前学生");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int n = JOptionPane.showConfirmDialog(null,
+				int n = JOptionPane.showConfirmDialog(button_2,
 						"确认注销社团？",
 						"确认窗口",
 						JOptionPane.YES_NO_CANCEL_OPTION);
@@ -352,12 +353,13 @@ public class StudentFrame extends FrameWithCollege {
 				int column = myClubsTable.columnAtPoint(arg0.getPoint());
 				
 				if (column == 0){;
-					new ClubMemberControlFrame(
+					JFrame clubMemberControlFrame = new ClubMemberControlFrame(
 							college, 
 							(String) myClubsTable.getValueAt(row, 0), 
 							student.getIndex(), 
-							(String) myClubsTable.getValueAt(row, 2) )
-						.setVisible(true);;
+							(String) myClubsTable.getValueAt(row, 2) );
+					clubMemberControlFrame.setLocationRelativeTo(myClubsTable);
+					clubMemberControlFrame.setVisible(true);;
 				}
 			}
 		});
@@ -370,11 +372,12 @@ public class StudentFrame extends FrameWithCollege {
 				int column = clubSearchResultTable.columnAtPoint(arg0.getPoint());
 				
 				if (column == 0){;
-					new RegistMemberFrame(
+					JFrame registerMemberFrame = new RegistMemberFrame(
 							college, 
 							(String) clubSearchResultTable.getValueAt(row, 0), 
-							student.getIndex() )
-						.setVisible(true);;
+							student.getIndex() );
+					registerMemberFrame.setLocationRelativeTo(clubSearchResultTable);
+					registerMemberFrame.setVisible(true);;
 				}
 			}
 		});
@@ -417,7 +420,7 @@ public class StudentFrame extends FrameWithCollege {
 	}
 	
 	private boolean check(){
-		int checkResult = 1;
+		boolean checkResult = true;
 		String changedIndex = indexField.getText();
 		String changedName = nameField.getText();
 		String changedMainCourse = mainCourseField.getText();
@@ -426,19 +429,19 @@ public class StudentFrame extends FrameWithCollege {
 			indexErrorLabel.setText("序号不变");
 		} else if (changedIndex.isEmpty()){
 			indexErrorLabel.setText("错误！序号不能为空，请填写序号。");
-			checkResult *= 0;
+			checkResult = false;
 		} else if (null != college.getStudent(changedIndex)){
 			indexErrorLabel.setText("错误！序号冲突，已存在相同序号的同学，请重新填写。");
-			checkResult *= 0;
+			checkResult = false;
 		} else {
 			indexErrorLabel.setText("");
 		}
 		
 		if (changedName.equals(name)){
-			nameErrorLabel.setText("序号不变");
-		} else if (changedIndex.isEmpty()){
-			nameErrorLabel.setText("错误！序号不能为空，请填写序号。");
-			checkResult *= 0;
+			nameErrorLabel.setText("名字不变");
+		} else if (changedName.isEmpty()){
+			nameErrorLabel.setText("错误！名字不能为空，请填写名字。");
+			checkResult = false;
 		} else {
 			nameErrorLabel.setText("");
 		}
@@ -447,12 +450,12 @@ public class StudentFrame extends FrameWithCollege {
 			mainCourseErrorLabel.setText("专业不变");
 		} else if (changedMainCourse.isEmpty()){
 			mainCourseErrorLabel.setText("错误！专业不能为空，请填写序号。");
-			checkResult *= 0;
+			checkResult = false;
 		} else {
 			mainCourseErrorLabel.setText("");
 		}
 		
-		return checkResult == 1;
+		return checkResult;
 	}
 	
 	private void clearErrorLabel() {

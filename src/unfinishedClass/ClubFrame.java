@@ -23,6 +23,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -45,7 +47,7 @@ public class ClubFrame extends FrameWithCollege {
 	protected SearchPanel studentSearchPanel;
 	protected ClubUpdateOperator clubUpdateOperator;
 	protected ClubDeleteOperator clubDeleteOperator;
-	
+	protected SearchOperatorForClubs nameSearchOperatorForClubs;
 	protected CardLayout cl_memberPanel;
 	
 
@@ -139,7 +141,7 @@ public class ClubFrame extends FrameWithCollege {
 		JButton button_2 = new JButton("注销社团");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int n = JOptionPane.showConfirmDialog(null,
+				int n = JOptionPane.showConfirmDialog(button_2,
 						"确认注销社团？",
 						"确认窗口",
 						JOptionPane.YES_NO_CANCEL_OPTION);
@@ -288,7 +290,7 @@ public class ClubFrame extends FrameWithCollege {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (check()){
-					int n = JOptionPane.showConfirmDialog(null,
+					int n = JOptionPane.showConfirmDialog(btnNewButton,
 							"确认更新社团信息？",
 							"确认窗口",
 							JOptionPane.YES_NO_CANCEL_OPTION);
@@ -323,12 +325,13 @@ public class ClubFrame extends FrameWithCollege {
 				int column = myMemberSearchResultTable.columnAtPoint(arg0.getPoint());
 				
 				if (column == 0){
-					new ClubMemberControlFrame(
+					JFrame clubMemberControlFrame = new ClubMemberControlFrame(
 							college, 
 							club.getIndex(), 
 							(String) myMemberSearchResultTable.getValueAt(row, 0), 
-							(String) myMemberSearchResultTable.getValueAt(row, 2) )
-						.setVisible(true);
+							(String) myMemberSearchResultTable.getValueAt(row, 2) );
+					clubMemberControlFrame.setLocationRelativeTo(myMemberSearchResultTable);
+					clubMemberControlFrame.setVisible(true);
 				}
 			}
 		});
@@ -341,19 +344,22 @@ public class ClubFrame extends FrameWithCollege {
 				int column = studentSearchResultTable.columnAtPoint(arg0.getPoint());
 				
 				if (column == 0){;
-					new RegistMemberFrame(
+					JFrame registMemberFrame = new RegistMemberFrame(
 							college, 
 							club.getIndex(),
-							(String) studentSearchResultTable.getValueAt(row, 0))
-						.setVisible(true);;
+							(String) studentSearchResultTable.getValueAt(row, 0));
+					registMemberFrame.setLocationRelativeTo(studentSearchResultTable);
+					registMemberFrame.setVisible(true);;
 				}
 			}
 		});
 		
 		
-		
 		myMemberSearchPanel.showSearchResult();
 		studentSearchPanel.showSearchResult();
+		nameSearchOperatorForClubs = new SearchOperatorForClubs(getCollege());
+		nameSearchOperatorForClubs.deselectSearchLog(-1);
+		nameSearchOperatorForClubs.selectSearchLog(1);
 		clearErrorLabel();
 	}
 	
@@ -374,7 +380,7 @@ public class ClubFrame extends FrameWithCollege {
 	}
 
 	protected boolean check(){
-		int checkResult = 1;
+		boolean checkResult = true;
 		String changedIndex = indexField.getText();
 		String changedName = nameField.getText();
 		String changedYear = yearField.getText();
@@ -387,10 +393,10 @@ public class ClubFrame extends FrameWithCollege {
 		} else {
 			if (changedIndex.isEmpty()){
 				indexErrorLabel.setText("错误！序号名为空。");
-				checkResult *= 0;
+				checkResult = false;
 			}else if (college.getClub(changedIndex) != null){
 				indexErrorLabel.setText("错误！序号名冲突。");
-				checkResult *= 0;
+				checkResult = false;
 			} else {
 				indexErrorLabel.setText("");
 			}
@@ -406,19 +412,16 @@ public class ClubFrame extends FrameWithCollege {
 		} else {
 			if (changedName.isEmpty()){
 				nameErrorLabel.setText("错误！名字为空。");
-				checkResult *= 0;
+				checkResult = false;
 			} else {
-				SearchOperatorForClubs sofc = new SearchOperatorForClubs(getCollege());
-				sofc.deselectSearchLog(-1);
-				sofc.selectSearchLog(1);
-				sofc.setSearchInfo(changedName);
-				sofc.operate();
+				nameSearchOperatorForClubs.setSearchInfo(changedName);
+				nameSearchOperatorForClubs.operate();
 				
-				if (sofc.getResult().getAllResult(new AllTrueFilter()).isEmpty()){
+				if (nameSearchOperatorForClubs.getResult().getAllResult(new SameNameFilter(changedName)).isEmpty()){
 					nameErrorLabel.setText("");
 				} else {
 					nameErrorLabel.setText("错误！名字冲突。");
-					checkResult *= 0;
+					checkResult = false;
 				}
 			}
 		}
@@ -428,11 +431,11 @@ public class ClubFrame extends FrameWithCollege {
 			dateErrorLabel.setText("");
 		} catch (ParseException e) {
 			dateErrorLabel.setText("错误！日期格式不正确。");
-			checkResult *= 0;
-			//MyLogger.logException(e);
+			checkResult = false;
+			MyLogger.logException(e);
 		}
 		
-		return checkResult == 1;
+		return checkResult;
 	}
 	
 	private void clearErrorLabel() {

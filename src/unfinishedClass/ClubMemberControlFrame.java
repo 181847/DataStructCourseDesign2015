@@ -67,7 +67,7 @@ public class ClubMemberControlFrame extends FrameWithCollege {
 				if (check()){
 					String changedPosition = positionField.getText();
 					
-					int n = JOptionPane.showConfirmDialog(null,
+					int n = JOptionPane.showConfirmDialog(button,
 							"确认修改职位信息？",
 							"确认窗口",
 							JOptionPane.YES_NO_CANCEL_OPTION);
@@ -93,7 +93,7 @@ public class ClubMemberControlFrame extends FrameWithCollege {
 		JButton button_1 = new JButton("退社");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int n = JOptionPane.showConfirmDialog(null,
+				int n = JOptionPane.showConfirmDialog(button_1,
 						"确认退出“" + club.getName() + "”社团？",
 						"确认窗口",
 						JOptionPane.YES_NO_CANCEL_OPTION);

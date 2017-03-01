@@ -67,7 +67,7 @@ public class RegistMemberFrame extends FrameWithCollege {
 			public void actionPerformed(ActionEvent arg0) {
 				if (check()){
 					
-					int n = JOptionPane.showConfirmDialog(null,
+					int n = JOptionPane.showConfirmDialog(button,
 							"确认参加社团“" + club.getName() + "”？",
 							"确认窗口",
 							JOptionPane.YES_NO_CANCEL_OPTION);
@@ -86,19 +86,23 @@ public class RegistMemberFrame extends FrameWithCollege {
 		});
 		
 		positionErrorLabel = new JLabel("");
+		
+		JLabel label_4 = new JLabel("职位：");
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(button, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(positionErrorLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(positionField, GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)))
-						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE))
+							.addComponent(button, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
+							.addGap(28)
+							.addComponent(label_4)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(positionField, GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+								.addComponent(positionErrorLabel)))
+						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -109,10 +113,12 @@ public class RegistMemberFrame extends FrameWithCollege {
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(positionField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(positionErrorLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addContainerGap(10, Short.MAX_VALUE))
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(positionField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_4))
+							.addGap(13)
+							.addComponent(positionErrorLabel, GroupLayout.DEFAULT_SIZE, 9, Short.MAX_VALUE)
+							.addContainerGap(34, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(button, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())))
