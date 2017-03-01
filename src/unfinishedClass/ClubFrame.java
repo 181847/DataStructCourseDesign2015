@@ -140,7 +140,7 @@ public class ClubFrame extends FrameWithCollege {
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int n = JOptionPane.showConfirmDialog(null,
-						"确认更新社团信息？",
+						"确认注销社团？",
 						"确认窗口",
 						JOptionPane.YES_NO_CANCEL_OPTION);
 				
