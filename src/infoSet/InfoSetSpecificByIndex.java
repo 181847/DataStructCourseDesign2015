@@ -79,9 +79,11 @@ public class InfoSetSpecificByIndex extends DoubleLoopLinkedInfoSet{
 			return 1;
 			
 		} else {
+			/*
 			MyLogger.logError("InfoSetSpecificByIndex中已经包含同序号的信息，"
 					+ "插入失败。"
 					+ "插入元素的序号：" + index);
+			*/
 			return -3;
 		}
 	}//insertInfo
