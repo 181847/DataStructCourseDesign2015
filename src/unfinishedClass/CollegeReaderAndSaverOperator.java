@@ -327,18 +327,39 @@ public class CollegeReaderAndSaverOperator extends CollegeOperator {
 	}
 
 	private void saveClub_StudentFile(String club_StudentFilePath) {
-		PrintWriter club_StudentWriter = new PrintWriter(new BufferedWriter(new FileWriter(club_StudentFilePath))); 
-		college.getClubInfoSet().traverseInfo(new SaveForClub_StudentTraverser(club_StudentWriter), new AllTrueFilter());
+		PrintWriter club_StudentWriter;
+		try {
+			club_StudentWriter = new PrintWriter(new BufferedWriter(new FileWriter(club_StudentFilePath)));
+			college.getClubInfoSet().traverseInfo(new SaveForClub_StudentTraverser(club_StudentWriter), new AllTrueFilter());
+			club_StudentWriter.close();
+		} catch (IOException e) {
+			MyLogger.logError("存储社员注册信息出错！");
+			MyLogger.logException(e);
+		} 
 	}
 
 	private void saveClubFile(String clubFilePath) {
-		PrintWriter clubWriter = new PrintWriter(new BufferedWriter(new FileWriter(clubFilePath))); 
-		college.getClubInfoSet().traverseInfo(new SaveForClubTraverser(clubWriter), new AllTrueFilter());
+		PrintWriter clubWriter;
+		try {
+			clubWriter = new PrintWriter(new BufferedWriter(new FileWriter(clubFilePath)));
+			college.getClubInfoSet().traverseInfo(new SaveForClubTraverser(clubWriter), new AllTrueFilter());
+			clubWriter.close();
+		} catch (IOException e) {
+			MyLogger.logError("存储社团文件出错！");
+			MyLogger.logException(e);
+		} 
 	}
 
 	private void saveStudentFile(String studentFilePath) {
-		PrintWriter studentWriter = new PrintWriter(new BufferedWriter(new FileWriter(studentFilePath))); 
-		college.getStudentInfoSet().traverseInfo(new SaveForStudentTraverser(studentWriter), new AllTrueFilter());
+		PrintWriter studentWriter;
+		try {
+			studentWriter = new PrintWriter(new BufferedWriter(new FileWriter(studentFilePath)));
+			college.getStudentInfoSet().traverseInfo(new SaveForStudentTraverser(studentWriter), new AllTrueFilter());
+			studentWriter.close();
+		} catch (IOException e) {
+			MyLogger.logError("存储学生文件出错！");
+			MyLogger.logException(e);
+		}
 	}
 
 	private boolean checkSaveFolderPath(String folderPath) {
