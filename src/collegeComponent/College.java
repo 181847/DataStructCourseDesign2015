@@ -167,7 +167,7 @@ public class College {
 	 * 		失败返回0。
 	 */
 	public int deleteClub(String clubIndex){
-		//TODO
+		clubInfoSet.deleteIndex(clubIndex);
 		return 0;
 	}
 }
