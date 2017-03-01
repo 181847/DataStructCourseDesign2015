@@ -28,6 +28,7 @@ public class SearchPanel extends JPanel {
 	private String[] column;
 	private SearchOperator so;
 	private ModelTraverser traverser;
+	private JButton searchButton;
 	
 	public SearchPanel(SearchOperator so, String[] column, ModelTraverser traverser) {
 		this.so = so;
@@ -42,13 +43,13 @@ public class SearchPanel extends JPanel {
 		controlPanel.add(searchTextField);
 		searchTextField.setColumns(10);
 		
-		JButton btnSearch = new JButton("Search");
-		btnSearch.addActionListener(new ActionListener() {
+		searchButton = new JButton("Search");
+		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				showSearchResult();
 			}
 		});
-		controlPanel.add(btnSearch);
+		controlPanel.add(searchButton);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
@@ -86,6 +87,10 @@ public class SearchPanel extends JPanel {
 		
 		
 		//showSearchResult();
+	}
+
+	public JButton getSearchButton() {
+		return searchButton;
 	}
 
 	public void showSearchResult() {
