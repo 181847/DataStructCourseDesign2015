@@ -25,7 +25,6 @@ public class SearchLog extends InfoSearchTree {
 	 * 		info为null，或者插入失败返回0。
 	 */
 	public int putInfo(IInfo info){
-		//TODO
 		if (info == null){
 			MyLogger.logError("SearchLog调用addSearchInfo()，"
 					+ "但是参数Info为null，"

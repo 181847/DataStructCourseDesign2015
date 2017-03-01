@@ -9,7 +9,6 @@ public class MyClubModelTraverser extends ModelTraverser {
 
 	public MyClubModelTraverser(DefaultTableModel model) {
 		super(model);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public MyClubModelTraverser(Object[] column){
