@@ -3,6 +3,10 @@ package operator;
 import basicTool.MyLogger;
 import collegeComponent.Club;
 import collegeComponent.College;
+import collegeComponent.tool.traverser.AddMemberInMyClubTraverser;
+import info.infoTool.AllTrueFilter;
+import unfinishedClass.AddClubInMyMemberTraverser;
+import unfinishedClass.DeleteClubInMyMemberTraverser;
 
 public class ClubUpdateOperator extends UpdateOperator {
 	public Club club;
@@ -36,8 +40,22 @@ public class ClubUpdateOperator extends UpdateOperator {
 			return 0;
 		}
 		college.deleteClub(originalIndex);
+		DeleteClubInMyMemberTraverser deleteTraverser =
+				new DeleteClubInMyMemberTraverser(originalIndex,
+						club.getMyMembers().getNum());
+		club
+			.getMyMembers()
+			.traverseInfo(deleteTraverser, new AllTrueFilter());
+		
+		
 		updateClubInfo();
+		
 		college.addClub(club);
+		club
+			.getMyMembers()
+			.traverseInfo(
+					new AddClubInMyMemberTraverser(club, deleteTraverser.getInfosInClub()), 
+					new AllTrueFilter());
 		return 0;
 	}
 	
