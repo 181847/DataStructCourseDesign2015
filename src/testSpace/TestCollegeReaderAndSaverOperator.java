@@ -10,7 +10,7 @@ public class TestCollegeReaderAndSaverOperator extends Test {
 		College newCollege = new College();
 		CollegeReaderAndSaverOperator collegeOperator = 
 				new CollegeReaderAndSaverOperator(newCollege);
-		collegeOperator.read("D:\\eclipseWorkSpace\\DataStructCourseDesign2015\\data");
+		collegeOperator.read("data");
 		
 		new CollegeFrame(newCollege).setVisible(true);
 	}
