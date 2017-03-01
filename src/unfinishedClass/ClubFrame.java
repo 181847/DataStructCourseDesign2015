@@ -6,6 +6,7 @@ import collegeComponent.College;
 import collegeComponent.tool.traverser.MyMemberModelTraverser;
 import collegeComponent.tool.traverser.StudentModelTraverser;
 import info.infoTool.AllTrueFilter;
+import operator.ClubDeleteOperator;
 import operator.ClubUpdateOperator;
 import operator.SearchOperatorForClubs;
 import operator.SearchOperatorForMyMembers;
@@ -43,6 +44,7 @@ public class ClubFrame extends FrameWithCollege {
 	protected SearchPanel myMemberSearchPanel;
 	protected SearchPanel studentSearchPanel;
 	protected ClubUpdateOperator clubUpdateOperator;
+	protected ClubDeleteOperator clubDeleteOperator;
 	
 	protected CardLayout cl_memberPanel;
 	
@@ -91,6 +93,7 @@ public class ClubFrame extends FrameWithCollege {
 							studentColumn, 
 							new StudentModelTraverser());
 			clubUpdateOperator = new ClubUpdateOperator(college, club);
+			clubDeleteOperator = new ClubDeleteOperator(college);
 		}
 		
 		JPanel panel = new JPanel();
@@ -133,54 +136,74 @@ public class ClubFrame extends FrameWithCollege {
 		
 		dateErrorLabel = new JLabel("1");
 		
+		JButton button_2 = new JButton("注销社团");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int n = JOptionPane.showConfirmDialog(null,
+						"确认更新社团信息？",
+						"确认窗口",
+						JOptionPane.YES_NO_CANCEL_OPTION);
+				
+				if (n != JOptionPane.YES_OPTION){
+					//check();
+					return;
+				}
+				
+				clubDeleteOperator.setTargetIndex(club.getIndex());
+				if (1 == clubDeleteOperator.operate()){
+					dispose();
+				} else {
+					MyLogger.logError("删除社团时发生错误！请勿保存文件。");
+				}
+			}
+		});
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(176)
-							.addComponent(btnNewButton)
-							.addGap(215))
-						.addGroup(gl_panel.createSequentialGroup()
+						.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 344, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+							.addComponent(button_2))
+						.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_panel.createSequentialGroup()
-											.addComponent(lblNewLabel)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(nameField, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE))
-										.addGroup(gl_panel.createSequentialGroup()
-											.addComponent(label)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(indexField, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)))
-									.addGap(18)
-									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addComponent(nameErrorLabel, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
-										.addComponent(indexErrorLabel, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)))
+									.addComponent(lblNewLabel)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(nameField, GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE))
 								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(label_1)
+									.addComponent(label)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(yearField, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(label_2)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(monthField, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(label_3)
-									.addGap(6)
-									.addComponent(dayField, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(label_4)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(dateErrorLabel, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)))
-							.addContainerGap())))
+									.addComponent(indexField, GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)))
+							.addGap(18)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(nameErrorLabel, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
+								.addComponent(indexErrorLabel, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)))
+						.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+							.addComponent(label_1)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(yearField, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(label_2)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(monthField, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(label_3)
+							.addGap(6)
+							.addComponent(dayField, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(label_4)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(dateErrorLabel, GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
+					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(33, Short.MAX_VALUE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(label)
 						.addComponent(indexField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -201,7 +224,9 @@ public class ClubFrame extends FrameWithCollege {
 						.addComponent(label_4)
 						.addComponent(dateErrorLabel))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnNewButton)
+						.addComponent(button_2))
 					.addContainerGap())
 		);
 		panel.setLayout(gl_panel);
