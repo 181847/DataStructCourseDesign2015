@@ -19,6 +19,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class AddStudentFrame extends FrameWithCollege {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2205342794434320229L;
 	private JTextField indexField;
 	private JTextField nameField;
 	private JTextField mainCourseField;
