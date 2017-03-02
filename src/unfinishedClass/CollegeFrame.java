@@ -38,6 +38,12 @@ import javax.swing.JToggleButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class CollegeFrame extends FrameWithCollege {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7105419762506000032L;
+
+
 	protected CollegeReaderAndSaverOperator readerAndSaverOperator;
 	
 
@@ -94,12 +100,47 @@ public class CollegeFrame extends FrameWithCollege {
 				new SearchPanel(
 						new SearchOperatorForClubs(college), 
 						clubColumn, 
-						new ClubModelTraverser());
+						new ClubModelTraverser(),
+						new AbstractTableNotifier() {
+								@Override
+								public void fire(){
+									if (columnIndex == 0){
+										JFrame clubFrame = new ClubFrame(college, 
+												(String) this.table.getValueAt(this.rowIndex, this.columnIndex));
+										
+										clubFrame.setLocationRelativeTo(this.table);
+										clubFrame.setVisible(true);
+									}
+								}
+
+								@Override
+								public boolean isCellEditable() {
+									return false;
+								}
+							});
+		
 		studentSearchPanel = 
 				new SearchPanel(
 						new SearchOperatorForStudents(college), 
 						studentColumn, 
-						new StudentModelTraverser());
+						new StudentModelTraverser(),
+						new AbstractTableNotifier(){
+							@Override
+							public void fire(){
+								if (columnIndex == 0){
+									JFrame studentFrame = new StudentFrame(college, 
+											(String) this.table.getValueAt(this.rowIndex, this.columnIndex));
+									
+									studentFrame.setLocationRelativeTo(this.table);
+									studentFrame.setVisible(true);
+								}
+							}
+
+							@Override
+							public boolean isCellEditable() {
+								return false;
+							}
+						});
 		CardLayout cardLayout = new CardLayout(5, 5);
 		studentsAndClubPanel.setLayout(cardLayout);
 		studentsAndClubPanel.add(clubSearchPanel, BorderLayout.CENTER);
@@ -117,7 +158,7 @@ public class CollegeFrame extends FrameWithCollege {
 			}
 		});
 		
-		JTable studentTable = studentSearchPanel.getResultTable();
+		
 		
 		JButton button = new JButton("添加学生");
 		studentSearchPanel.add(button, BorderLayout.SOUTH);
@@ -129,23 +170,6 @@ public class CollegeFrame extends FrameWithCollege {
 				addStudentFrame.setVisible(true);
 			}
 		});
-		
-		studentTable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				int row = studentTable.rowAtPoint(arg0.getPoint());
-				int column = studentTable.columnAtPoint(arg0.getPoint());
-				
-				if (column == 0){;
-					JFrame studentFrame = new StudentFrame(college, 
-							(String) studentTable.getValueAt(row, column));
-					studentFrame.setLocationRelativeTo(studentTable);
-					studentFrame.setVisible(true);
-				}
-			}
-		});
-		
-		JTable clubTable = clubSearchPanel.getResultTable();
 		
 		JButton btnNewButton_2 = new JButton("添加社团");
 		btnNewButton_2.addActionListener(new ActionListener() {
@@ -159,22 +183,8 @@ public class CollegeFrame extends FrameWithCollege {
 		
 		JPanel panel_1 = new JPanel();
 		getContentPane().add(panel_1, BorderLayout.SOUTH);
-		clubTable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				Point location = arg0.getPoint();
-				int row = studentTable.rowAtPoint(location);
-				int column = studentTable.columnAtPoint(location);
-				
-				if (column == 0){
-					JFrame clubFrame = new ClubFrame(college, 
-							(String) clubTable.getValueAt(row, column));
-					
-					clubFrame.setLocationRelativeTo(clubTable);
-					clubFrame.setVisible(true);
-				}
-			}
-		});
+		
+		
 		
 		readerAndSaverOperator.read("saveData//data");
 		//第一次打开College窗口会把data在backUp中做一个备份
@@ -186,7 +196,7 @@ public class CollegeFrame extends FrameWithCollege {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("File");
+		JMenu mnNewMenu = new JMenu("文件");
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem menuItem = new JMenuItem("读取");
@@ -250,26 +260,4 @@ public class CollegeFrame extends FrameWithCollege {
 		clubSearchPanel.showSearchResult();
 	}
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8496767234452948614L;
-
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
-	}
 }

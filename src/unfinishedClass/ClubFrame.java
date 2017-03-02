@@ -88,12 +88,50 @@ public class ClubFrame extends FrameWithCollege {
 					new SearchPanel(
 							new SearchOperatorForMyMembers(college, club),
 							myMemberColumn, 
-							new MyMemberModelTraverser());
+							new MyMemberModelTraverser(),
+							new AbstractTableNotifier() {
+								@Override
+								public void fire(){
+									if (this.columnIndex == 0){
+										JFrame clubMemberControlFrame = new ClubMemberControlFrame(
+												college, 
+												club.getIndex(), 
+												(String) this.table.getValueAt(this.rowIndex, 0), 
+												(String) this.table.getValueAt(this.rowIndex, 2) );
+										clubMemberControlFrame.setLocationRelativeTo(this.table);
+										clubMemberControlFrame.setVisible(true);
+									}
+								}
+
+								@Override
+								public boolean isCellEditable() {
+									return false;
+								}
+							});
 			studentSearchPanel = 
 					new SearchPanel(
 							new SearchOperatorForStudents(college), 
 							studentColumn, 
-							new StudentModelTraverser());
+							new StudentModelTraverser(),
+							new AbstractTableNotifier() {
+								@Override
+								public void fire(){
+									if (this.columnIndex == 0){
+										JFrame registMemberFrame = new RegistMemberFrame(
+												college, 
+												club.getIndex(),
+												(String) this.table.getValueAt(this.rowIndex, 0));
+										registMemberFrame.setLocationRelativeTo(this.table);
+										registMemberFrame.setVisible(true);
+									}
+									
+								}
+
+								@Override
+								public boolean isCellEditable() {
+									return false;
+								}
+							});
 			clubUpdateOperator = new ClubUpdateOperator(college, club);
 			clubDeleteOperator = new ClubDeleteOperator(college);
 		}
@@ -316,44 +354,6 @@ public class ClubFrame extends FrameWithCollege {
 				}
 			}
 		});
-		
-		JTable myMemberSearchResultTable = myMemberSearchPanel.getResultTable();
-		myMemberSearchResultTable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				int row = myMemberSearchResultTable.rowAtPoint(arg0.getPoint());
-				int column = myMemberSearchResultTable.columnAtPoint(arg0.getPoint());
-				
-				if (column == 0){
-					JFrame clubMemberControlFrame = new ClubMemberControlFrame(
-							college, 
-							club.getIndex(), 
-							(String) myMemberSearchResultTable.getValueAt(row, 0), 
-							(String) myMemberSearchResultTable.getValueAt(row, 2) );
-					clubMemberControlFrame.setLocationRelativeTo(myMemberSearchResultTable);
-					clubMemberControlFrame.setVisible(true);
-				}
-			}
-		});
-		
-		JTable studentSearchResultTable = studentSearchPanel.getResultTable();
-		studentSearchResultTable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				int row = studentSearchResultTable.rowAtPoint(arg0.getPoint());
-				int column = studentSearchResultTable.columnAtPoint(arg0.getPoint());
-				
-				if (column == 0){;
-					JFrame registMemberFrame = new RegistMemberFrame(
-							college, 
-							club.getIndex(),
-							(String) studentSearchResultTable.getValueAt(row, 0));
-					registMemberFrame.setLocationRelativeTo(studentSearchResultTable);
-					registMemberFrame.setVisible(true);;
-				}
-			}
-		});
-		
 		
 		myMemberSearchPanel.showSearchResult();
 		studentSearchPanel.showSearchResult();

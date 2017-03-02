@@ -92,7 +92,25 @@ public class StudentFrame extends FrameWithCollege {
 					new SearchPanel(
 							new SearchOperatorForClubs(college), 
 							clubColumn, 
-							new ClubModelTraverser());
+							new ClubModelTraverser(),
+							new AbstractTableNotifier() {
+								@Override
+								public void fire(){
+									if (columnIndex == 0){
+										JFrame registerMemberFrame = new RegistMemberFrame(
+												college, 
+												(String) this.table.getValueAt(this.rowIndex, 0), 
+												student.getIndex() );
+										registerMemberFrame.setLocationRelativeTo(this.table);
+										registerMemberFrame.setVisible(true);;
+									}
+								}
+
+								@Override
+								public boolean isCellEditable() {
+									return false;
+								}
+							});
 			studentDeleteOperator = new StudentDeleteOperator(college);
 		}
 		
@@ -146,17 +164,25 @@ public class StudentFrame extends FrameWithCollege {
 			}
 		});
 		
-		myClubsTable = new JTable(){
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
+		myClubsTable = new TableWithNotifier(new AbstractTableNotifier(){
+							@Override
+							public void fire(){
+								if (this.columnIndex == 0){
+									JFrame clubMemberControlFrame = new ClubMemberControlFrame(
+											college, 
+											(String) this.table.getValueAt(this.rowIndex, 0), 
+											student.getIndex(), 
+											(String) this.table.getValueAt(this.rowIndex, 2) );
+									clubMemberControlFrame.setLocationRelativeTo(this.table);
+									clubMemberControlFrame.setVisible(true);;
+								}
+							}
 
-			@Override
-			public boolean isCellEditable(int rowIndex, int columnIndex){
-				return false;
-			}
-		};
+								@Override
+								public boolean isCellEditable() {
+									return false;
+								}
+							});
 		
 		scrollPane.setViewportView(myClubsTable);
 		button.addActionListener(new ActionListener() {
@@ -360,24 +386,6 @@ public class StudentFrame extends FrameWithCollege {
 							(String) myClubsTable.getValueAt(row, 2) );
 					clubMemberControlFrame.setLocationRelativeTo(myClubsTable);
 					clubMemberControlFrame.setVisible(true);;
-				}
-			}
-		});
-		
-		JTable clubSearchResultTable = clubSearchPanel.getResultTable();
-		clubSearchResultTable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				int row = clubSearchResultTable.rowAtPoint(arg0.getPoint());
-				int column = clubSearchResultTable.columnAtPoint(arg0.getPoint());
-				
-				if (column == 0){;
-					JFrame registerMemberFrame = new RegistMemberFrame(
-							college, 
-							(String) clubSearchResultTable.getValueAt(row, 0), 
-							student.getIndex() );
-					registerMemberFrame.setLocationRelativeTo(clubSearchResultTable);
-					registerMemberFrame.setVisible(true);;
 				}
 			}
 		});
