@@ -5,7 +5,6 @@ import collegeComponent.Club;
 import collegeComponent.College;
 import collegeComponent.tool.traverser.MyMemberModelTraverser;
 import collegeComponent.tool.traverser.StudentModelTraverser;
-import info.infoTool.AllTrueFilter;
 import operator.ClubDeleteOperator;
 import operator.ClubUpdateOperator;
 import operator.SearchOperatorForClubs;
@@ -26,8 +25,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
@@ -91,23 +88,20 @@ public class ClubFrame extends FrameWithCollege {
 							new MyMemberModelTraverser(),
 							new AbstractTableNotifier() {
 								@Override
-								public void fire(){
-									if (this.columnIndex == 0){
-										JFrame clubMemberControlFrame = new ClubMemberControlFrame(
-												college, 
-												club.getIndex(), 
-												(String) this.table.getValueAt(this.rowIndex, 0), 
-												(String) this.table.getValueAt(this.rowIndex, 2) );
-										clubMemberControlFrame.setLocationRelativeTo(this.table);
-										clubMemberControlFrame.setVisible(true);
-									}
-								}
-
-								@Override
-								public boolean isCellEditable() {
-									return false;
-								}
-							});
+								public boolean fire(int rowIndex, int columnIndex, JTable table){
+										if (columnIndex == 0){
+											JFrame clubMemberControlFrame = new ClubMemberControlFrame(
+													college, 
+													club.getIndex(), 
+													(String) table.getValueAt(rowIndex, 0), 
+													(String) table.getValueAt(rowIndex, 2) );
+											clubMemberControlFrame.setLocationRelativeTo(table);
+											clubMemberControlFrame.setVisible(true);
+										}//if
+										return false;
+									}//fire()
+								});//AbstractTableNotifier
+			
 			studentSearchPanel = 
 					new SearchPanel(
 							new SearchOperatorForStudents(college), 
@@ -115,22 +109,17 @@ public class ClubFrame extends FrameWithCollege {
 							new StudentModelTraverser(),
 							new AbstractTableNotifier() {
 								@Override
-								public void fire(){
-									if (this.columnIndex == 0){
-										JFrame registMemberFrame = new RegistMemberFrame(
-												college, 
-												club.getIndex(),
-												(String) this.table.getValueAt(this.rowIndex, 0));
-										registMemberFrame.setLocationRelativeTo(this.table);
-										registMemberFrame.setVisible(true);
-									}
-									
-								}
-
-								@Override
-								public boolean isCellEditable() {
-									return false;
-								}
+								public boolean fire(int rowIndex, int columnIndex, JTable table){
+										if (columnIndex == 0){
+											JFrame registMemberFrame = new RegistMemberFrame(
+													college, 
+													club.getIndex(),
+													(String) table.getValueAt(rowIndex, 0));
+											registMemberFrame.setLocationRelativeTo(table);
+											registMemberFrame.setVisible(true);
+										}//if
+										return false;
+									}//fire()
 							});
 			clubUpdateOperator = new ClubUpdateOperator(college, club);
 			clubDeleteOperator = new ClubDeleteOperator(college);

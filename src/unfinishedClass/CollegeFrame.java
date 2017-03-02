@@ -1,7 +1,6 @@
 package unfinishedClass;
 
 import collegeComponent.College;
-import collegeComponent.Student;
 import collegeComponent.tool.traverser.ClubModelTraverser;
 import collegeComponent.tool.traverser.StudentModelTraverser;
 import operator.SearchOperatorForClubs;
@@ -11,19 +10,13 @@ import javax.swing.JTable;
 
 import aboutVisual.FrameWithCollege;
 import aboutVisual.SearchPanel;
-import basicTool.MyLogger;
-
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Point;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.ButtonGroup;
@@ -31,8 +24,6 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import java.awt.Component;
 import javax.swing.JMenu;
 import javax.swing.JToggleButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -102,22 +93,18 @@ public class CollegeFrame extends FrameWithCollege {
 						clubColumn, 
 						new ClubModelTraverser(),
 						new AbstractTableNotifier() {
-								@Override
-								public void fire(){
+							@Override
+							public boolean fire(int rowIndex, int columnIndex, JTable table){
 									if (columnIndex == 0){
 										JFrame clubFrame = new ClubFrame(college, 
-												(String) this.table.getValueAt(this.rowIndex, this.columnIndex));
+												(String) table.getValueAt(rowIndex, columnIndex));
 										
-										clubFrame.setLocationRelativeTo(this.table);
+										clubFrame.setLocationRelativeTo(table);
 										clubFrame.setVisible(true);
-									}
-								}
-
-								@Override
-								public boolean isCellEditable() {
+									}//if
 									return false;
-								}
-							});
+								}//fire()
+							});//AbstractTableNotifier
 		
 		studentSearchPanel = 
 				new SearchPanel(
@@ -126,21 +113,17 @@ public class CollegeFrame extends FrameWithCollege {
 						new StudentModelTraverser(),
 						new AbstractTableNotifier(){
 							@Override
-							public void fire(){
+							public boolean fire(int rowIndex, int columnIndex, JTable table){
 								if (columnIndex == 0){
 									JFrame studentFrame = new StudentFrame(college, 
-											(String) this.table.getValueAt(this.rowIndex, this.columnIndex));
+											(String) table.getValueAt(rowIndex, columnIndex));
 									
-									studentFrame.setLocationRelativeTo(this.table);
+									studentFrame.setLocationRelativeTo(table);
 									studentFrame.setVisible(true);
-								}
-							}
-
-							@Override
-							public boolean isCellEditable() {
+								}//if
 								return false;
-							}
-						});
+							}//fire()
+						});//AbstractTableNotifier
 		CardLayout cardLayout = new CardLayout(5, 5);
 		studentsAndClubPanel.setLayout(cardLayout);
 		studentsAndClubPanel.add(clubSearchPanel, BorderLayout.CENTER);
@@ -204,7 +187,7 @@ public class CollegeFrame extends FrameWithCollege {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				int n = JOptionPane.showConfirmDialog(tglbtnNewToggleButton,
-						"确认不保存当前修改的信息？",
+						"确认读取本地文件中的信息？当前未保存的内容可能丢失。\n你可以在saveData/backUp文件夹中找到 打开本次“学院”窗口时 所使用数据的 备份。",
 						"确认窗口",
 						JOptionPane.YES_NO_CANCEL_OPTION);
 				
@@ -223,7 +206,7 @@ public class CollegeFrame extends FrameWithCollege {
 		menuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int n = JOptionPane.showConfirmDialog(tglbtnNewToggleButton,
-						"确认保存所有的信息？\n如果错误保存的话，可以在saveData/backUp文件夹中找到原来初次打开窗口时使用的数据。",
+						"确认保存目前的信息？\n你可以在saveData/backUp文件夹中找到 打开本次“学院”窗口时 所使用数据的 备份。",
 						"确认窗口",
 						JOptionPane.YES_NO_CANCEL_OPTION);
 				

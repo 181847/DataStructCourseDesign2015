@@ -31,8 +31,6 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
 import javax.swing.JTable;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
@@ -95,19 +93,15 @@ public class StudentFrame extends FrameWithCollege {
 							new ClubModelTraverser(),
 							new AbstractTableNotifier() {
 								@Override
-								public void fire(){
+								public boolean fire(int rowIndex, int columnIndex, JTable table){
 									if (columnIndex == 0){
 										JFrame registerMemberFrame = new RegistMemberFrame(
 												college, 
-												(String) this.table.getValueAt(this.rowIndex, 0), 
+												(String) table.getValueAt(rowIndex, 0), 
 												student.getIndex() );
-										registerMemberFrame.setLocationRelativeTo(this.table);
+										registerMemberFrame.setLocationRelativeTo(table);
 										registerMemberFrame.setVisible(true);;
 									}
-								}
-
-								@Override
-								public boolean isCellEditable() {
 									return false;
 								}
 							});
@@ -165,24 +159,20 @@ public class StudentFrame extends FrameWithCollege {
 		});
 		
 		myClubsTable = new TableWithNotifier(new AbstractTableNotifier(){
-							@Override
-							public void fire(){
-								if (this.columnIndex == 0){
-									JFrame clubMemberControlFrame = new ClubMemberControlFrame(
-											college, 
-											(String) this.table.getValueAt(this.rowIndex, 0), 
-											student.getIndex(), 
-											(String) this.table.getValueAt(this.rowIndex, 2) );
-									clubMemberControlFrame.setLocationRelativeTo(this.table);
-									clubMemberControlFrame.setVisible(true);;
-								}
-							}
-
-								@Override
-								public boolean isCellEditable() {
-									return false;
-								}
-							});
+				@Override
+				public boolean fire(int rowIndex, int columnIndex, JTable table){
+					if (columnIndex == 0){
+						JFrame clubMemberControlFrame = new ClubMemberControlFrame(
+													college, 
+													(String) table.getValueAt(rowIndex, 0), 
+													student.getIndex(), 
+													(String) table.getValueAt(rowIndex, 2) );
+						clubMemberControlFrame.setLocationRelativeTo(table);
+						clubMemberControlFrame.setVisible(true);;
+					}//if
+					return false;
+				}//fire()
+			});//myClubsTable
 		
 		scrollPane.setViewportView(myClubsTable);
 		button.addActionListener(new ActionListener() {
@@ -265,7 +255,7 @@ public class StudentFrame extends FrameWithCollege {
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int n = JOptionPane.showConfirmDialog(button_2,
-						"确认注销社团？",
+						"确认注销学生？",
 						"确认窗口",
 						JOptionPane.YES_NO_CANCEL_OPTION);
 				
@@ -371,24 +361,6 @@ public class StudentFrame extends FrameWithCollege {
 		getContentPane().setLayout(groupLayout);
 		updateData();
 		refreshMyClubTable();
-		
-		myClubsTable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				int row = myClubsTable.rowAtPoint(arg0.getPoint());
-				int column = myClubsTable.columnAtPoint(arg0.getPoint());
-				
-				if (column == 0){;
-					JFrame clubMemberControlFrame = new ClubMemberControlFrame(
-							college, 
-							(String) myClubsTable.getValueAt(row, 0), 
-							student.getIndex(), 
-							(String) myClubsTable.getValueAt(row, 2) );
-					clubMemberControlFrame.setLocationRelativeTo(myClubsTable);
-					clubMemberControlFrame.setVisible(true);;
-				}
-			}
-		});
 	}
 	
 	private void updateData() {
