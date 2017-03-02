@@ -1,13 +1,10 @@
 package unfinishedClass;
 
 import basicTool.MyLogger;
-import collegeComponent.InfoInClub;
 import collegeComponent.MyClub;
 import collegeComponent.MyMember;
-import info.infoTool.AbstractTraverser;
 import infoInterface.IInfo;
 import infoSet.InfoSetSpecificByIndex;
-import infoSet.SearchableInfoSet;
 
 /**
  * 遍历对象Club中的MyMember，

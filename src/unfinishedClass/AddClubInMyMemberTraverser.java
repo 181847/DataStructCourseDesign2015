@@ -4,10 +4,8 @@ import collegeComponent.Club;
 import collegeComponent.InfoInClub;
 import collegeComponent.MyClub;
 import collegeComponent.MyMember;
-import collegeComponent.Student;
 import info.InfoWithContainer;
 import infoSet.InfoSetSpecificByIndex;
-import infoSet.SearchableInfoSet;
 
 public class AddClubInMyMemberTraverser extends AddTraverserForUpdateOperator {
 

@@ -1,10 +1,8 @@
 package collegeComponent.tool.traverser;
 
 import basicTool.MyLogger;
-import collegeComponent.InfoInClub;
 import collegeComponent.MyClub;
 import collegeComponent.MyMember;
-import info.infoTool.AbstractTraverser;
 import infoInterface.IInfo;
 import infoSet.SearchableInfoSet;
 import unfinishedClass.DeleteTraverserForUpdateOperator;
