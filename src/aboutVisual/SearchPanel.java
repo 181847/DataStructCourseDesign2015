@@ -3,6 +3,7 @@ package aboutVisual;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -12,6 +13,8 @@ import basicTool.MyLogger;
 import collegeComponent.tool.traverser.ModelTraverser;
 import info.infoTool.AllTrueFilter;
 import operator.SearchOperator;
+import unfinishedClass.AbstractTableNotifier;
+import unfinishedClass.TableWithNotifier;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -30,7 +33,31 @@ public class SearchPanel extends JPanel {
 	private ModelTraverser traverser;
 	private JButton searchButton;
 	
-	public SearchPanel(SearchOperator so, String[] column, ModelTraverser traverser) {
+	/**
+	 * 创建一个搜索面板。
+	 * @param so
+	 * 		搜索面板要用到的SearchOperator，
+	 * 		SearchOperator内部包含数据对象、搜索方法和搜索结果，
+	 * 		搜索面板通过调用SearchOperator的operat()方法来执行搜索，
+	 * 		并通过SearchOperator获取搜索的结果。
+	 * @param column
+	 * 		用于显示在搜索面板当中的列标签，
+	 * 		可以是一个String数组，例如{"名字", "性别", "年级"};
+	 * @param traverser
+	 * 		这个Traverser用于遍历SearchOperator的搜搜索结果，
+	 * 		然后转换成对应的用于talbe显示的model，
+	 * 		这个traverser由外部定义，但是要求生成的model的column必须和这个
+	 * 		构造方法的colum数组相匹配。
+	 * @param notifier
+	 * 		这个notifier会在table询问表格数据的某个具体的单位格能否编辑的时候发动，
+	 * 		notifier会记下发动编辑功能的单位格的行数和列数，
+	 * 		然后发动notifier内部的notify()方法，
+	 * 		执行特定的代码。
+	 */
+	public SearchPanel(SearchOperator so,
+			String[] column,
+			ModelTraverser traverser, 
+			AbstractTableNotifier tableNotifier) {
 		this.so = so;
 		this.column = column;
 		this.traverser = traverser;
@@ -54,17 +81,7 @@ public class SearchPanel extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
 		
-		resultTable = new JTable(){
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public boolean isCellEditable(int rowIndex, int columnIndex){
-				return false;
-			}
-		};
+		resultTable = new TableWithNotifier(tableNotifier);
 		scrollPane.setViewportView(resultTable);
 		
 		searchTextField.getDocument().addDocumentListener(new DocumentListener(){
