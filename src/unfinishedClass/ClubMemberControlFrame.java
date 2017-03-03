@@ -82,8 +82,11 @@ public class ClubMemberControlFrame extends FrameWithCollege {
 					
 					clubPositionOperator.setPosition(changedPosition);
 					if (clubPositionOperator.operate() == 1){
-						freshPositionLabel(changedPosition);
+						dispose();
+						return;
 					}
+					
+					positionErrorLabel.setText("错误！修改职位信息失败。");
 				}
 			}
 
