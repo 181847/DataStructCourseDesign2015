@@ -3,6 +3,7 @@ package unfinishedClass;
 import collegeComponent.College;
 import collegeComponent.tool.traverser.ClubModelTraverser;
 import collegeComponent.tool.traverser.StudentModelTraverser;
+import operator.CollegeReaderAndSaverOperator;
 import operator.SearchOperatorForClubs;
 import operator.SearchOperatorForStudents;
 import javax.swing.JPanel;
@@ -10,6 +11,9 @@ import javax.swing.JTable;
 
 import aboutVisual.FrameWithCollege;
 import aboutVisual.SearchPanel;
+import basicTool.AbstractTableNotifier;
+import basicTool.MyLogger;
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.JButton;
@@ -41,15 +45,39 @@ public class CollegeFrame extends FrameWithCollege {
 	protected CollegeReaderAndSaverOperator readerAndSaverOperator;
 	
 
-	public String readFilePath;
-	public String saveFilePath;
+	public String dateFolderPath;
+	public String backupPath;
 	public SearchPanel clubSearchPanel;
 	public SearchPanel studentSearchPanel;
 	public final String[] clubColumn = { "社团编号", "社团名字", "创建日期"};
 	public final String[] studentColumn = {"学号", "姓名", "性别", "年级", "专业"};
 	
-	public CollegeFrame(College college) {
+	/**
+	 * @param college
+	 * 		一个新的College对象。
+	 * @param dateFolderPath
+	 * 		用来读取所有社团、学生信息的文件夹路径。
+	 * @param backupPath
+	 * 		用来备份这个新窗口初始状态下的数据的文件夹路径，
+	 * 		请注意这个文件夹路径下名为Club.dat/Student.dat/Club_Student.dat的文件
+	 * 		将会被重写覆盖，请注意保护自己的文件。
+	 */
+	public CollegeFrame(College college, String dateFolderPath, String backupPath) {
 		super(college);
+		if (college == null){
+			return;
+		}
+		if (dateFolderPath == null){
+			MyLogger.logError("创建CollegeFrame失败，文件读取路径为空。");
+			return;
+		}
+		if (backupPath == null){
+			MyLogger.logError("创建CollegeFrame失败，文件备份路径为空。");
+			return;
+		}
+		this.dateFolderPath = dateFolderPath;
+		this.backupPath = backupPath;
+		
 		setTitle("学院");
 		setSize(500, 600);
 		readerAndSaverOperator = new CollegeReaderAndSaverOperator(college);
@@ -172,9 +200,9 @@ public class CollegeFrame extends FrameWithCollege {
 		
 		
 		
-		readerAndSaverOperator.read("saveData//data");
+		readerAndSaverOperator.read(dateFolderPath);
 		//第一次打开College窗口会把data在backUp中做一个备份
-		readerAndSaverOperator.save("saveData//backUp");
+		readerAndSaverOperator.save(backupPath);
 		
 		studentSearchPanel.getSearchButton().setText("搜索学生");
 		clubSearchPanel.getSearchButton().setText("搜索社团");
@@ -190,7 +218,7 @@ public class CollegeFrame extends FrameWithCollege {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				int n = JOptionPane.showConfirmDialog(tglbtnNewToggleButton,
-						"确认读取本地文件中的信息？当前未保存的内容可能丢失。\n你可以在saveData/backUp文件夹中找到 打开本次“学院”窗口时 所使用数据的 备份。",
+						"确认读取本地文件中的信息？当前未保存的内容可能丢失。\n你可以在\"" + backupPath +  "\"文件夹中找到 打开本次“学院”窗口时 所使用数据的 备份。",
 						"确认窗口",
 						JOptionPane.YES_NO_CANCEL_OPTION);
 				
@@ -198,7 +226,7 @@ public class CollegeFrame extends FrameWithCollege {
 					//check();
 					return;
 				}
-				readerAndSaverOperator.read("saveData//data");
+				readerAndSaverOperator.read(dateFolderPath);
 				studentSearchPanel.showSearchResult();
 				clubSearchPanel.showSearchResult();
 			}
@@ -209,7 +237,7 @@ public class CollegeFrame extends FrameWithCollege {
 		menuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int n = JOptionPane.showConfirmDialog(tglbtnNewToggleButton,
-						"确认保存目前的信息？\n你可以在saveData/backUp文件夹中找到 打开本次“学院”窗口时 所使用数据的 备份。",
+						"确认保存目前的信息？\n你可以在\"" + backupPath +  "\"文件夹中找到 打开本次“学院”窗口时 所使用数据的 备份。",
 						"确认窗口",
 						JOptionPane.YES_NO_CANCEL_OPTION);
 				
@@ -218,7 +246,7 @@ public class CollegeFrame extends FrameWithCollege {
 					return;
 				}
 				
-				readerAndSaverOperator.save("saveData//data");
+				readerAndSaverOperator.save(dateFolderPath);
 			}
 		});
 		mnNewMenu.add(menuItem_1);
