@@ -214,6 +214,9 @@ public class AddStudentFrame extends FrameWithCollege {
 		if (index.isEmpty()){
 			indexErrorLabel.setText("错误！学号不能为空，请填写学号。");
 			checkResult = false;
+		} else if ( ! BasicStringChecker.check(index)){
+			indexErrorLabel.setText("错误！字符串中不能包含'&'字符。");
+			checkResult = false;
 		} else if (null != college.getStudent(index)){
 			indexErrorLabel.setText("错误！学号冲突，已存在相同学号的同学，请重新填写一个其他的学号。");
 			checkResult = false;
@@ -224,12 +227,18 @@ public class AddStudentFrame extends FrameWithCollege {
 		if (name.isEmpty()){
 			nameErrorLabel.setText("错误！名字不能为空，请填写名字。");
 			checkResult = false;
+		} else if ( ! BasicStringChecker.check(name)){
+			nameErrorLabel.setText("错误！字符串中不能包含'&'字符。");
+			checkResult = false;
 		} else {
 			nameErrorLabel.setText("");
 		}
 		
 		if (mainCourse.isEmpty()){
 			mainCourseErrorLabel.setText("错误！专业不能为空，请填写序号。");
+			checkResult = false;
+		} else if ( ! BasicStringChecker.check(mainCourse)){
+			mainCourseErrorLabel.setText("错误！字符串中不能包含'&'字符。");
 			checkResult = false;
 		} else {
 			mainCourseErrorLabel.setText("");

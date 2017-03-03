@@ -177,31 +177,41 @@ public class RegistMemberFrame extends FrameWithCollege {
 				.getMyMembers()
 				.getIndex(studentIndex)
 				.isEmpty()){
+			
 			String changedPosition = positionField.getText();
-			if (changedPosition.isEmpty()){
+			if ( ! BasicStringChecker.check(changedPosition)){
+				positionErrorLabel.setText("错误！字符串中不能包含'&'字符。");
+				return false;
+				
+			} else if (changedPosition.isEmpty()){
 				positionErrorLabel.setText("错误！职位不能为空");
 				return false;
+				
 			} else if (changedPosition.equals("会长")){
 				searchOperatorForClubMembers.operate();
 				if ( searchOperatorForClubMembers
-						.getResult()
-						.getAllResult(new AllTrueFilter())
-						.isEmpty() ){
+										.getResult()
+										.getAllResult(new SameNameFilter("会长"))
+										.isEmpty() ){
+					
 					positionErrorLabel.setText("");
 					return true;
+					
 				} else {
 					positionErrorLabel.setText("这个社团已存在会长，请指定一个其他的职位");
 					return false;
-				}
+				}//if
+				
 			} else {
 				positionErrorLabel.setText("");
 				return true;
-			}
+				
+			}//if
+			
 		} else {
 			positionErrorLabel.setText("已经参加了这个社团，请不要重复参加同一个社团。");
 			return false;
+			
 		}
-		
-		
 	}
 }

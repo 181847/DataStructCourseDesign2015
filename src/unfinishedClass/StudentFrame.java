@@ -80,7 +80,7 @@ public class StudentFrame extends FrameWithCollege {
 	public StudentFrame(College college, String studentIndex) {
 		super(college);
 		traverser = new MyClubModelTraverser();
-		this.setSize(530, 789);
+		this.setSize(582, 789);
 		student = college.getStudent(studentIndex);
 		if (student == null){
 			MyLogger.logError("StudentFrame没有获得Student对象，"
@@ -88,6 +88,7 @@ public class StudentFrame extends FrameWithCollege {
 			this.setVisible(false);
 			return ;
 		} else {
+			updateTitle();
 			studentUpdateOperator = new StudentUpdateOperator(college, student);
 			clubSearchPanel = 
 					new SearchPanel(
@@ -292,7 +293,7 @@ public class StudentFrame extends FrameWithCollege {
 								.addGroup(gl_panel.createSequentialGroup()
 									.addComponent(label_1)
 									.addGap(18)
-									.addComponent(nameField, 234, 234, 234))
+									.addComponent(nameField, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
 								.addGroup(gl_panel.createSequentialGroup()
 									.addComponent(label_2)
 									.addGap(18)
@@ -306,19 +307,16 @@ public class StudentFrame extends FrameWithCollege {
 									.addGap(18)
 									.addComponent(mainCourseField, 234, 234, 234)))
 							.addGap(18)
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-									.addComponent(nameErrorLabel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-									.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-											.addComponent(gradeErrorLabel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-											.addComponent(mainCourseErrorLabel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE))
-										.addComponent(genderErrorLabel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)))
-								.addComponent(indexErrorLabel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)))
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(indexErrorLabel, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+								.addComponent(nameErrorLabel, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+								.addComponent(genderErrorLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(gradeErrorLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(mainCourseErrorLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(192)
 							.addComponent(btnNewButton)
-							.addPreferredGap(ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
 							.addComponent(button_2)))
 					.addContainerGap())
 		);
@@ -336,7 +334,7 @@ public class StudentFrame extends FrameWithCollege {
 						.addComponent(nameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(nameErrorLabel))
 					.addGap(24)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(label_2)
@@ -344,8 +342,9 @@ public class StudentFrame extends FrameWithCollege {
 							.addGap(18)
 							.addComponent(label_3))
 						.addGroup(gl_panel.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(genderErrorLabel)
-							.addGap(18)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(gradeBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(gradeErrorLabel))))
@@ -366,6 +365,10 @@ public class StudentFrame extends FrameWithCollege {
 		refreshMyClubTable();
 	}
 	
+	private void updateTitle() {
+		this.setTitle("\"" + student.getName() + "\"");
+	}
+
 	private void updateData() {
 		index = student.getIndex();
 		name = student.getName();
@@ -393,6 +396,7 @@ public class StudentFrame extends FrameWithCollege {
 		mainCourseField.setText(mainCourse);
 		studentUpdateOperator.setStudent(student);
 		clearErrorLabel();
+		updateTitle();
 	}
 
 	private void refreshMyClubTable() {
@@ -410,6 +414,9 @@ public class StudentFrame extends FrameWithCollege {
 		
 		if (changedIndex.equals(index)){
 			indexErrorLabel.setText("序号不变");
+		} else if ( ! BasicStringChecker.check(changedIndex)){
+			indexErrorLabel.setText("错误！字符串中不能包含'&'字符。");
+			checkResult = false;
 		} else if (changedIndex.isEmpty()){
 			indexErrorLabel.setText("错误！序号不能为空，请填写序号。");
 			checkResult = false;
@@ -418,34 +425,35 @@ public class StudentFrame extends FrameWithCollege {
 			checkResult = false;
 		} else {
 			indexErrorLabel.setText("");
-		}
+		}//if
 		
 		if (changedName.equals(name)){
 			nameErrorLabel.setText("名字不变");
+		} else if ( ! BasicStringChecker.check(changedName)){
+			nameErrorLabel.setText("错误！字符串中不能包含'&'字符。");
+			checkResult = false;
 		} else if (changedName.isEmpty()){
 			nameErrorLabel.setText("错误！名字不能为空，请填写名字。");
 			checkResult = false;
 		} else {
 			nameErrorLabel.setText("");
-		}
+		}//if
 		
 		if (changedMainCourse.equals(mainCourse)){
 			mainCourseErrorLabel.setText("专业不变");
+		} else if ( ! BasicStringChecker.check(changedMainCourse)){
+			mainCourseErrorLabel.setText("错误！字符串中不能包含'&'字符。");
+			checkResult = false;
 		} else if (changedMainCourse.isEmpty()){
 			mainCourseErrorLabel.setText("错误！专业不能为空，请填写序号。");
 			checkResult = false;
 		} else {
 			mainCourseErrorLabel.setText("");
-		}
+		}//if
 		
 		return checkResult;
 	}
 	
 	private void clearErrorLabel() {
-		indexErrorLabel.setText("");
-		nameErrorLabel.setText("");
-		genderErrorLabel.setText("");
-		gradeErrorLabel.setText("");
-		mainCourseErrorLabel.setText("");
 	}
 }

@@ -85,6 +85,7 @@ public class ClubFrame extends FrameWithCollege {
 			this.setVisible(false);
 			return ;
 		} else {
+			updateTitle();
 			myMemberSearchPanel = 
 					new SearchPanel(
 							new SearchOperatorForMyMembers(college, club),
@@ -196,12 +197,12 @@ public class ClubFrame extends FrameWithCollege {
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 344, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
 							.addComponent(button_2))
-						.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addComponent(lblNewLabel)
@@ -211,11 +212,14 @@ public class ClubFrame extends FrameWithCollege {
 									.addComponent(label)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(indexField, GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)))
-							.addGap(18)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(nameErrorLabel, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
-								.addComponent(indexErrorLabel, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)))
-						.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(18)
+									.addComponent(indexErrorLabel, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(18)
+									.addComponent(nameErrorLabel, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))))
+						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(label_1)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(yearField, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
@@ -343,7 +347,6 @@ public class ClubFrame extends FrameWithCollege {
 					
 					clubUpdateOperator.operate();
 					updateData();
-					clearErrorLabel();
 				}
 			}
 		});
@@ -370,6 +373,9 @@ public class ClubFrame extends FrameWithCollege {
 		yearField.setText(year);
 		monthField.setText(month);
 		dayField.setText(day);
+
+		clearErrorLabel();
+		updateTitle();
 	}
 
 	protected boolean check(){
@@ -383,6 +389,9 @@ public class ClubFrame extends FrameWithCollege {
 		//检查序号
 		if (changedIndex.compareTo(index) == 0 ){
 			indexErrorLabel.setText("序号名不变。");
+		} else if ( ! BasicStringChecker.check(changedIndex)){
+			indexErrorLabel.setText("错误！字符串中不能包含'&'字符。");
+			checkResult = false;
 		} else {
 			if (changedIndex.isEmpty()){
 				indexErrorLabel.setText("错误！序号名为空。");
@@ -402,6 +411,9 @@ public class ClubFrame extends FrameWithCollege {
 		//检查名字
 		if (changedName.compareTo(name) == 0 ){
 			nameErrorLabel.setText("名字不变。");
+		} else if ( ! BasicStringChecker.check(changedName)){
+			nameErrorLabel.setText("错误！字符串中不能包含'&'字符。");
+			checkResult = false;
 		} else {
 			if (changedName.isEmpty()){
 				nameErrorLabel.setText("错误！名字为空。");
@@ -435,5 +447,9 @@ public class ClubFrame extends FrameWithCollege {
 		indexErrorLabel.setText("");
 		nameErrorLabel.setText("");
 		dateErrorLabel.setText("");
+	}
+	
+	private void updateTitle() {
+		this.setTitle("\"" + club.getName() + "\"");
 	}
 }

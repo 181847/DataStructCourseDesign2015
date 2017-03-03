@@ -228,17 +228,24 @@ public class AddClubFrame extends FrameWithCollege {
 		String month = yearField.getText();
 		String day = dayField.getText();
 		
-		if (index.isEmpty()){
+		 if (index.isEmpty()){
 			indexErrorLabel.setText("错误！序号名不能为空。");
-		} else if (college.getClub(index) != null){
+			checkResult = false;
+		} else if ( ! BasicStringChecker.check(index)){
+			indexErrorLabel.setText("错误！字符串中不能包含'&'字符。");
+			checkResult = false;
+		}else if (college.getClub(index) != null){
 			indexErrorLabel.setText("错误！序号名冲突。");
 			checkResult = false;
 		} else {
 			indexErrorLabel.setText("");
 		}
 		
-		if (name.isEmpty()){
+		 if (name.isEmpty()){
 			nameErrorLabel.setText("错误！名字为空。");
+			checkResult = false;
+		} else if ( ! BasicStringChecker.check(name)){
+			nameErrorLabel.setText("错误！字符串中不能包含'&'字符。");
 			checkResult = false;
 		} else {
 			nameSearchOperatorForClubs.setSearchInfo(name);
