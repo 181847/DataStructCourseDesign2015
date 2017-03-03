@@ -106,6 +106,9 @@ public class ClubFrame extends FrameWithCollege {
 										return false;
 									}//fire()
 								});//AbstractTableNotifier
+			myMemberSearchPanel
+				.getSearchButton()
+				.setText("搜索本社成员");
 			
 			studentSearchPanel = 
 					new SearchPanel(
@@ -125,7 +128,11 @@ public class ClubFrame extends FrameWithCollege {
 										}//if
 										return false;
 									}//fire()
-							});
+								});
+			studentSearchPanel
+				.getSearchButton()
+				.setText("搜索所有学生");
+			
 			clubUpdateOperator = new ClubUpdateOperator(college, club);
 			clubDeleteOperator = new ClubDeleteOperator(college);
 		}
