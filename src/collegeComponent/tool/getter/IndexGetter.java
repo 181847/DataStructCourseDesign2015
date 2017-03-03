@@ -1,8 +1,12 @@
-package info.infoTool;
+package collegeComponent.tool.getter;
 
 import basicInterface.IIndexHolder;
 import basicTool.MyLogger;
+import info.infoTool.AbstractGetter;
 
+/**
+ * 获取IInfo对象内部的container（IIndexHolder）的姓名。
+ */
 public class IndexGetter extends AbstractGetter {
 
 	@Override

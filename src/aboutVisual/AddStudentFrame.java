@@ -1,6 +1,6 @@
-package unfinishedClass;
+package aboutVisual;
 
-import aboutVisual.FrameWithCollege;
+import basicTool.BasicStringChecker;
 import collegeComponent.College;
 import collegeComponent.Student;
 
@@ -37,6 +37,8 @@ public class AddStudentFrame extends FrameWithCollege {
 
 	public AddStudentFrame(College college) {
 		super(college);
+		setResizable(false);
+		setTitle("创建学生");
 		
 		if (college == null){
 			return;

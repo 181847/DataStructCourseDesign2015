@@ -1,4 +1,4 @@
-package unfinishedClass;
+package basicTool;
 
 import javax.swing.JTable;
 

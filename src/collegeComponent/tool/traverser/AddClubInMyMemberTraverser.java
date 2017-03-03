@@ -1,4 +1,4 @@
-package unfinishedClass;
+package collegeComponent.tool.traverser;
 
 import collegeComponent.Club;
 import collegeComponent.InfoInClub;

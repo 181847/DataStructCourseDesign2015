@@ -1,4 +1,4 @@
-package unfinishedClass;
+package aboutVisual;
 
 import basicTool.MyLogger;
 import collegeComponent.Club;
@@ -21,8 +21,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-
-import aboutVisual.FrameWithCollege;
 
 import java.awt.Color;
 
@@ -48,6 +46,8 @@ public class ClubMemberControlFrame extends FrameWithCollege {
 
 	public ClubMemberControlFrame(College college, String clubIndex, String studentIndex, String position){
 		super(college);
+		setTitle("修改社团中的职位");
+		setResizable(false);
 		this.clubIndex = clubIndex;
 		this.studentIndex = studentIndex;
 		this.position = position;

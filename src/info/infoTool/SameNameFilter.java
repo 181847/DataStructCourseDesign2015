@@ -1,8 +1,7 @@
-package unfinishedClass;
+package info.infoTool;
 
 import basicInterface.INameHolder;
 import basicTool.MyLogger;
-import info.infoTool.AbstractFilter;
 
 /**
  * 设定一个名字，

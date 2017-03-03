@@ -1,4 +1,4 @@
-package unfinishedClass;
+package aboutVisual;
 
 import collegeComponent.College;
 import collegeComponent.Student;
@@ -23,9 +23,10 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-import aboutVisual.FrameWithCollege;
-import aboutVisual.SearchPanel;
+import basicTool.AbstractTableNotifier;
+import basicTool.BasicStringChecker;
 import basicTool.MyLogger;
+import basicTool.TableWithNotifier;
 
 import java.awt.Color;
 import javax.swing.JScrollPane;
@@ -79,6 +80,7 @@ public class StudentFrame extends FrameWithCollege {
 
 	public StudentFrame(College college, String studentIndex) {
 		super(college);
+		setResizable(false);
 		traverser = new MyClubModelTraverser();
 		this.setSize(582, 789);
 		student = college.getStudent(studentIndex);

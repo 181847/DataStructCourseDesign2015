@@ -1,9 +1,10 @@
-package unfinishedClass;
+package aboutVisual;
 
-import aboutVisual.FrameWithCollege;
+import basicTool.BasicStringChecker;
 import basicTool.MyLogger;
 import collegeComponent.Club;
 import collegeComponent.College;
+import info.infoTool.SameNameFilter;
 import operator.SearchOperatorForClubs;
 
 import javax.swing.JPanel;
@@ -47,6 +48,7 @@ public class AddClubFrame extends FrameWithCollege {
 	public AddClubFrame(College college) {
 		super(college);
 		setResizable(false);
+		setTitle("创建社团");
 		
 		if (college == null){
 			return;

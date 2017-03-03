@@ -5,9 +5,9 @@ import java.text.ParseException;
 import basicTool.MyLogger;
 import collegeComponent.Club;
 import collegeComponent.College;
+import collegeComponent.tool.traverser.AddClubInMyMemberTraverser;
+import collegeComponent.tool.traverser.DeleteClubInMyMemberTraverser;
 import info.infoTool.AllTrueFilter;
-import unfinishedClass.AddClubInMyMemberTraverser;
-import unfinishedClass.DeleteClubInMyMemberTraverser;
 
 /**
  * 用于更新社团的基本信息的操作者，

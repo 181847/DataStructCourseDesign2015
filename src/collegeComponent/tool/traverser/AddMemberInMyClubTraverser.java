@@ -6,7 +6,6 @@ import collegeComponent.MyMember;
 import collegeComponent.Student;
 import info.InfoWithContainer;
 import infoSet.SearchableInfoSet;
-import unfinishedClass.AddTraverserForUpdateOperator;
 
 /**
  * 遍历对象：Student内部的myClubs集合（表示该学生参加的所有社团）。

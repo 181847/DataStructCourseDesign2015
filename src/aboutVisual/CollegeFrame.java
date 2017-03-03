@@ -1,4 +1,4 @@
-package unfinishedClass;
+package aboutVisual;
 
 import collegeComponent.College;
 import collegeComponent.tool.traverser.ClubModelTraverser;
@@ -9,8 +9,6 @@ import operator.SearchOperatorForStudents;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
-import aboutVisual.FrameWithCollege;
-import aboutVisual.SearchPanel;
 import basicTool.AbstractTableNotifier;
 import basicTool.MyLogger;
 
@@ -64,6 +62,7 @@ public class CollegeFrame extends FrameWithCollege {
 	 */
 	public CollegeFrame(College college, String dateFolderPath, String backupPath) {
 		super(college);
+		setResizable(false);
 		if (college == null){
 			return;
 		}

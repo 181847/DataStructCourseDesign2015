@@ -8,12 +8,11 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
-import basicTool.MyLogger;
+import basicTool.AbstractTableNotifier;
+import basicTool.TableWithNotifier;
 import collegeComponent.tool.traverser.ModelTraverser;
 import info.infoTool.AllTrueFilter;
 import operator.SearchOperator;
-import unfinishedClass.AbstractTableNotifier;
-import unfinishedClass.TableWithNotifier;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;

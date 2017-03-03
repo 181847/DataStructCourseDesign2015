@@ -5,7 +5,6 @@ import collegeComponent.MyClub;
 import collegeComponent.MyMember;
 import infoInterface.IInfo;
 import infoSet.SearchableInfoSet;
-import unfinishedClass.DeleteTraverserForUpdateOperator;
 
 /**
  * 此类专门用于更新Student的信息的时候，

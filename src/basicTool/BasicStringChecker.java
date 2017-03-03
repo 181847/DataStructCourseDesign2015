@@ -1,4 +1,4 @@
-package unfinishedClass;
+package basicTool;
 
 public class BasicStringChecker {
 	public static boolean check(String str){

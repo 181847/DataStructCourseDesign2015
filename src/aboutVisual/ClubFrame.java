@@ -1,10 +1,13 @@
-package unfinishedClass;
+package aboutVisual;
 
+import basicTool.AbstractTableNotifier;
+import basicTool.BasicStringChecker;
 import basicTool.MyLogger;
 import collegeComponent.Club;
 import collegeComponent.College;
 import collegeComponent.tool.traverser.MyMemberModelTraverser;
 import collegeComponent.tool.traverser.StudentModelTraverser;
+import info.infoTool.SameNameFilter;
 import operator.ClubDeleteOperator;
 import operator.ClubUpdateOperator;
 import operator.SearchOperatorForClubs;
@@ -29,9 +32,6 @@ import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
-
-import aboutVisual.FrameWithCollege;
-import aboutVisual.SearchPanel;
 
 import java.awt.Color;
 import java.awt.CardLayout;

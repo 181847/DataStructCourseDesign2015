@@ -5,12 +5,12 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 
+import aboutVisual.ClubFrame;
 import aboutVisual.SearchPanel;
+import basicTool.AbstractTableNotifier;
 import collegeComponent.tool.traverser.ClubModelTraverser;
 import operator.SearchOperatorForClubs;
 import testSpace.Test;
-import unfinishedClass.AbstractTableNotifier;
-import unfinishedClass.ClubFrame;
 
 public class TestSearchPanel extends JFrame {
 	public SearchPanel searchPanel;

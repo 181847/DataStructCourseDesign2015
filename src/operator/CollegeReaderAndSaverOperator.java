@@ -1,4 +1,4 @@
-package unfinishedClass;
+package operator;
 
 
 import java.io.*;
@@ -15,11 +15,12 @@ import collegeComponent.tool.getter.MainCourseGetterForStudent;
 import collegeComponent.tool.getter.NameGetter;
 import collegeComponent.tool.getter.PinyinGetter;
 import collegeComponent.tool.getter.ShortPinyinGetter;
+import collegeComponent.tool.traverser.SaveForClubTraverser;
+import collegeComponent.tool.traverser.SaveForClub_StudentTraverser;
+import collegeComponent.tool.traverser.SaveForStudentTraverser;
 import info.infoTool.AllTrueFilter;
 import infoInterface.IInfoGetter;
 import infoSet.SearchableInfoSet;
-import operator.CollegeOperator;
-import operator.RegisterOperator;
 
 /**
  * 本操作者用来以一个外部传入的college为载体，

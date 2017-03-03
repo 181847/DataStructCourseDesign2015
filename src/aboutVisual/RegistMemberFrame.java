@@ -1,11 +1,11 @@
-package unfinishedClass;
+package aboutVisual;
 
-import aboutVisual.FrameWithCollege;
+import basicTool.BasicStringChecker;
 import basicTool.MyLogger;
 import collegeComponent.Club;
 import collegeComponent.College;
 import collegeComponent.Student;
-import info.infoTool.AllTrueFilter;
+import info.infoTool.SameNameFilter;
 import operator.RegisterOperator;
 import operator.SearchOperator;
 import operator.SearchOperatorForMyMembers;
