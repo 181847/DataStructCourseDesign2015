@@ -11,7 +11,7 @@ public class TestCollegeFrame extends Test {
 	public static void main(String[] args) {
 		//prepare();
 		
-		JFrame collegeFrame = new CollegeFrame(new College(), "saveData//data", "saveData//backUp");
+		JFrame collegeFrame = new CollegeFrame(new College(), "saveData//data", "saveData//backup");
 		collegeFrame.setVisible(true);
 
 	}
