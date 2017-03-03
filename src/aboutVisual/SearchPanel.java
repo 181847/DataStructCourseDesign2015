@@ -123,7 +123,6 @@ public class SearchPanel extends JPanel {
 	 */
 	public void showSearchResult() {
 		String searchInfo = searchTextField.getText();
-		MyLogger.log("SearchInfo: " + (searchInfo == null));
 		traverser.setModel(new DefaultTableModel(column, 0));
 		so.setSearchInfo(searchInfo);
 		so.selectSearchLog(-1);
