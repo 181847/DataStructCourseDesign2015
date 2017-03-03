@@ -29,6 +29,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JToggleButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * 这个窗口类用来管理所有的社团和学生对象。
@@ -62,6 +64,9 @@ public class CollegeFrame extends FrameWithCollege {
 	 */
 	public CollegeFrame(College college, String dateFolderPath, String backupPath) {
 		super(college);
+		
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
 		setResizable(false);
 		if (college == null){
 			return;
@@ -267,10 +272,32 @@ public class CollegeFrame extends FrameWithCollege {
 				System.exit(0);
 			}
 		});
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				int n = JOptionPane.showConfirmDialog(tglbtnNewToggleButton_1,
+						"确定退出？退出当前学院窗口后将无法再保存修改。",
+						"确认窗口",
+						JOptionPane.YES_NO_CANCEL_OPTION);
+				
+				if (n != JOptionPane.YES_OPTION){
+					//check();
+					return;
+				}
+				
+				dispose();
+				System.exit(0);
+			}
+		});
+		
+		
 		mnNewMenu.add(menuItem_2);
 		
 		studentSearchPanel.showSearchResult();
 		clubSearchPanel.showSearchResult();
+		
+		
 	}
 
 }
