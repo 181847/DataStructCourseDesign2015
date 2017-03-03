@@ -36,6 +36,10 @@ import aboutVisual.SearchPanel;
 import java.awt.Color;
 import java.awt.CardLayout;
 
+/**
+ * 用于修改社团信息，
+ * 添加社员，删除社员的窗口类。
+ */
 public class ClubFrame extends FrameWithCollege {
 	protected Club club;
 	protected final String[] myMemberColumn = {"社员学号", "姓名", "职位"};

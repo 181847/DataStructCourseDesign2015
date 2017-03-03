@@ -4,6 +4,10 @@ import collegeComponent.College;
 import info.infoTool.AbstractTraverser;
 import operator.DeregisterOperator;
 
+/**
+ * 注销遍历者的抽象类，内部包含一个DeregisterOperator，
+ * 具体的注销方法由子类定义。
+ */
 public abstract class DeregistTraverser extends AbstractTraverser {
 	public DeregisterOperator dro;
 	

@@ -2,6 +2,19 @@ package operator;
 
 import collegeComponent.College;
 
+/**
+ * 专门搜索社团对象的操作者，
+ * 设置好college对象，
+ * 通过本类的selectSearchLog(int)和deselectedSearchLog(int)来设置
+ * 搜索要涉及的目录。
+ * 【
+ * 0 - 序号；
+ * 1 - 名字；
+ * 2 - 拼音名字；
+ * 3 - 短拼音名字；
+ * 4 - 社团创建时间
+ * 】
+ */
 public class SearchOperatorForClubs extends SearchOperator {
 
 	/**

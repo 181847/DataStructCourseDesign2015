@@ -4,6 +4,13 @@ import basicTool.MyLogger;
 import collegeComponent.InfoInClub;
 import info.infoTool.AbstractTraverser;
 
+/**
+ * 专门为Club.myMemberInfoSet和Student.myClubInfoSet遍历的抽象类，
+ * 这个抽象类用来删除指定的社员或者参加社团对象，
+ * 然后将所有被删除的社员的职位用数组存储起来，
+ * 这个方法需要配合AddTraverserForUpdateOperator使用，
+ * 来进行Club和Student的信息更新。
+ */
 public abstract class DeleteTraverserForUpdateOperator extends AbstractTraverser {
 	public String deleteTargetIndex;
 	public InfoInClub[] infosInClub;

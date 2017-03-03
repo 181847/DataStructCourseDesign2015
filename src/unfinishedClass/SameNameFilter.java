@@ -4,6 +4,10 @@ import basicInterface.INameHolder;
 import basicTool.MyLogger;
 import info.infoTool.AbstractFilter;
 
+/**
+ * 设定一个名字，
+ * 只有相同名字的对象才能被遍历到。
+ */
 public class SameNameFilter extends AbstractFilter {
 	public String name;
 	

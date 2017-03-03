@@ -6,7 +6,18 @@ import info.infoTool.AllTrueFilter;
 import infoInterface.IInfo;
 import infoInterface.IInfoGetter;
 
-
+/**
+ * 本类继承于InfoSearchTree，
+ * 利用InfoSearchTree的字符串存储路径，
+ * 来实现类似字符串的前端匹配搜素，
+ * 内部包含一个Getter，
+ * 每个插入的Info通过这个统一的Getter来获取相关的插入路径，
+ * 从而使得本SearchLog成为某个信息的搜索目录，
+ * 例如设置keyGetter为NameGetter，
+ * 就可以将本类改为一个根据名字进行搜索的搜索目录，
+ * 如果设置keyGetter为PinyinGetter，
+ * 就可以将本类改为一个根据拼音进行搜索的搜索目录。
+ */
 public class SearchLog extends InfoSearchTree {
 	IInfoGetter keyGetter;
 

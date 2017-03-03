@@ -2,6 +2,19 @@ package unfinishedClass;
 
 import javax.swing.JTable;
 
+/**
+ * 本类继承于JTable，
+ * 内部增加一个自创建的成员AbstractTableNotifier，
+ * 这个成员在初始化的时候被指定。
+ * 重载一个方法，
+ * boolean isCellEditable(int rowIndex, int columnIndex);
+ * 这个方法会在表格每次被点击的时候用来判断当前单元格能否被编辑，
+ * 重载这个方法之后，
+ * 这个方法返回调用AbstractTableNotifier.fire(int rowIndex, int columnIndex, JTable table)
+ * 的返回值，
+ * 如此一来程序员可以通过重载AbstractTableNotifier的方法，
+ * 来定制表格不同位置的单元格被点击时的响应事件。
+ */
 public class TableWithNotifier extends JTable {
 	/**
 	 * 

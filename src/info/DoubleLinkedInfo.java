@@ -2,6 +2,10 @@ package info;
 
 import infoInterface.IInfo;
 
+/**
+ * 一个双向链接的Info类型，
+ * 用于DoubleLoopLinkedInfoSet中作为双重循环链表的一个节点。
+ */
 public class DoubleLinkedInfo extends InfoWithContainer implements IInfo {
 	/**
 	 * 前一个信息体。

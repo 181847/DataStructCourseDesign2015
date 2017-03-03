@@ -5,6 +5,12 @@ import info.DoubleLinkedInfo;
 import infoInterface.IInfo;
 import infoInterface.IInfoFilter;
 
+/**
+ * 目前此类专门用于InfoSetSpecificByIndex类当中的registArea，
+ * registArea保存的信息都是DoubleLinkedInfo类型，
+ * 通过这个过滤者，可以针对container（DoubleLinkedInfo类型）的container
+ * 进行过滤，过滤规则由构造方法的参数innerFilter决定。
+ */
 public class InnerFilterForInfo extends AbstractFilter {
 	IInfoFilter innerFilter;
 	

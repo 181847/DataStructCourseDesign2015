@@ -5,6 +5,7 @@ import basicTool.MyLogger;
 import collegeComponent.tool.getter.DateGetter;
 import collegeComponent.tool.getter.GenderGetterForStudent;
 import collegeComponent.tool.getter.GradeGetterForStudent;
+import collegeComponent.tool.getter.IndexGetter;
 import collegeComponent.tool.getter.MainCourseGetterForStudent;
 import collegeComponent.tool.getter.NameGetter;
 import collegeComponent.tool.getter.PinyinGetter;
@@ -12,11 +13,32 @@ import collegeComponent.tool.getter.ShortPinyinGetter;
 import collegeComponent.tool.traverser.StudentTraverser;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
-import info.infoTool.IndexGetter;
 import infoInterface.IInfo;
 import infoInterface.IInfoGetter;
 import infoSet.SearchableInfoSet;
 
+/**
+ * College对象用来集中存储所有社团和学生对象，
+ * 内部用两个带有搜索目录的InfoSet来存储社团和学生。
+ * 学生搜索目录：
+ * 『
+ * 0.学号；
+ * 1.姓名；
+ * 2.名字拼音；
+ * 3.名字短拼音；
+ * 4.性别，男-“M”，女- "F"，其他-“?”；
+ * 5.年级；
+ * 6.专业；
+ * 』
+ * 社团搜索目录：
+ * 『
+ * 0.社团编号；
+ * 1.社团名字；
+ * 2.名字拼音；
+ * 3.名字短拼音；
+ * 4.创建时间；
+ * 』
+ */
 public class College {
 	/**
 	 * 学生信息集合。
@@ -62,10 +84,20 @@ public class College {
 		return clubInfoSet;
 	}
 	
+	/**
+	 * 设置学生搜索目录，
+	 * 本方法一般只在读取文件的时候调用。
+	 * @param studentInfoSet
+	 */
 	public void setStudentInfoSet(SearchableInfoSet studentInfoSet) {
 		this.studentInfoSet = studentInfoSet;
 	}
 
+	/**
+	 * 设置社团集合，
+	 * 本方法一般只在读取文件的时候调用。
+	 * @param clubInfoSet
+	 */
 	public void setClubInfoSet(SearchableInfoSet clubInfoSet) {
 		this.clubInfoSet = clubInfoSet;
 	}
@@ -154,7 +186,10 @@ public class College {
 	}
 	
 	/**
-	 * 删除指定序号的学生。
+	 * 删除指定序号的学生，
+	 * 请注意，
+	 * 删除学生对象之前请一定不要修改这个学生对象的任何信息，
+	 * 否则无法将搜索目录中的记录全部删除。
 	 * @param sutdentIndex
 	 * 		要删除的学生的序号。
 	 * @return
@@ -167,7 +202,10 @@ public class College {
 	}
 	
 	/**
-	 * 删除指定编号的社团。
+	 * 删除指定编号的社团，
+	 * 请注意，
+	 * 删除社团对象之前请一定不要修改这个社团对象的任何信息，
+	 * 否则无法将搜索目录中的记录全部删除。
 	 * @param clubIndex
 	 * 		要删除的社团的编号。
 	 * @return

@@ -8,7 +8,17 @@ import info.InfoWithContainer;
 import infoSet.SearchableInfoSet;
 import unfinishedClass.AddTraverserForUpdateOperator;
 
+/**
+ * 遍历对象：Student内部的myClubs集合（表示该学生参加的所有社团）。
+ * 将student和infosInClub数组中的每个单例结合成为一个MyMember对象，
+ * 然后插入一个Club对象中，
+ * 这个遍历者必须配合DeleteMemberInMyClubTraverser使用。
+ * 这个遍历者主要用于StudentUpdateOperator。
+ * @author 75309
+ *
+ */
 public class AddMemberInMyClubTraverser extends AddTraverserForUpdateOperator {
+	
 	
 	public AddMemberInMyClubTraverser(Student student, InfoInClub[] infosInClub){
 		super(student, infosInClub);

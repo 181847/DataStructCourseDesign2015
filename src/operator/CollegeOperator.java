@@ -3,6 +3,12 @@ package operator;
 import basicInterface.IOperator;
 import collegeComponent.College;
 
+/**
+ * 所有基于college对象进行操作的Operator的抽象父类，
+ * 内部包含一个college对象。
+ * @author 75309
+ *
+ */
 public abstract class CollegeOperator implements IOperator {
 	public  College college;
 	

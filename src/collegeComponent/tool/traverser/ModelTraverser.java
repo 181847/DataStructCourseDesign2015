@@ -5,6 +5,9 @@ import javax.swing.table.DefaultTableModel;
 import basicTool.MyLogger;
 import info.infoTool.AbstractTraverser;
 
+/**
+ * 此抽象类用于遍历Info，并创建用于JTable显示model。
+ */
 public abstract class ModelTraverser extends AbstractTraverser {
 	public DefaultTableModel model;
 	

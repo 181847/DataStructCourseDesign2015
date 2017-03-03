@@ -4,6 +4,18 @@ import basicTool.MyLogger;
 import collegeComponent.Student;
 import info.infoTool.TimesLimitedTraverser;
 
+/**
+ * 可限制次数的学生遍历者，
+ * DoubleLoopLinkedInfoSet和InfoSearchTree拥有
+ * 专门为此类有限制的遍历者的遍历方法，
+ * 普通遍历方法也可以实现次数限制遍历，但是专门的限制方法更节省资源，
+ * 能够在Traverser被限制的瞬间跳出遍历，
+ * 原本这中限制性的遍历是为了加快搜索显示速度，
+ * 对于数量极大的搜索结果，先显示部分的搜索结果，
+ * 当确定之后才显示全部的显示结果，
+ * 但是此类还没有应用到搜索结果的表示中，因为现有的测试数据还太小，
+ * 没有办法测试大量的数据时的速度。
+ */
 public class LimitedStudentTraverser extends TimesLimitedTraverser {
 
 	/**

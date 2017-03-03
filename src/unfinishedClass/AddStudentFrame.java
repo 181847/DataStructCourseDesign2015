@@ -18,6 +18,9 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * 本类是用来向College中插入新学生的窗口类。
+ */
 public class AddStudentFrame extends FrameWithCollege {
 	/**
 	 * 

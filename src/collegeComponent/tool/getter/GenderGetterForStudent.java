@@ -5,6 +5,12 @@ import collegeComponent.MyMember;
 import collegeComponent.Student;
 import info.infoTool.AbstractGetter;
 
+/**
+ * 获取IInfo对象内部的container（Student或MyMember）的性别，
+ * 男 - "M"
+ * 女 - "F"
+ * 其他 - "?";
+ */
 public class GenderGetterForStudent extends AbstractGetter {
 
 	@Override

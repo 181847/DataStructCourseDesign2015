@@ -5,9 +5,10 @@ import infoInterface.IInfo;
 import infoInterface.IInfoTraverser;
 
 /**
- * 在这里规定了如果遍历的info对象为null的话，
- * 就直接返回0，
- * 如果info不为null就交由dealWithInfo()方法来处理。
+ * 一个Traverser的抽象类，
+ * 这个抽象类先对info做空指针判断，
+ * 在container一定不为null的情况将对container的处理交给dealWithContainer()处理，
+ * 程序猿在定义新的Traverser的时候就不需要对各种非空情况进行判断了。
  */
 public abstract class AbstractTraverser implements IInfoTraverser {
 	

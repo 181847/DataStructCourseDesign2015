@@ -23,6 +23,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
+/**
+ * 用于向College添加社团的窗口类。
+ */
 public class AddClubFrame extends FrameWithCollege {
 	/**
 	 * 

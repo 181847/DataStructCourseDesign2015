@@ -6,8 +6,6 @@ import infoInterface.IInfoFilter;
 
 /**
  * 这个过滤器对于任何非null的Info对象都返回true
- * @author 75309
- *
  */
 public class AllTrueFilter implements IInfoFilter {
 	@Override

@@ -36,6 +36,9 @@ import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * 修改学生基本信息、修改在社团中的职位、参加新社团的功能。
+ */
 public class StudentFrame extends FrameWithCollege {
 
 	/**

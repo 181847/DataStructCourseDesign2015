@@ -7,8 +7,6 @@ import infoSet.DoubleLoopLinkedInfoSet;
 
 /**
  * 这个遍历装置能够将遍历到的Info加入内部存储的DoubleLoopLinkedInfoSet中。
- * @author 75309
- *
  */
 public class CopyTraverser implements IInfoTraverser {
 	DoubleLoopLinkedInfoSet containerSet;

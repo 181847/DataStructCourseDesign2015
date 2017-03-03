@@ -26,6 +26,9 @@ import aboutVisual.FrameWithCollege;
 
 import java.awt.Color;
 
+/**
+ * 修改社员信息的窗口类。
+ */
 public class ClubMemberControlFrame extends FrameWithCollege {
 	/**
 	 * 

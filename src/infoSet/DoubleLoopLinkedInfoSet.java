@@ -11,6 +11,9 @@ import infoInterface.IInfoGetter;
 import infoInterface.IInfoTraverser;
 import infoInterface.ILimitedTraverser;
 
+/**
+ * 以双重循环链表的方式来存储Info的集合。
+ */
 public class DoubleLoopLinkedInfoSet implements IInfoSet{
 	/**
 	 * 默认的头部节点。

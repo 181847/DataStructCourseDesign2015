@@ -2,10 +2,10 @@ package testSpace;
 
 import basicTool.MyLogger;
 import collegeComponent.Student;
+import collegeComponent.tool.getter.IndexGetter;
 import collegeComponent.tool.traverser.StudentTraverser;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
-import info.infoTool.IndexGetter;
 import infoSet.InfoSearchTree;
 
 public class TestInfoSearchTree extends Test{

@@ -23,6 +23,9 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * 注册社员的窗口类。
+ */
 public class RegistMemberFrame extends FrameWithCollege {
 	
 	/**

@@ -5,6 +5,11 @@ import collegeComponent.Club;
 import info.infoTool.AbstractTraverser;
 import info.infoTool.AllTrueFilter;
 
+/**
+ * 遍历Club对象，将Club对象的信息全部打印到控制台上。
+ * @author 75309
+ *
+ */
 public class ClubTraverser extends AbstractTraverser {
 
 	@Override

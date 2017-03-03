@@ -1,5 +1,8 @@
 package basicInterface;
 
+/**
+ * 定义了获取和设置名字的接口方法。
+ */
 public interface INameHolder {
 	/**
 	 * 设置名字。

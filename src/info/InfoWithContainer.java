@@ -2,6 +2,10 @@ package info;
 
 import infoInterface.IInfo;
 
+/**
+ * 一个最基本的Info类型，
+ * 包含一个成员变量container来存储实际的信息。
+ */
 public class InfoWithContainer implements IInfo{
 	/**
 	 * 存储信息的对象，

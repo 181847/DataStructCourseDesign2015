@@ -5,6 +5,11 @@ import collegeComponent.Student;
 import info.infoTool.AbstractTraverser;
 import info.infoTool.AllTrueFilter;
 
+/**
+ * 遍历StudentInfoSet，
+ * 向控制台输出所有学生的信息，
+ * 包括所有参加的社团的信息和职位的信息。
+ */
 public class StudentTraverser extends AbstractTraverser {
 
 	@Override

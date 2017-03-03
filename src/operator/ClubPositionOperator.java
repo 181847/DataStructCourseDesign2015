@@ -8,6 +8,12 @@ import info.InfoWithContainer;
 import infoInterface.IInfo;
 import infoSet.SearchableInfoSet;
 
+/**
+ * 修改社员对象的职位信息，
+ * 同时更新有关职位的搜索目录，
+ * 设置好college对象、社团的编号、
+ * 学生的编号、将要修改的职位信息（Position）
+ */
 public class ClubPositionOperator extends RegisterOperator {
 
 	public ClubPositionOperator(College college) {

@@ -5,6 +5,12 @@ import info.DoubleLinkedInfo;
 import infoInterface.IInfo;
 import infoInterface.IInfoGetter;
 
+/**
+ * 目前此类专门用于InfoSetSpecificByIndex类当中的registArea，
+ * registArea保存的信息都是DoubleLinkedInfo类型，
+ * 通过这个Getter，可以针对container（DoubleLinkedInfo类型）的container
+ * 进行信息提取，提取方法由构造方法的参数innerGetter决定。
+ */
 public class InnerGetterForInfo extends AbstractGetter {
 	IInfoGetter innerGetter;
 	

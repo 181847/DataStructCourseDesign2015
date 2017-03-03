@@ -11,19 +11,22 @@ import info.InfoWithContainer;
 import infoSet.InfoSetSpecificByIndex;
 import infoSet.SearchableInfoSet;
 
+/**
+ * 注册社员操作者，指定学生参加某个社团，
+ * 设置好college对象、社团的编号、学生的编号、在社团中的职位。
+ */
 public class RegisterOperator extends CollegeOperator {
 	public String studentIndex;
 	public String clubIndex;
 	public String position;
 
 	public RegisterOperator(College college) {
-		super(college);
+		super(college); 
 	}
 
 	/**
 	 * @return
 	 * 		如果学号，社团编号，职位不符合要求，
-	 * 	返回0；
 	 * 		如果不存在对应的学生或者社团，
 	 * 	返回-1；
 	 * 		如果已经有相同学号的社员参加了这个社团，

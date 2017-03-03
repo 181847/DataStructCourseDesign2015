@@ -5,10 +5,9 @@ import collegeComponent.InfoInClub;
 import info.infoTool.AbstractTraverser;
 
 /**
- * 此类专门用于更新Club信息或者Student信息的时候，
- * 将Club或者Student重新插入相应的myClubs和myMembers中的。
- * @author 75309
- *
+ * 此类为UpudateOperator内部要用到的抽象类，
+ * 专门用于更新Club信息或者Student信息的时候，
+ * 更新Club.myMembersInfoSet或者Student.myClubsInfoSet中的先关搜索目录或者序号信息。
  */
 public abstract class AddTraverserForUpdateOperator extends AbstractTraverser {
 	public Object mainObject;

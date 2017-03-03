@@ -5,6 +5,9 @@ import collegeComponent.MyMember;
 import collegeComponent.Student;
 import info.infoTool.AbstractGetter;
 
+/**
+ * 获取IInfo对象内部的container（Student或MyMember）的年级。
+ */
 public class GradeGetterForStudent extends AbstractGetter {
 
 	@Override

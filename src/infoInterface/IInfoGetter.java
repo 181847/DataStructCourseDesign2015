@@ -1,5 +1,8 @@
 package infoInterface;
 
+/**
+ * 获取Info中的信息（字符串形式）。
+ */
 public interface IInfoGetter {
 	/**
 	 * 获取Info对象当中指定的信息。

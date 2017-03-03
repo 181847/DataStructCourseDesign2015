@@ -3,6 +3,10 @@ package operator;
 import basicTool.MyLogger;
 import collegeComponent.College;
 
+/**
+ * 用于注销社员的操作者，
+ * 设置好college对象，社团编号，学生学号。
+ */
 public class DeregisterOperator extends CollegeOperator {
 	public String studentIndex;
 	public String clubIndex;

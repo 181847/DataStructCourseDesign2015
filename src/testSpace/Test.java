@@ -6,6 +6,7 @@ import collegeComponent.College;
 import collegeComponent.Student;
 import collegeComponent.tool.getter.GenderGetterForStudent;
 import collegeComponent.tool.getter.GradeGetterForStudent;
+import collegeComponent.tool.getter.IndexGetter;
 import collegeComponent.tool.getter.MainCourseGetterForStudent;
 import collegeComponent.tool.getter.NameGetter;
 import collegeComponent.tool.traverser.ClubTraverser;
@@ -13,7 +14,6 @@ import collegeComponent.tool.traverser.MyClubTraverser;
 import collegeComponent.tool.traverser.MyMemberTraverser;
 import collegeComponent.tool.traverser.StudentTraverser;
 import info.infoTool.AllTrueFilter;
-import info.infoTool.IndexGetter;
 import operator.RegisterOperator;
 
 public class Test {

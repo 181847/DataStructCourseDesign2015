@@ -11,6 +11,8 @@ import unfinishedClass.DeleteTraverserForUpdateOperator;
  * 此类专门用于更新Student的信息的时候，
  * 从新对这个Student所参加的社团中的社员信息，
  * 删除操作，并且用InfoInClub数组存储所有参加的社团中的职位信息。
+ * 这个遍历者必须配合AddMemberInMyClubTraverser使用。
+ * 这个遍历者主要用于StudentUpdateOperator当中。
  * @author 75309
  *
  */

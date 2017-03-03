@@ -4,6 +4,9 @@ import basicInterface.INameHolder;
 import basicTool.MyLogger;
 import info.infoTool.AbstractGetter;
 
+/**
+ * 获取IInfo对象内部的container（INameHolder）的姓名。
+ */
 public class NameGetter extends AbstractGetter {
 
 	@Override

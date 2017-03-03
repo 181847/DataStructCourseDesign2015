@@ -1,6 +1,5 @@
 package infoSet;
 
-import basicInterface.IInfoSet;
 import basicTool.MyLogger;
 import info.infoTool.CopyTraverser;
 import info.infoTool.LimitedCopyTraverser;
@@ -8,6 +7,17 @@ import infoInterface.IInfoFilter;
 import infoInterface.IInfoTraverser;
 import infoInterface.ILimitedTraverser;
 
+/**
+ * 本类用于作为SearchableInfoSet的搜索结果，
+ * SearchableInfoSet的搜索是在各个搜索目录（InfoSearchTree）中进行的，
+ * 得到的结果也是一个InfoSearchTree数组，
+ * 代表在各个目录中的搜索结果，
+ * SearchResult收集这些InfoSearchTree，
+ * 并且提供一系列的方法来将这些InfoSearchTree转换为一个不包含重复序号的InfoSet类型，
+ * 即InfoSetSpecificByIndex类型。
+ * @author 75309
+ *
+ */
 public class SearchResult{
 	InfoSearchTree[] searchTree;
 	
@@ -38,7 +48,7 @@ public class SearchResult{
 	 * 		返回最多包含num个信息体的IInfoSet，
 	 * 		最终也可能一个信息体都没有，但是返回值一定不为null。
 	 */
-	public IInfoSet getLimitedResult(int num, IInfoFilter filter){
+	public InfoSetSpecificByIndex getLimitedResult(int num, IInfoFilter filter){
 		InfoSetSpecificByIndex resultSet = new InfoSetSpecificByIndex();
 		if (num >= 0){
 			ILimitedTraverser traverser = new LimitedCopyTraverser(num, resultSet);

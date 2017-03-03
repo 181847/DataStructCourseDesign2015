@@ -8,6 +8,10 @@ import info.infoTool.AllTrueFilter;
 import infoInterface.IInfoTraverser;
 import testVisual.SaveTraverser;
 
+/**
+ * 本类用来遍历College.clubInfoSet对象，
+ * 来存储所有的社团中社员的信息。
+ */
 public class SaveForClub_StudentTraverser extends SaveTraverser implements IInfoTraverser {
 
 	public SaveForClub_StudentTraverser(PrintWriter clubWriter) {

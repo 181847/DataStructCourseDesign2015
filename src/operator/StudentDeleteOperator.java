@@ -7,6 +7,13 @@ import collegeComponent.tool.traverser.DeregistTraverserForMyClub;
 import info.infoTool.AllTrueFilter;
 import infoSet.InfoSetSpecificByIndex;
 
+/**
+* 删除学生操作者，
+* 传入college对象，
+* 设置要删除的社团对象，
+* 将这个学生从college和所有参加的社团的社员中删除。
+* 设置好college对象和学生的学号。
+*/
 public class StudentDeleteOperator extends DeleteOperator {
 
 	public StudentDeleteOperator(College college) {

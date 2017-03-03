@@ -5,6 +5,9 @@ import javax.swing.table.DefaultTableModel;
 import basicTool.MyLogger;
 import collegeComponent.Student;
 
+/**
+ * 遍历StudentInfoSet，并生成一个model对象，用于JTable中显示社团信息。
+ */
 public class StudentModelTraverser extends ModelTraverser {
 	public StudentModelTraverser(Object[] studentColumn){
 		super(studentColumn);

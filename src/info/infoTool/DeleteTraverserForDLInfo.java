@@ -4,6 +4,13 @@ import basicTool.MyLogger;
 import info.DoubleLinkedInfo;
 import infoSet.DoubleLoopLinkedInfoSet;
 
+/**
+ * 此类专门用于InfoSetSpecificByIndex类当中的registArea，
+ * registArea保存的信息都是DoubleLinkedInfo类型，
+ * 通过这个遍历者，
+ * 将所有遍历到的内部的container（DoubleLinkedInfo）从
+ * 包含这个节点（container）的双重链表中删除。
+ */
 public class DeleteTraverserForDLInfo extends AbstractTraverser {
 	DoubleLoopLinkedInfoSet deleteResultSet;
 	

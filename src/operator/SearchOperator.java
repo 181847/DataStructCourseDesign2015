@@ -5,6 +5,12 @@ import collegeComponent.College;
 import infoSet.InfoSearchTree;
 import infoSet.SearchResult;
 
+/**
+ * 搜索操作者的父类，
+ * 本类包含一个searchInfo用来记录用来搜索的信息，
+ * 一个boolean[] selectedLog，用来指定哪些搜索目录需要被搜索，
+ * 一个SearchResult来存储上一次搜索的结果
+ */
 public abstract class SearchOperator extends CollegeOperator {
 	/**
 	 * 搜索需要的字符串。

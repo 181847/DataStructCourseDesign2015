@@ -6,9 +6,17 @@ import com.github.stuxuhai.jpinyin.PinyinHelper;
 
 import basicInterface.IPinyinHolder;
 
+/**
+ * 本类继承于RegistObject类型，
+ * 实现了IPinyinHolder接口，
+ * 获取拼音时将拼音对应到父类RegistObject的名字，
+ * 内部用两个字符串来分别存储全拼音和短拼音，
+ * 并且重载父类的setName()方法，
+ * 设置名字的时候也要根据新的名字来设置全拼音和短拼音。
+ */
 public class RegistObjectWithPinyin extends RegistObject implements IPinyinHolder {
-	public String pinyin;
-	public String shortPinyin;
+	protected String pinyin;
+	protected String shortPinyin;
 	
 	public RegistObjectWithPinyin(String index, String name) {
 		super(index, name);
@@ -35,7 +43,7 @@ public class RegistObjectWithPinyin extends RegistObject implements IPinyinHolde
 	 */
 	@Override
 	public void setName(String name){
-		this.name = name;
+		super.setName(name);
 		setPinyin(null);
 		setShortPinyin(null);
 	}

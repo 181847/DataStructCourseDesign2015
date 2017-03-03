@@ -4,6 +4,12 @@ import basicTool.MyLogger;
 import collegeComponent.College;
 import collegeComponent.MyClub;
 
+/**
+ * 让Student对象退出所有参加的社团，
+ * 遍历的对象是Student内部的myClubsInfoSet集合，
+ * 将这个学生参加的所有社团注销，
+ * 这个Traverser一般用于StudentDeleteOperator中删除学生对象。
+ */
 public class DeregistTraverserForMyClub extends DeregistTraverser {
 	
 	public DeregistTraverserForMyClub(College college, String studentIndex){

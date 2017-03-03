@@ -10,6 +10,12 @@ import infoInterface.IInfoGetter;
 import infoInterface.IInfoTraverser;
 import infoInterface.ILimitedTraverser;
 
+/**
+ * 以字符串为路径，
+ * 用树结构存储Info的集合，
+ * 每个树节点都有一个对应的字符串，
+ * 利用这个类来实现搜索目录。
+ */
 public class InfoSearchTree implements IInfoSet{
 	public InfoSearchTree lChild;
 	public InfoSearchTree rChild;

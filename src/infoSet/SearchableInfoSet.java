@@ -1,11 +1,19 @@
 package infoSet;
 
 import basicTool.MyLogger;
-import info.infoTool.IndexGetter;
+import collegeComponent.tool.getter.IndexGetter;
 import infoInterface.IInfo;
 import infoInterface.IInfoFilter;
 import infoInterface.IInfoGetter;
 
+/**
+ * 本类继承于InfoSetSpecificByIndex，
+ * 内部根据构造方法中的传入的Getter来生成相应的搜索目录，
+ * 并且添加搜索方法，简化搜索过程，将各个搜索目录中的搜索结果
+ * （搜索结果都是InfoSearchTree类型）
+ * 集合起来，生成一个SearchResult对象传递出来作为搜索结果，
+ * SearchResult内部定义了针对多个InfoSearchTree来获取指定信息集合的方法。
+ */
 public class SearchableInfoSet extends InfoSetSpecificByIndex {
 	public SearchLogForIndex[] searchLogs;
 	

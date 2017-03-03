@@ -6,6 +6,10 @@ import basicTool.MyLogger;
 import collegeComponent.Club;
 import testVisual.SaveTraverser;
 
+/**
+ * 遍历College.clubInfoSet，
+ * 用来存储所有社团的基本信息。
+ */
 public class SaveForClubTraverser extends SaveTraverser {
 	
 	public SaveForClubTraverser(PrintWriter clubWriter){

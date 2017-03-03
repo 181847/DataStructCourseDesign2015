@@ -1,13 +1,20 @@
 package operator;
 
+import java.text.ParseException;
+
 import basicTool.MyLogger;
 import collegeComponent.Club;
 import collegeComponent.College;
-import collegeComponent.tool.traverser.AddMemberInMyClubTraverser;
 import info.infoTool.AllTrueFilter;
 import unfinishedClass.AddClubInMyMemberTraverser;
 import unfinishedClass.DeleteClubInMyMemberTraverser;
 
+/**
+ * 用于更新社团的基本信息的操作者，
+ * 这个操作者会更新college中club的搜索目录。
+ * 设置好college对象和未修改的Club对象，通过这个操作者来设置将要修改的
+ * 序号、名字、创建日期等。
+ */
 public class ClubUpdateOperator extends UpdateOperator {
 	public Club club;
 	public String newIndex = null;
@@ -39,26 +46,59 @@ public class ClubUpdateOperator extends UpdateOperator {
 			MyLogger.logError("ClubUpdateOperator中的社团编号信息为null或者空串，信息更新失败。");
 			return 0;
 		}
-		college.deleteClub(originalIndex);
-		DeleteClubInMyMemberTraverser deleteTraverser =
-				new DeleteClubInMyMemberTraverser(originalIndex,
-						club.getMyMembers().getNum());
-		club
-			.getMyMembers()
-			.traverseInfo(deleteTraverser, new AllTrueFilter());
-		
-		
-		updateClubInfo();
-		
-		college.addClub(club);
-		club
-			.getMyMembers()
-			.traverseInfo(
-					new AddClubInMyMemberTraverser(club, deleteTraverser.getInfosInClub()), 
-					new AllTrueFilter());
+		if (check()){
+			college.deleteClub(originalIndex);
+			DeleteClubInMyMemberTraverser deleteTraverser =
+					new DeleteClubInMyMemberTraverser(originalIndex,
+							club.getMyMembers().getNum());
+			club
+				.getMyMembers()
+				.traverseInfo(deleteTraverser, new AllTrueFilter());
+			
+			
+			updateClubInfo();
+			
+			college.addClub(club);
+			club
+				.getMyMembers()
+				.traverseInfo(
+						new AddClubInMyMemberTraverser(club, deleteTraverser.getInfosInClub()), 
+						new AllTrueFilter());
+			return 1;
+		}
 		return 0;
 	}
 	
+	private boolean check() {
+		boolean checkResult = true;
+		
+		if (newIndex != null && newIndex.isEmpty()){
+			MyLogger.logError("ClubUpdateOperator更新社团信息出错，"
+					+ "新的社团序号为空串，更新失败。");
+			checkResult = false;
+		}
+		
+		if (newName != null && newName.isEmpty()){
+			MyLogger.logError("ClubUpdateOperator更新社团信息出错，"
+					+ "新的社团名字为空串，更新失败。");
+			checkResult = false;
+		
+		}
+		
+		if (newDate != null){
+			try {
+				club.getDateFormate().parse(newDate);
+			} catch (ParseException e) {
+				MyLogger.logError("ClubUpdateOperator更新社团信息出错，"
+						+ "新的社团创建时间格式错误，更新失败。请检查 newDate："
+						+ newDate);
+				MyLogger.logException(e);
+				checkResult = false;
+			}
+		}
+		return checkResult;
+	}
+
 	public void setClub(Club club) {
 		if (club == null){
 			MyLogger.logError("ClubUpdateOperator设置的社团对象为null，设置失败。");

@@ -4,6 +4,9 @@ import basicInterface.IPinyinHolder;
 import basicTool.MyLogger;
 import info.infoTool.AbstractGetter;
 
+/**
+ * 获取IInfo对象内部的container（IPinyinHolder）的全拼音。
+ */
 public class PinyinGetter extends AbstractGetter {
 
 	@Override

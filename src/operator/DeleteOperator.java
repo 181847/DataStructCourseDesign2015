@@ -3,6 +3,10 @@ package operator;
 import basicTool.MyLogger;
 import collegeComponent.College;
 
+/**
+ * 一个删除Club/Student类型的抽象父类，
+ * 内部包含一个targetIndex来指示要删除的对象序号。
+ */
 public abstract class DeleteOperator extends CollegeOperator {
 	public String targetIndex;
 

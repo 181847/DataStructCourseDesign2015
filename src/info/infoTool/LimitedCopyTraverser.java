@@ -3,6 +3,9 @@ package info.infoTool;
 import info.InfoWithContainer;
 import infoSet.DoubleLoopLinkedInfoSet;
 
+/**
+ * 可限制次数的复制遍历者。
+ */
 public class LimitedCopyTraverser extends TimesLimitedTraverser {
 	DoubleLoopLinkedInfoSet containerSet;
 

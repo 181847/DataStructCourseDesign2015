@@ -3,7 +3,6 @@ package aboutVisual;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -21,6 +20,13 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * 一个搜索面板，
+ * 主要的内部组件是：
+ * 文本框：接受搜索信息；
+ * 按钮：手动搜索，或者更新搜索信息；
+ * JTable：显示搜索结果。
+ */
 public class SearchPanel extends JPanel {
 	/**
 	 * 
@@ -49,10 +55,11 @@ public class SearchPanel extends JPanel {
 	 * 		这个traverser由外部定义，但是要求生成的model的column必须和这个
 	 * 		构造方法的colum数组相匹配。
 	 * @param notifier
-	 * 		这个notifier会在table询问表格数据的某个具体的单位格能否编辑的时候发动，
-	 * 		notifier会记下发动编辑功能的单位格的行数和列数，
-	 * 		然后发动notifier内部的notify()方法，
-	 * 		执行特定的代码。
+	 * 		这个类型的类需要重载一个方法：
+	 * 		boolean fire(int rowIndex, int columnIndex, JTable table)，
+	 * 		这个搜索面板中的JTable的一个询问单元格能否编辑的方法被改为
+	 * 		返回执行这个fire()方法的返回值，
+	 * 		程序猿可以自己重载fire()方法来对表格的不同部位的点击事件进行响应。
 	 */
 	public SearchPanel(SearchOperator so,
 			String[] column,
@@ -99,17 +106,21 @@ public class SearchPanel extends JPanel {
                 //删除时响应
             	showSearchResult();
             }});
-		
-		
-		
-		
-		//showSearchResult();
 	}
 
+	/**
+	 * 获取搜索按钮组件。
+	 * @return
+	 * 		搜索按钮组件。
+	 */
 	public JButton getSearchButton() {
 		return searchButton;
 	}
 
+	/**
+	 * 根据当前文本框中的信息搜索，
+	 * 将搜索结果反映到JTable上。
+	 */
 	public void showSearchResult() {
 		String searchInfo = searchTextField.getText();
 		MyLogger.log("SearchInfo: " + (searchInfo == null));
@@ -124,6 +135,10 @@ public class SearchPanel extends JPanel {
 		resultTable.setModel(traverser.getModel());
 	}
 	
+	/**
+	 * 返回搜索面板中的JTable组件。
+	 * @return
+	 */
 	public JTable getResultTable(){
 		return resultTable;
 	}

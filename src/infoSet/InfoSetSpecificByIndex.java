@@ -1,12 +1,12 @@
 package infoSet;
 
 import basicTool.MyLogger;
+import collegeComponent.tool.getter.IndexGetter;
 import collegeComponent.tool.getter.NameGetter;
 import info.DoubleLinkedInfo;
 import info.InfoWithContainer;
 import info.infoTool.AllTrueFilter;
 import info.infoTool.DeleteTraverserForDLInfo;
-import info.infoTool.IndexGetter;
 import info.infoTool.InnerCopyTraverserForIInfo;
 import info.infoTool.InnerFilterForInfo;
 import info.infoTool.InnerGetterForInfo;
@@ -15,10 +15,9 @@ import infoInterface.IInfoFilter;
 import infoInterface.IInfoGetter;
 
 /**
- * 本类并不能依靠Index参数获取相关信息体，
- * 本类只是利用Index的数据确保这个集合体内部的信息体的序号是唯一的。
- * @author 75309
- *
+ * 本类继承与DoubleLoopLinkedInfoSet，
+ * 要求插入的Info的container必须实现IIndexHolder接口，
+ * 插入的Info的序号都不允许重复。
  */
 public class InfoSetSpecificByIndex extends DoubleLoopLinkedInfoSet{
 	/**

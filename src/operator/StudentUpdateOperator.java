@@ -7,6 +7,12 @@ import collegeComponent.tool.traverser.AddMemberInMyClubTraverser;
 import collegeComponent.tool.traverser.DeleteMemberInMyClubTraverser;
 import info.infoTool.AllTrueFilter;
 
+/**
+ * 用于更新学生的基本信息的操作者，
+ * 这个操作者会更新college中student的搜索目录。
+ * 设置好college对象和未修改的Student对象，通过这个操作者来设置将要修改的
+ * 学号、名字、性别、年级、专业。
+ */
 public class StudentUpdateOperator extends UpdateOperator {
 	public Student student;
 	public String newIndex = null;

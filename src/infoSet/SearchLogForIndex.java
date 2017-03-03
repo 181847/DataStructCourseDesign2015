@@ -1,16 +1,16 @@
 package infoSet;
 
 import basicTool.MyLogger;
+import collegeComponent.tool.getter.IndexGetter;
 import info.infoTool.AllTrueFilter;
-import info.infoTool.IndexGetter;
 import infoInterface.IInfo;
 import infoInterface.IInfoGetter;
 
 /**
  * 这个搜索目录专门为信息体包含的container是IIndexHolder的子类，
- * 添加一个删除方法可以区分Index的方法
- * @author 75309
- *
+ * 添加一个删除索引的方法，
+ * 通过传入一个基本信息没有改变的Info对象，
+ * 将这个Info对象的索引从本搜索目录中删除。
  */
 public class SearchLogForIndex extends SearchLog {
 

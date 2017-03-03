@@ -4,6 +4,9 @@ import basicInterface.IDateHolder;
 import basicTool.MyLogger;
 import info.infoTool.AbstractGetter;
 
+/**
+ * 获取IInfo对象内部的container（IDateHolder）的日期。
+ */
 public class DateGetter extends AbstractGetter {
 
 	@Override

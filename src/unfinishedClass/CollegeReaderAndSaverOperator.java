@@ -10,17 +10,30 @@ import collegeComponent.Student;
 import collegeComponent.tool.getter.DateGetter;
 import collegeComponent.tool.getter.GenderGetterForStudent;
 import collegeComponent.tool.getter.GradeGetterForStudent;
+import collegeComponent.tool.getter.IndexGetter;
 import collegeComponent.tool.getter.MainCourseGetterForStudent;
 import collegeComponent.tool.getter.NameGetter;
 import collegeComponent.tool.getter.PinyinGetter;
 import collegeComponent.tool.getter.ShortPinyinGetter;
 import info.infoTool.AllTrueFilter;
-import info.infoTool.IndexGetter;
 import infoInterface.IInfoGetter;
 import infoSet.SearchableInfoSet;
 import operator.CollegeOperator;
 import operator.RegisterOperator;
 
+/**
+ * 本操作者用来以一个外部传入的college为载体，
+ * 读取文件和保存文件，
+ * 读取和保存需要的文件路径都必须是一个文件夹的路径，
+ * 读取时的文件夹下要求必须有一下三个名字的文件：
+ * 【
+ * Club.dat；
+ * Student.dat；
+ * Club_Student.dat；
+ * 】
+ * 保存时会自动为指定的文件夹路径下创建以上三个文件,
+ * 本类型的operator()没有任何作用。
+ */
 public class CollegeReaderAndSaverOperator extends CollegeOperator {
 	public RegisterOperator registerOperator;
 	
@@ -30,6 +43,9 @@ public class CollegeReaderAndSaverOperator extends CollegeOperator {
 		registerOperator = new RegisterOperator(college);
 	}
 
+	/**
+	 * 空方法，没有任何功能。
+	 */
 	@Override
 	public int operate() {
 		// TODO Auto-generated method stub

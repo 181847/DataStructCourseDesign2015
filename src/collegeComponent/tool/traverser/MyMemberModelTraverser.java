@@ -5,6 +5,10 @@ import javax.swing.table.DefaultTableModel;
 import basicTool.MyLogger;
 import collegeComponent.MyMember;
 
+/**
+ * 遍历Club对象内部的MyMembersInfoSet，
+ * 创建用于JTable显示的model。
+ */
 public class MyMemberModelTraverser extends ModelTraverser {
 
 	public MyMemberModelTraverser(Object[] myMemberColumn){

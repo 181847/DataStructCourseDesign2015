@@ -4,6 +4,12 @@ import basicTool.MyLogger;
 import infoInterface.IInfo;
 import infoInterface.IInfoGetter;
 
+/**
+ * 一个Getter的抽象类，
+ * 这个抽象类先对info做空指针判断，
+ * 在container一定不为null的情况将对container的处理交给dealWithContainer()处理，
+ * 程序猿在定义新的Getter的时候就不需要对各种非空情况进行判断了。
+ */
 public abstract class AbstractGetter implements IInfoGetter {
 	public abstract String dealWithContainer(Object container);
 

@@ -7,6 +7,10 @@ import collegeComponent.MyMember;
 import infoInterface.IInfoTraverser;
 import testVisual.SaveTraverser;
 
+/**
+ * 本类用于SaveForClub_MemberTraverser当中，
+ * 与其配合，来存储所有社团的社员信息。
+ */
 public class SaveForClub_MemberTraverser extends SaveTraverser implements IInfoTraverser {
 	public String clubIndex;
 	public SaveForClub_MemberTraverser(PrintWriter writer, String clubIndex) {

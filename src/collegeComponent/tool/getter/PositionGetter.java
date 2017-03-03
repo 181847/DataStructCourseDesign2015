@@ -4,6 +4,9 @@ import basicInterface.IPositionHolder;
 import basicTool.MyLogger;
 import info.infoTool.AbstractGetter;
 
+/**
+ * 获取IInfo对象内部的container（IPositionHolder）的职位。
+ */
 public class PositionGetter extends AbstractGetter {
 
 	@Override

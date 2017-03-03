@@ -28,6 +28,9 @@ import javax.swing.JMenu;
 import javax.swing.JToggleButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * 这个窗口类用来管理所有的社团和学生对象。
+ */
 public class CollegeFrame extends FrameWithCollege {
 	/**
 	 * 

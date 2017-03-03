@@ -4,6 +4,10 @@ import basicTool.MyLogger;
 import collegeComponent.MyClub;
 import info.infoTool.AbstractTraverser;
 
+/**
+ * 遍历Student对象内部的MyClubsInfoSet，
+ * 向控制台输出所有参加的社团的信息，和相应的职位信息。
+ */
 public class MyClubTraverser extends AbstractTraverser {
 
 	@Override

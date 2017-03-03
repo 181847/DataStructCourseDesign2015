@@ -2,11 +2,16 @@ package basicTool;
 
 import basicInterface.IIndexHolder;
 
+/**
+ * 本类实现IIndexHolder接口，
+ * 定义了一个包含序号的对象类型，
+ * 内部用一个字符串来保存序号。
+ */
 public class IndexHolder implements IIndexHolder {
 	/**
 	 * 以字符串形式保存的编号。
 	 */
-	public String index;
+	protected String index;
 	
 	/**
 	 * 设置对象的序号。

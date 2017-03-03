@@ -4,6 +4,12 @@ import basicTool.MyLogger;
 import infoInterface.IInfo;
 import infoSet.DoubleLoopLinkedInfoSet;
 
+/**
+ * 目前此类专门用于InfoSetSpecificByIndex类当中的registArea，
+ * registArea保存的信息都是DoubleLinkedInfo类型，
+ * 通过这个遍历者，将所有遍历到的container（DoubleLinkedInfo类型）内部的container
+ * （container的container）放到成员变量containerSet中。
+ */
 public class InnerCopyTraverserForIInfo extends AbstractTraverser {
 	DoubleLoopLinkedInfoSet containerSet;
 

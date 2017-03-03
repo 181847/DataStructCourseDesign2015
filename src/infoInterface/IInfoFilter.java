@@ -1,5 +1,10 @@
 package infoInterface;
 
+/**
+ * 用于InfoSet的部分操作，
+ * 对Info进行判断，返回真假，
+ * InfoSet根据Filter的真假返回值来判断是否对这个Info进行某种操作。
+ */
 public interface IInfoFilter {
 	/**
 	 * 针对当前Info中的信息返回真假。
