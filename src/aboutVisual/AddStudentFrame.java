@@ -17,6 +17,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 /**
  * 本类是用来向College中插入新学生的窗口类。
@@ -49,6 +51,7 @@ public class AddStudentFrame extends FrameWithCollege {
 		getContentPane().add(panel, BorderLayout.CENTER);
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
 		JButton btnNewButton = new JButton("添加学生");
 		btnNewButton.addActionListener(new ActionListener() {

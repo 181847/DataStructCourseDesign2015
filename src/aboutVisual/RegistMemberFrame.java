@@ -42,6 +42,7 @@ public class RegistMemberFrame extends FrameWithCollege {
 
 	public RegistMemberFrame(College college, String clubIndex, String studentIndex) {
 		super(college);
+		setTitle("参加社团");
 		setResizable(false);
 		this.clubIndex = clubIndex;
 		this.studentIndex = studentIndex;
